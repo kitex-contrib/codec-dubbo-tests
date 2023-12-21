@@ -28,3 +28,6 @@ output/*
 # Vscode files
 .vscode
 
+# Maven generated files
+code/dubbo-java/target/
+
