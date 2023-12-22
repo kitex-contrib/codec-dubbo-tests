@@ -31,3 +31,6 @@ output/*
 # Maven generated files
 code/dubbo-java/target/
 
+# java thrift
+code/kitex/java.thrift
+
