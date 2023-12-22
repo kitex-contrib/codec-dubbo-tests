@@ -32,11 +32,15 @@ LOCAL_REPO=$1
 cd ./code/kitex || exit
 if [[ -n $LOCAL_REPO ]]; then
   go mod edit -replace github.com/kitex-contrib/codec-dubbo="${LOCAL_REPO}"
+else
+  go get github.com/kitex-contrib/codec-dubbo@latest
 fi
 go mod tidy
 cd - || exit
 if [[ -n $LOCAL_REPO ]]; then
   go mod edit -replace github.com/kitex-contrib/codec-dubbo="${LOCAL_REPO}"
+else
+  go get github.com/kitex-contrib/codec-dubbo@latest
 fi
 go mod tidy
 
