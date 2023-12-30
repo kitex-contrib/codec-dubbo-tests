@@ -190,4 +190,8 @@ public interface UserProvider {
     EchoOptionalMultiInt32Response EchoOptionalMultiInt32Response(Integer req) throws Exception;
 
     EchoOptionalMultiStringResponse EchoOptionalMultiStringResponse(String req) throws Exception;
+
+    Boolean EchoException(Boolean req) throws Exception;
+
+    Boolean EchoCustomizedException(Boolean req) throws Exception;
 }

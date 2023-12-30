@@ -113,6 +113,8 @@ func NewServiceInfo() *kitex.ServiceInfo {
 		"EchoOptionalMultiBoolResponse":   kitex.NewMethodInfo(echoOptionalMultiBoolResponseHandler, newTestServiceEchoOptionalMultiBoolResponseArgs, newTestServiceEchoOptionalMultiBoolResponseResult, false),
 		"EchoOptionalMultiInt32Response":  kitex.NewMethodInfo(echoOptionalMultiInt32ResponseHandler, newTestServiceEchoOptionalMultiInt32ResponseArgs, newTestServiceEchoOptionalMultiInt32ResponseResult, false),
 		"EchoOptionalMultiStringResponse": kitex.NewMethodInfo(echoOptionalMultiStringResponseHandler, newTestServiceEchoOptionalMultiStringResponseArgs, newTestServiceEchoOptionalMultiStringResponseResult, false),
+		"EchoException":                   kitex.NewMethodInfo(echoExceptionHandler, newTestServiceEchoExceptionArgs, newTestServiceEchoExceptionResult, false),
+		"EchoCustomizedException":         kitex.NewMethodInfo(echoCustomizedExceptionHandler, newTestServiceEchoCustomizedExceptionArgs, newTestServiceEchoCustomizedExceptionResult, false),
 	}
 	extra := map[string]interface{}{
 		"PackageName":     "echo",
@@ -1820,6 +1822,42 @@ func newTestServiceEchoOptionalMultiStringResponseResult() interface{} {
 	return echo.NewTestServiceEchoOptionalMultiStringResponseResult()
 }
 
+func echoExceptionHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+	realArg := arg.(*echo.TestServiceEchoExceptionArgs)
+	realResult := result.(*echo.TestServiceEchoExceptionResult)
+	success, err := handler.(echo.TestService).EchoException(ctx, realArg.Req)
+	if err != nil {
+		return err
+	}
+	realResult.Success = &success
+	return nil
+}
+func newTestServiceEchoExceptionArgs() interface{} {
+	return echo.NewTestServiceEchoExceptionArgs()
+}
+
+func newTestServiceEchoExceptionResult() interface{} {
+	return echo.NewTestServiceEchoExceptionResult()
+}
+
+func echoCustomizedExceptionHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+	realArg := arg.(*echo.TestServiceEchoCustomizedExceptionArgs)
+	realResult := result.(*echo.TestServiceEchoCustomizedExceptionResult)
+	success, err := handler.(echo.TestService).EchoCustomizedException(ctx, realArg.Req)
+	if err != nil {
+		return err
+	}
+	realResult.Success = &success
+	return nil
+}
+func newTestServiceEchoCustomizedExceptionArgs() interface{} {
+	return echo.NewTestServiceEchoCustomizedExceptionArgs()
+}
+
+func newTestServiceEchoCustomizedExceptionResult() interface{} {
+	return echo.NewTestServiceEchoCustomizedExceptionResult()
+}
+
 type kClient struct {
 	c client.Client
 }
@@ -2796,6 +2834,26 @@ func (p *kClient) EchoOptionalMultiStringResponse(ctx context.Context, req strin
 	_args.Req = req
 	var _result echo.TestServiceEchoOptionalMultiStringResponseResult
 	if err = p.c.Call(ctx, "EchoOptionalMultiStringResponse", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) EchoException(ctx context.Context, req bool) (r bool, err error) {
+	var _args echo.TestServiceEchoExceptionArgs
+	_args.Req = req
+	var _result echo.TestServiceEchoExceptionResult
+	if err = p.c.Call(ctx, "EchoException", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) EchoCustomizedException(ctx context.Context, req bool) (r bool, err error) {
+	var _args echo.TestServiceEchoCustomizedExceptionArgs
+	_args.Req = req
+	var _result echo.TestServiceEchoCustomizedExceptionResult
+	if err = p.c.Call(ctx, "EchoCustomizedException", &_args, &_result); err != nil {
 		return
 	}
 	return _result.GetSuccess(), nil

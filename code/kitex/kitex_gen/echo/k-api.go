@@ -6613,3 +6613,137 @@ func (p *TestServiceEchoOptionalMultiStringResponseResult) String() string {
 func (p *TestServiceEchoOptionalMultiStringResponseResult) GetResult() interface{} {
 	return p.Success
 }
+
+type TestServiceEchoExceptionArgs struct {
+	Req bool `thrift:"req,1" frugal:"1,default,bool" json:"req"`
+}
+
+func NewTestServiceEchoExceptionArgs() *TestServiceEchoExceptionArgs {
+	return &TestServiceEchoExceptionArgs{}
+}
+
+func (p *TestServiceEchoExceptionArgs) InitDefault() {
+	*p = TestServiceEchoExceptionArgs{}
+}
+
+func (p *TestServiceEchoExceptionArgs) GetReq() (v bool) {
+	return p.Req
+}
+func (p *TestServiceEchoExceptionArgs) SetReq(val bool) {
+	p.Req = val
+}
+
+func (p *TestServiceEchoExceptionArgs) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	return fmt.Sprintf("TestServiceEchoExceptionArgs(%+v)", *p)
+}
+func (p *TestServiceEchoExceptionArgs) GetFirstArgument() interface{} {
+	return p.Req
+}
+
+type TestServiceEchoExceptionResult struct {
+	Success *bool `thrift:"success,0,optional" frugal:"0,optional,bool" json:"success,omitempty"`
+}
+
+func NewTestServiceEchoExceptionResult() *TestServiceEchoExceptionResult {
+	return &TestServiceEchoExceptionResult{}
+}
+
+func (p *TestServiceEchoExceptionResult) InitDefault() {
+	*p = TestServiceEchoExceptionResult{}
+}
+
+var TestServiceEchoExceptionResult_Success_DEFAULT bool
+
+func (p *TestServiceEchoExceptionResult) GetSuccess() (v bool) {
+	if !p.IsSetSuccess() {
+		return TestServiceEchoExceptionResult_Success_DEFAULT
+	}
+	return *p.Success
+}
+func (p *TestServiceEchoExceptionResult) SetSuccess(x interface{}) {
+	p.Success = x.(*bool)
+}
+
+func (p *TestServiceEchoExceptionResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *TestServiceEchoExceptionResult) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	return fmt.Sprintf("TestServiceEchoExceptionResult(%+v)", *p)
+}
+func (p *TestServiceEchoExceptionResult) GetResult() interface{} {
+	return p.Success
+}
+
+type TestServiceEchoCustomizedExceptionArgs struct {
+	Req bool `thrift:"req,1" frugal:"1,default,bool" json:"req"`
+}
+
+func NewTestServiceEchoCustomizedExceptionArgs() *TestServiceEchoCustomizedExceptionArgs {
+	return &TestServiceEchoCustomizedExceptionArgs{}
+}
+
+func (p *TestServiceEchoCustomizedExceptionArgs) InitDefault() {
+	*p = TestServiceEchoCustomizedExceptionArgs{}
+}
+
+func (p *TestServiceEchoCustomizedExceptionArgs) GetReq() (v bool) {
+	return p.Req
+}
+func (p *TestServiceEchoCustomizedExceptionArgs) SetReq(val bool) {
+	p.Req = val
+}
+
+func (p *TestServiceEchoCustomizedExceptionArgs) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	return fmt.Sprintf("TestServiceEchoCustomizedExceptionArgs(%+v)", *p)
+}
+func (p *TestServiceEchoCustomizedExceptionArgs) GetFirstArgument() interface{} {
+	return p.Req
+}
+
+type TestServiceEchoCustomizedExceptionResult struct {
+	Success *bool `thrift:"success,0,optional" frugal:"0,optional,bool" json:"success,omitempty"`
+}
+
+func NewTestServiceEchoCustomizedExceptionResult() *TestServiceEchoCustomizedExceptionResult {
+	return &TestServiceEchoCustomizedExceptionResult{}
+}
+
+func (p *TestServiceEchoCustomizedExceptionResult) InitDefault() {
+	*p = TestServiceEchoCustomizedExceptionResult{}
+}
+
+var TestServiceEchoCustomizedExceptionResult_Success_DEFAULT bool
+
+func (p *TestServiceEchoCustomizedExceptionResult) GetSuccess() (v bool) {
+	if !p.IsSetSuccess() {
+		return TestServiceEchoCustomizedExceptionResult_Success_DEFAULT
+	}
+	return *p.Success
+}
+func (p *TestServiceEchoCustomizedExceptionResult) SetSuccess(x interface{}) {
+	p.Success = x.(*bool)
+}
+
+func (p *TestServiceEchoCustomizedExceptionResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *TestServiceEchoCustomizedExceptionResult) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	return fmt.Sprintf("TestServiceEchoCustomizedExceptionResult(%+v)", *p)
+}
+func (p *TestServiceEchoCustomizedExceptionResult) GetResult() interface{} {
+	return p.Success
+}

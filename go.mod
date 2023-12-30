@@ -15,3 +15,5 @@ require (
 )
 
 replace github.com/kitex-contrib/codec-dubbo-tests/code/kitex v0.0.0 => ./code/kitex
+
+replace github.com/kitex-contrib/codec-dubbo v0.2.2 => github.com/DMwangnima/codec-dubbo v0.0.0-20231230090821-a110bb2e0a0b

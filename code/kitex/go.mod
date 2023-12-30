@@ -54,3 +54,5 @@ require (
 )
 
 replace github.com/apache/thrift => github.com/apache/thrift v0.13.0
+
+replace github.com/kitex-contrib/codec-dubbo v0.2.2 => github.com/DMwangnima/codec-dubbo v0.0.0-20231230090821-a110bb2e0a0b
