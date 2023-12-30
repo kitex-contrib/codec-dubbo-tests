@@ -21,10 +21,11 @@ package kitex2dubbo
 
 import (
 	"context"
+	"testing"
+
 	"github.com/kitex-contrib/codec-dubbo-tests/code/kitex/kitex_gen/echo"
 	hessian2_exception "github.com/kitex-contrib/codec-dubbo/pkg/hessian2/exception"
 	"github.com/stretchr/testify/assert"
-	"testing"
 )
 
 func TestEchoException_Java(t *testing.T) {

@@ -4,6 +4,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+
 	hessian2_exception "github.com/kitex-contrib/codec-dubbo/pkg/hessian2/exception"
 
 	"github.com/kitex-contrib/codec-dubbo-tests/code/kitex/kitex_gen/echo"
