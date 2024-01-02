@@ -60,10 +60,13 @@ struct EchoMultiStringResponse {
 
 struct EchoOptionalStructRequest {
     1: optional bool req,
+    2: optional TweetType tweetType = TweetType.TWEET,
+    3: optional bool req2
 }(JavaClassName="org.apache.dubbo.tests.api.EchoOptionalStructRequest")
 
 struct EchoOptionalStructResponse {
     1: optional bool resp,
+    2: optional TweetType tweetType = TweetType.TWEET
 }(JavaClassName="org.apache.dubbo.tests.api.EchoOptionalStructResponse")
 
 struct EchoOptionalMultiBoolRequest {
@@ -105,6 +108,13 @@ struct EchoOptionalMultiStringResponse {
     2: optional list<string> listResp,
     3: optional map<bool, string> mapResp
 }(JavaClassName="org.apache.dubbo.tests.api.EchoOptionalMultiStringResponse")
+
+enum TweetType {
+    TWEET,
+    RETWEET = 2,
+    DM = 0xa,
+    REPLY
+}
 service TestService {
     i32 EchoInt(1: i32 req)
 

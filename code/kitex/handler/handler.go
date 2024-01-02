@@ -513,7 +513,7 @@ func (s *TestServiceImpl) EchoOptionalBool2StringMap(ctx context.Context, req ma
 
 // EchoOptionalStruct implements the TestServiceImpl interface.
 func (s *TestServiceImpl) EchoOptionalStruct(ctx context.Context, req *echo.EchoOptionalStructRequest) (resp *echo.EchoOptionalStructResponse, err error) {
-	return nil, nil
+	return &echo.EchoOptionalStructResponse{TweetType: req.TweetType}, nil
 }
 
 // EchoOptionalMultiBoolRequest implements the TestServiceImpl interface.
