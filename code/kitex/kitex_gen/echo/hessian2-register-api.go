@@ -580,6 +580,16 @@ func (p *EchoOptionalStructRequest) Encode(e codec.Encoder) error {
 		return err
 	}
 
+	err = e.Encode(p.TweetType)
+	if err != nil {
+		return err
+	}
+
+	err = e.Encode(p.Req2)
+	if err != nil {
+		return err
+	}
+
 	return nil
 }
 
@@ -593,6 +603,24 @@ func (p *EchoOptionalStructRequest) Decode(d codec.Decoder) error {
 		return err
 	}
 	err = hessian2.ReflectResponse(v, &p.Req)
+	if err != nil {
+		return errors.Wrap(err, fmt.Sprintf("invalid data type: %T", v))
+	}
+
+	v, err = d.Decode()
+	if err != nil {
+		return err
+	}
+	err = hessian2.ReflectResponse(v, &p.TweetType)
+	if err != nil {
+		return errors.Wrap(err, fmt.Sprintf("invalid data type: %T", v))
+	}
+
+	v, err = d.Decode()
+	if err != nil {
+		return err
+	}
+	err = hessian2.ReflectResponse(v, &p.Req2)
 	if err != nil {
 		return errors.Wrap(err, fmt.Sprintf("invalid data type: %T", v))
 	}
@@ -611,6 +639,11 @@ func (p *EchoOptionalStructResponse) Encode(e codec.Encoder) error {
 		return err
 	}
 
+	err = e.Encode(p.TweetType)
+	if err != nil {
+		return err
+	}
+
 	return nil
 }
 
@@ -624,6 +657,15 @@ func (p *EchoOptionalStructResponse) Decode(d codec.Decoder) error {
 		return err
 	}
 	err = hessian2.ReflectResponse(v, &p.Resp)
+	if err != nil {
+		return errors.Wrap(err, fmt.Sprintf("invalid data type: %T", v))
+	}
+
+	v, err = d.Decode()
+	if err != nil {
+		return err
+	}
+	err = hessian2.ReflectResponse(v, &p.TweetType)
 	if err != nil {
 		return errors.Wrap(err, fmt.Sprintf("invalid data type: %T", v))
 	}
