@@ -206,5 +206,7 @@ func TestResolve(t *testing.T) {
 		cli, err := testservice.NewClient("testtest", opts...)
 		assert.Nil(t, err)
 		test.judge(t, cli)
+		// prevent instances from not being registered to zookeeper yet
+		time.Sleep(1 * time.Second)
 	}
 }

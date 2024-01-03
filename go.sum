@@ -383,8 +383,6 @@ github.com/Azure/go-autorest/tracing v0.5.0/go.mod h1:r/s2XiOKccPW3HrqB+W0TQzfbt
 github.com/BurntSushi/toml v0.3.1 h1:WXkYYl6Yr3qBf1K79EBnL4mak0OimBfB0XUf9Vl28OQ=
 github.com/BurntSushi/toml v0.3.1/go.mod h1:xHWCNGjB5oqiDr8zfno3MHue2Ht5sIBksp03qcyfWMU=
 github.com/BurntSushi/xgb v0.0.0-20160522181843-27f122750802/go.mod h1:IVnqGOEym/WlBOVXweHU+Q+/VP0lqqI8lqeDx9IjBqo=
-github.com/DMwangnima/codec-dubbo v0.0.0-20231230090821-a110bb2e0a0b h1:7RtFLk2agBa7csldJprYY6Inb7XM7jitHhOZ/Ac7K+s=
-github.com/DMwangnima/codec-dubbo v0.0.0-20231230090821-a110bb2e0a0b/go.mod h1:0pp4flNA+oPBDxAcOCxH7D+McLAjFrLzGXVABdw22xE=
 github.com/DataDog/datadog-go v3.2.0+incompatible/go.mod h1:LButxg5PwREeZtORoXG3tL4fMGNddJ+vMq1mwgfaqoQ=
 github.com/HdrHistogram/hdrhistogram-go v1.1.2 h1:5IcZpTvzydCQeHzK4Ef/D5rrSqwxob0t8PQPMybUNFM=
 github.com/HdrHistogram/hdrhistogram-go v1.1.2/go.mod h1:yDgFjdqOqDEKOvasDdhWNXYg9BVp4O+o5f6V/ehm6Oo=
@@ -1031,6 +1029,9 @@ github.com/kisielk/errcheck v1.2.0/go.mod h1:/BMXB+zMLi60iA8Vv6Ksmxu/1UDYcXs4uQL
 github.com/kisielk/errcheck v1.5.0/go.mod h1:pFxgyoBC7bSaBwPgfKdkLd5X25qrDl4LWUI2bnpBCr8=
 github.com/kisielk/gotool v1.0.0/go.mod h1:XhKaO+MFFWcvkIS/tQcRk01m1F5IRFswLeQ+oQHNcck=
 github.com/kitex-contrib/codec-dubbo v0.2.1/go.mod h1:KHC/UOUIu9vJBqE3VBdCZMMGwntGaCNjGOIG6zJoowY=
+github.com/kitex-contrib/codec-dubbo v0.2.2/go.mod h1:0pp4flNA+oPBDxAcOCxH7D+McLAjFrLzGXVABdw22xE=
+github.com/kitex-contrib/codec-dubbo v0.2.4-0.20240103114736-708aa3f1726a h1:KNQnhU5obY/5vzkmqlig0PrmGCbpEMk4SfqmL2a4AcM=
+github.com/kitex-contrib/codec-dubbo v0.2.4-0.20240103114736-708aa3f1726a/go.mod h1:0pp4flNA+oPBDxAcOCxH7D+McLAjFrLzGXVABdw22xE=
 github.com/kitex-contrib/codec-dubbo/registries/zookeeper v0.0.0-20231220024013-016c9d2b688f h1:Axy/09EBCovbeD7PDM6aKPtIz8h1MdCRR/TU74+HeB8=
 github.com/kitex-contrib/codec-dubbo/registries/zookeeper v0.0.0-20231220024013-016c9d2b688f/go.mod h1:ztO2fZjlVm/kCSmp+0NwIeVBQpQxX3uNbqe0xBdVGFU=
 github.com/klauspost/cpuid/v2 v2.0.9/go.mod h1:FInQzS24/EEf25PyTYn52gqo7WaD8xa0213Md/qVLRg=
