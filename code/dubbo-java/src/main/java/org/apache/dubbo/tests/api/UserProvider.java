@@ -24,6 +24,15 @@ import java.util.List;
 import java.util.Map;
 
 public interface UserProvider {
+    Boolean EchoRetBool() throws Exception;
+    Byte EchoRetByte() throws Exception;
+    Short EchoRetInt16() throws Exception;
+    Integer EchoRetInt32() throws Exception;
+    Long EchoRetInt64() throws Exception;
+    Float EchoRetFloat() throws Exception;
+    Double EchoRetDouble() throws Exception;
+    String EchoRetString() throws Exception;
+
     Boolean EchoBool(Boolean req) throws Exception;
 
     Byte EchoByte(Byte req) throws Exception;

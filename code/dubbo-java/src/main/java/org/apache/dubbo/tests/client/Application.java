@@ -56,6 +56,7 @@ public class Application {
             return;
         }
 
+        testRetWithoutInParams(service);
         testBaseTypes(service);
         testContainerListType(service);
         testContainerMapType(service);
@@ -75,6 +76,17 @@ public class Application {
 
     public static void logEchoEnd(String methodName) {
         System.out.printf("{%s} end\n", methodName);
+    }
+
+    public static void testRetWithoutInParams(UserProvider svc) {
+        testEchoRetBool(svc);
+        testEchoRetByte(svc);
+        testEchoRetInt16(svc);
+        testEchoRetInt32(svc);
+        testEchoRetInt64(svc);
+        testEchoRetFloat(svc);
+        testEchoRetDouble(svc);
+        testEchoRetString(svc);
     }
 
     public static void testBaseTypes(UserProvider svc) {
@@ -179,6 +191,110 @@ public class Application {
         testEchoMethodB(svc);
         testEchoMethodC(svc);
         testEchoMethodD(svc);
+    }
+
+    public static void testEchoRetByte(UserProvider svc) {
+        String methodName = "EchoRetByte";
+        try {
+            byte resp = svc.EchoRetByte();
+            if (0 != resp) {
+                logEchoFail(methodName);
+            }
+        } catch (Exception e) {
+            logEchoException(methodName, e);
+        }
+        logEchoEnd(methodName);
+    }
+
+    public static void testEchoRetInt16(UserProvider svc) {
+        String methodName = "EchoRetInt16";
+        try {
+            short resp = svc.EchoRetInt16();
+            if (0 != resp) {
+                logEchoFail(methodName);
+            }
+        } catch (Exception e) {
+            logEchoException(methodName, e);
+        }
+        logEchoEnd(methodName);
+    }
+
+    public static void testEchoRetInt32(UserProvider svc) {
+        String methodName = "EchoRetInt32";
+        try {
+            int resp = svc.EchoRetInt32();
+            if (0 != resp) {
+                logEchoFail(methodName);
+            }
+        } catch (Exception e) {
+            logEchoException(methodName, e);
+        }
+        logEchoEnd(methodName);
+    }
+
+    public static void testEchoRetInt64(UserProvider svc) {
+        String methodName = "EchoRetInt64";
+        try {
+            long resp = svc.EchoRetInt64();
+            if (0 != resp) {
+                logEchoFail(methodName);
+            }
+        } catch (Exception e) {
+            logEchoException(methodName, e);
+        }
+        logEchoEnd(methodName);
+    }
+
+    public static void testEchoRetFloat(UserProvider svc) {
+        String methodName = "EchoRetFloat";
+        try {
+            float resp = svc.EchoRetFloat();
+            if (0 != resp) {
+                logEchoFail(methodName);
+            }
+        } catch (Exception e) {
+            logEchoException(methodName, e);
+        }
+        logEchoEnd(methodName);
+    }
+
+    public static void testEchoRetDouble(UserProvider svc) {
+        String methodName = "EchoRetDouble";
+        try {
+            double resp = svc.EchoRetDouble();
+            if (0 != resp) {
+                logEchoFail(methodName);
+            }
+        } catch (Exception e) {
+            logEchoException(methodName, e);
+        }
+        logEchoEnd(methodName);
+    }
+
+    public static void testEchoRetString(UserProvider svc) {
+        String methodName = "EchoRetString";
+        try {
+            String resp = svc.EchoRetString();
+            if ("".equals(resp)) {
+                logEchoFail(methodName);
+            }
+        } catch (Exception e) {
+            logEchoException(methodName, e);
+        }
+        logEchoEnd(methodName);
+    }
+
+    public static void testEchoRetBool(UserProvider svc) {
+        String methodName = "EchoRetBool";
+        try {
+            boolean resp = svc.EchoRetBool();
+            if (resp) {
+                logEchoFail(methodName);
+            }
+        } catch (Exception e) {
+            logEchoException(methodName, e);
+        }
+        logEchoEnd(methodName);
     }
 
     public static void testEchoBool(UserProvider svc) {

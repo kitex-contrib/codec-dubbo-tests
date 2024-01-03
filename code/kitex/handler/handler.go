@@ -11,6 +11,46 @@ import (
 // TestServiceImpl implements the last service interface defined in the IDL.
 type TestServiceImpl struct{}
 
+// EchoRetByte implements the TestServiceImpl interface.
+func (s *TestServiceImpl) EchoRetByte(ctx context.Context) (resp int8, err error) {
+	return
+}
+
+// EchoRetBool implements the TestServiceImpl interface.
+func (s *TestServiceImpl) EchoRetBool(ctx context.Context) (resp bool, err error) {
+	return
+}
+
+// EchoRetInt16 implements the TestServiceImpl interface.
+func (s *TestServiceImpl) EchoRetInt16(ctx context.Context) (resp int16, err error) {
+	return
+}
+
+// EchoRetInt32 implements the TestServiceImpl interface.
+func (s *TestServiceImpl) EchoRetInt32(ctx context.Context) (resp int32, err error) {
+	return
+}
+
+// EchoRetInt64 implements the TestServiceImpl interface.
+func (s *TestServiceImpl) EchoRetInt64(ctx context.Context) (resp int64, err error) {
+	return
+}
+
+// EchoRetFloat implements the TestServiceImpl interface.
+func (s *TestServiceImpl) EchoRetFloat(ctx context.Context) (resp float64, err error) {
+	return
+}
+
+// EchoRetDouble implements the TestServiceImpl interface.
+func (s *TestServiceImpl) EchoRetDouble(ctx context.Context) (resp float64, err error) {
+	return
+}
+
+// EchoRetString implements the TestServiceImpl interface.
+func (s *TestServiceImpl) EchoRetString(ctx context.Context) (resp string, err error) {
+	return
+}
+
 // EchoInt implements the TestServiceImpl interface.
 func (s *TestServiceImpl) EchoInt(ctx context.Context, req int32) (resp int32, err error) {
 	// for exception test

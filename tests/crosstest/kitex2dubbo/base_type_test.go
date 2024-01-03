@@ -98,6 +98,46 @@ func TestMain(m *testing.M) {
 	os.Exit(0)
 }
 
+func TestEchoRetBool(t *testing.T) {
+	resp, err := cli2Go.EchoRetBool(context.Background())
+	assertEcho(t, err, false, resp)
+}
+
+func TestEchoRetByte(t *testing.T) {
+	resp, err := cli2Go.EchoRetByte(context.Background())
+	assertEcho(t, err, 0, resp)
+}
+
+func TestEchoRetInt16(t *testing.T) {
+	resp, err := cli2Go.EchoRetInt16(context.Background())
+	assertEcho(t, err, 0, resp)
+}
+
+func TestEchoRetInt32(t *testing.T) {
+	resp, err := cli2Go.EchoRetInt32(context.Background())
+	assertEcho(t, err, 0, resp)
+}
+
+func TestEchoRetInt64(t *testing.T) {
+	resp, err := cli2Go.EchoRetInt64(context.Background())
+	assertEcho(t, err, 0, resp)
+}
+
+func TestEchoRetFloat(t *testing.T) {
+	resp, err := cli2Go.EchoRetFloat(context.Background())
+	assertEcho(t, err, 0, resp)
+}
+
+func TestEchoRetDouble(t *testing.T) {
+	resp, err := cli2Go.EchoRetDouble(context.Background())
+	assertEcho(t, err, 0, resp)
+}
+
+func TestEchoRetString(t *testing.T) {
+	resp, err := cli2Go.EchoRetString(context.Background())
+	assertEcho(t, err, "", resp)
+}
+
 func TestEchoBool(t *testing.T) {
 	req := true
 	resp, err := cli2Go.EchoBool(context.Background(), req)
@@ -149,6 +189,46 @@ func TestEchoString(t *testing.T) {
 }
 
 // ----------kitex -> dubbo-java----------
+
+func TestEchoRetBool_Java(t *testing.T) {
+	resp, err := cli2Java.EchoRetBool(context.Background())
+	assertEcho(t, err, false, resp)
+}
+
+func TestEchoRetByte_Java(t *testing.T) {
+	resp, err := cli2Java.EchoRetByte(context.Background())
+	assertEcho(t, err, 0, resp)
+}
+
+func TestEchoRetInt16_Java(t *testing.T) {
+	resp, err := cli2Java.EchoRetInt16(context.Background())
+	assertEcho(t, err, 0, resp)
+}
+
+func TestEchoRetInt32_Java(t *testing.T) {
+	resp, err := cli2Java.EchoRetInt32(context.Background())
+	assertEcho(t, err, 0, resp)
+}
+
+func TestEchoRetInt64_Java(t *testing.T) {
+	resp, err := cli2Java.EchoRetInt64(context.Background())
+	assertEcho(t, err, 0, resp)
+}
+
+func TestEchoRetFloat_Java(t *testing.T) {
+	resp, err := cli2Java.EchoRetFloat(context.Background())
+	assertEcho(t, err, 0, resp)
+}
+
+func TestEchoRetDouble_Java(t *testing.T) {
+	resp, err := cli2Java.EchoRetDouble(context.Background())
+	assertEcho(t, err, 0, resp)
+}
+
+func TestEchoRetString_Java(t *testing.T) {
+	resp, err := cli2Java.EchoRetString(context.Background())
+	assertEcho(t, err, "", resp)
+}
 
 func TestEchoBool_Java(t *testing.T) {
 	req := true

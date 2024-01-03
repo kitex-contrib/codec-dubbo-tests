@@ -106,6 +106,16 @@ struct EchoOptionalMultiStringResponse {
     3: optional map<bool, string> mapResp
 }(JavaClassName="org.apache.dubbo.tests.api.EchoOptionalMultiStringResponse")
 service TestService {
+    // without in params
+    byte   EchoRetByte()
+    bool   EchoRetBool()
+    i16    EchoRetInt16()
+    i32    EchoRetInt32()
+    i64    EchoRetInt64()
+    double EchoRetFloat()
+    double EchoRetDouble()
+    string EchoRetString()
+
     i32 EchoInt(1: i32 req)
 
     // base types
