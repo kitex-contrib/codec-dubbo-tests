@@ -107,8 +107,8 @@ struct EchoOptionalMultiStringResponse {
 }(JavaClassName="org.apache.dubbo.tests.api.EchoOptionalMultiStringResponse")
 
 exception EchoCustomizedException {
-    1: required java.Exception exceptionNested,
-    2: required string customizedMessage,
+    1: required java.Exception exception (thrift.nested="true")
+    2: required string customizedMessage
 }(JavaClassName="org.apache.dubbo.tests.api.EchoCustomizedException")
 
 service TestService {
