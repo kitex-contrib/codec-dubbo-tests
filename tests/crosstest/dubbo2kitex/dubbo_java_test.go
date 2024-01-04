@@ -30,6 +30,14 @@ func TestDubboJava(t *testing.T) {
 		nil,
 		[]string{
 			// comment lines mean dubbo-java can not support
+			"EchoRetBool",
+			"EchoRetByte",
+			"EchoRetInt16",
+			"EchoRetInt32",
+			"EchoRetInt64",
+			"EchoRetDouble",
+			"EchoRetFloat",
+			"EchoRetString",
 			"EchoBool",
 			"EchoByte",
 			"EchoInt16",

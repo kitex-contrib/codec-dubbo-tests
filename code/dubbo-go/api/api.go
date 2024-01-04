@@ -126,6 +126,15 @@ var UserProviderClient = &UserProvider{} // client pointer
 
 // UserProvider client interface
 type UserProvider struct {
+	EchoRetBool   func(ctx context.Context) (bool, error)    //`dubbo:"echoRetBool"`
+	EchoRetByte   func(ctx context.Context) (byte, error)    //`dubbo:"echoRetByte"`
+	EchoRetInt16  func(ctx context.Context) (int16, error)   //`dubbo:"echoRetInt16"`
+	EchoRetInt32  func(ctx context.Context) (int32, error)   //`dubbo:"echoRetInt32"`
+	EchoRetInt64  func(ctx context.Context) (int64, error)   //`dubbo:"echoRetInt64"`
+	EchoRetDouble func(ctx context.Context) (float64, error) //`dubbo:"echoRetDouble"`
+	EchoRetFloat  func(ctx context.Context) (float64, error) //`dubbo:"echoRetFloat"`
+	EchoRetString func(ctx context.Context) (string, error)  //`dubbo:"echoRetString"`
+
 	// dubbo tag is necessary to map go function name to java function name
 	GetUser func(ctx context.Context, req int32) (*User, error) //`dubbo:"getUser"`
 	EchoInt func(ctx context.Context, req int32) (int32, error) //`dubbo:"echoInt"`
@@ -182,6 +191,34 @@ type UserProvider struct {
 }
 
 type UserProviderImpl struct{}
+
+func (u *UserProviderImpl) EchoRetBool(ctx context.Context) (bool, error) {
+	return false, nil
+}
+
+func (u *UserProviderImpl) EchoRetInt16(ctx context.Context) (int16, error) {
+	return 0, nil
+}
+
+func (u *UserProviderImpl) EchoRetInt32(ctx context.Context) (int32, error) {
+	return 0, nil
+}
+
+func (u *UserProviderImpl) EchoRetInt64(ctx context.Context) (int64, error) {
+	return 0, nil
+}
+
+func (u *UserProviderImpl) EchoRetFloat(ctx context.Context) (float64, error) {
+	return 0, nil
+}
+
+func (u *UserProviderImpl) EchoRetDouble(ctx context.Context) (float64, error) {
+	return 0, nil
+}
+
+func (u *UserProviderImpl) EchoRetString(ctx context.Context) (string, error) {
+	return "", nil
+}
 
 func (u *UserProviderImpl) EchoBool(ctx context.Context, req bool) (bool, error) {
 	return req, nil

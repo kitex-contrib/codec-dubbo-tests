@@ -28,6 +28,46 @@ import java.util.Map;
 
 public class UserProviderImpl implements UserProvider {
     @Override
+    public Boolean EchoRetBool() throws Exception {
+        return false;
+    }
+
+    @Override
+    public Byte EchoRetByte() throws Exception {
+        return 0;
+    }
+
+    @Override
+    public Short EchoRetInt16() throws Exception {
+        return 0;
+    }
+
+    @Override
+    public Integer EchoRetInt32() throws Exception {
+        return 0;
+    }
+
+    @Override
+    public Long EchoRetInt64() throws Exception {
+        return 0L;
+    }
+
+    @Override
+    public Float EchoRetFloat() throws Exception {
+        return 0F;
+    }
+
+    @Override
+    public Double EchoRetDouble() throws Exception {
+        return 0D;
+    }
+
+    @Override
+    public String EchoRetString() throws Exception {
+        return "";
+    }
+
+    @Override
     public Boolean EchoBool(Boolean req) throws Exception {
         return req;
     }

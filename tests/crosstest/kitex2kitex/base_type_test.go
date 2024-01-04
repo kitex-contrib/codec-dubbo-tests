@@ -86,6 +86,46 @@ func TestMain(m *testing.M) {
 	os.Exit(0)
 }
 
+func TestEchoRetBool(t *testing.T) {
+	resp, err := cli.EchoRetBool(context.Background())
+	assertEcho(t, err, false, resp)
+}
+
+func TestEchoRetByte(t *testing.T) {
+	resp, err := cli.EchoRetByte(context.Background())
+	assertEcho(t, err, 0, resp)
+}
+
+func TestEchoRetInt16(t *testing.T) {
+	resp, err := cli.EchoRetInt16(context.Background())
+	assertEcho(t, err, 0, resp)
+}
+
+func TestEchoRetInt32(t *testing.T) {
+	resp, err := cli.EchoRetInt32(context.Background())
+	assertEcho(t, err, 0, resp)
+}
+
+func TestEchoRetInt64(t *testing.T) {
+	resp, err := cli.EchoRetInt64(context.Background())
+	assertEcho(t, err, 0, resp)
+}
+
+func TestEchoRetFloat(t *testing.T) {
+	resp, err := cli.EchoRetFloat(context.Background())
+	assertEcho(t, err, 0, resp)
+}
+
+func TestEchoRetDouble(t *testing.T) {
+	resp, err := cli.EchoRetDouble(context.Background())
+	assertEcho(t, err, 0, resp)
+}
+
+func TestEchoRetString(t *testing.T) {
+	resp, err := cli.EchoRetString(context.Background())
+	assertEcho(t, err, "", resp)
+}
+
 func TestEchoBool(t *testing.T) {
 	req := true
 	resp, err := cli.EchoBool(context.Background(), req)
