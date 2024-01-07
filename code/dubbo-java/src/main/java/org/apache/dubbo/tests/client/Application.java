@@ -30,7 +30,7 @@ import java.util.*;
 public class Application {
     public static void main(String[] args) throws IOException {
         DubboBootstrap instance = DubboBootstrap.getInstance()
-                    .application("dubbo");
+                .application("dubbo");
         ReferenceConfig<UserProvider> reference = new ReferenceConfig<>();
         reference.setInterface(UserProvider.class);
 
@@ -64,6 +64,7 @@ public class Application {
         testMethodArgsAnnotation(service);
         testMethodNameAnnotation(service);
         testJavaNull(service);
+        testExceptions(service);
     }
 
     public static void logEchoFail(String methodName) {
@@ -193,6 +194,11 @@ public class Application {
         testEchoMethodD(svc);
     }
 
+    public static void testExceptions(UserProvider svc) {
+        testException(svc);
+        testCustomizedException(svc);
+    }
+
     public static void testEchoRetByte(UserProvider svc) {
         String methodName = "EchoRetByte";
         try {
@@ -275,7 +281,7 @@ public class Application {
         String methodName = "EchoRetString";
         try {
             String resp = svc.EchoRetString();
-            if ("".equals(resp)) {
+            if (!"".equals(resp)) {
                 logEchoFail(methodName);
             }
         } catch (Exception e) {
@@ -1542,6 +1548,34 @@ public class Application {
             }
         } catch (Exception e) {
             logEchoException(methodName, e);
+        }
+        logEchoEnd(methodName);
+    }
+
+    public static void testException(UserProvider svc) {
+        String methodName = "EchoException";
+        try {
+            Boolean req = true;
+            Boolean resp = svc.EchoException(req);
+
+        } catch (Exception e) {
+            if (!(e instanceof Exception) || !(e.getMessage().equals(methodName))) {
+                logEchoException(methodName, e);
+            }
+        }
+        logEchoEnd(methodName);
+    }
+
+    public static void testCustomizedException(UserProvider svc) {
+        String methodName = "EchoCustomizedException";
+        try {
+            Boolean req = true;
+            Boolean resp = svc.EchoCustomizedException(req);
+
+        } catch (Exception e) {
+            if (!(e instanceof EchoCustomizedException) || !(((EchoCustomizedException) e).getCustomizedMessage().equals(methodName))) {
+                logEchoException(methodName, e);
+            }
         }
         logEchoEnd(methodName);
     }

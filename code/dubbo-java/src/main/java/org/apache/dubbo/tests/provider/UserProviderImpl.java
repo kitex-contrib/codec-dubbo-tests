@@ -499,4 +499,14 @@ public class UserProviderImpl implements UserProvider {
     public EchoOptionalMultiStringResponse EchoOptionalMultiStringResponse(String req) throws Exception {
         return new EchoOptionalMultiStringResponse(null, null, null);
     }
+
+    @Override
+    public Boolean EchoException(Boolean req) throws Exception {
+        throw new Exception("EchoException");
+    }
+
+    @Override
+    public Boolean EchoCustomizedException(Boolean req) throws Exception {
+        throw new EchoCustomizedException("EchoCustomizedException");
+    }
 }

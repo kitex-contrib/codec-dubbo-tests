@@ -5,6 +5,8 @@ import (
 	"errors"
 	"fmt"
 
+	hessian2_exception "github.com/kitex-contrib/codec-dubbo/pkg/hessian2/exception"
+
 	"github.com/kitex-contrib/codec-dubbo-tests/code/kitex/kitex_gen/echo"
 )
 
@@ -598,4 +600,17 @@ func (s *TestServiceImpl) EchoOptionalMultiStringResponse(ctx context.Context, r
 		ListResp: nil,
 		MapResp:  nil,
 	}, nil
+}
+
+// EchoException implements the TestServiceImpl interface.
+func (s *TestServiceImpl) EchoException(ctx context.Context, req bool) (resp bool, err error) {
+	return false, hessian2_exception.NewException("EchoException")
+}
+
+// EchoCustomizedException implements the TestServiceImpl interface.
+func (s *TestServiceImpl) EchoCustomizedException(ctx context.Context, req bool) (resp bool, err error) {
+	return false, &echo.EchoCustomizedException{
+		Exception:         *hessian2_exception.NewException(""),
+		CustomizedMessage: "EchoCustomizedException",
+	}
 }

@@ -113,6 +113,8 @@ type Client interface {
 	EchoOptionalMultiBoolResponse(ctx context.Context, req bool, callOptions ...callopt.Option) (r *echo.EchoOptionalMultiBoolResponse, err error)
 	EchoOptionalMultiInt32Response(ctx context.Context, req int32, callOptions ...callopt.Option) (r *echo.EchoOptionalMultiInt32Response, err error)
 	EchoOptionalMultiStringResponse(ctx context.Context, req string, callOptions ...callopt.Option) (r *echo.EchoOptionalMultiStringResponse, err error)
+	EchoException(ctx context.Context, req bool, callOptions ...callopt.Option) (r bool, err error)
+	EchoCustomizedException(ctx context.Context, req bool, callOptions ...callopt.Option) (r bool, err error)
 }
 
 // NewClient creates a client for the service defined in IDL.
@@ -652,4 +654,14 @@ func (p *kTestServiceClient) EchoOptionalMultiInt32Response(ctx context.Context,
 func (p *kTestServiceClient) EchoOptionalMultiStringResponse(ctx context.Context, req string, callOptions ...callopt.Option) (r *echo.EchoOptionalMultiStringResponse, err error) {
 	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
 	return p.kClient.EchoOptionalMultiStringResponse(ctx, req)
+}
+
+func (p *kTestServiceClient) EchoException(ctx context.Context, req bool, callOptions ...callopt.Option) (r bool, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.EchoException(ctx, req)
+}
+
+func (p *kTestServiceClient) EchoCustomizedException(ctx context.Context, req bool, callOptions ...callopt.Option) (r bool, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.EchoCustomizedException(ctx, req)
 }

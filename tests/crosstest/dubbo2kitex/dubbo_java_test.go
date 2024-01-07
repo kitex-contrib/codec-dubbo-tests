@@ -95,6 +95,8 @@ func TestDubboJava(t *testing.T) {
 			"EchoOptionalMultiBoolResponse",
 			"EchoOptionalMultiInt32Response",
 			"EchoOptionalMultiStringResponse",
+			"EchoException",
+			"EchoCustomizedException",
 		},
 	)
 }

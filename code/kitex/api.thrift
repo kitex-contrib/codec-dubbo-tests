@@ -105,6 +105,12 @@ struct EchoOptionalMultiStringResponse {
     2: optional list<string> listResp,
     3: optional map<bool, string> mapResp
 }(JavaClassName="org.apache.dubbo.tests.api.EchoOptionalMultiStringResponse")
+
+exception EchoCustomizedException {
+    1: required java.Exception exception (thrift.nested="true")
+    2: required string customizedMessage
+}(JavaClassName="org.apache.dubbo.tests.api.EchoCustomizedException")
+
 service TestService {
     // without in params
     byte   EchoRetByte()
@@ -227,4 +233,8 @@ service TestService {
     EchoOptionalMultiBoolResponse EchoOptionalMultiBoolResponse(bool req)
     EchoOptionalMultiInt32Response EchoOptionalMultiInt32Response(i32 req)
     EchoOptionalMultiStringResponse EchoOptionalMultiStringResponse(string req)
+
+    // exception
+    bool EchoException(1: bool req)
+    bool EchoCustomizedException(1: bool req)
 }(JavaClassName="org.apache.dubbo.tests.api.UserProvider")
