@@ -194,11 +194,11 @@ public class Application {
         testEchoMethodD(svc);
     }
 
-<<<<<<< HEAD
     public static void testExceptions(UserProvider svc) {
         testException(svc);
         testCustomizedException(svc);
-=======
+    }
+
     public static void testEchoRetByte(UserProvider svc) {
         String methodName = "EchoRetByte";
         try {
@@ -281,7 +281,7 @@ public class Application {
         String methodName = "EchoRetString";
         try {
             String resp = svc.EchoRetString();
-            if ("".equals(resp)) {
+            if (!"".equals(resp)) {
                 logEchoFail(methodName);
             }
         } catch (Exception e) {
@@ -301,7 +301,6 @@ public class Application {
             logEchoException(methodName, e);
         }
         logEchoEnd(methodName);
->>>>>>> origin/main
     }
 
     public static void testEchoBool(UserProvider svc) {

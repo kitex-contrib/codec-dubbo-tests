@@ -93,32 +93,32 @@ func TestEchoRetBool(t *testing.T) {
 
 func TestEchoRetByte(t *testing.T) {
 	resp, err := cli.EchoRetByte(context.Background())
-	assertEcho(t, err, 0, resp)
+	assertEcho(t, err, int8(0), resp)
 }
 
 func TestEchoRetInt16(t *testing.T) {
 	resp, err := cli.EchoRetInt16(context.Background())
-	assertEcho(t, err, 0, resp)
+	assertEcho(t, err, int16(0), resp)
 }
 
 func TestEchoRetInt32(t *testing.T) {
 	resp, err := cli.EchoRetInt32(context.Background())
-	assertEcho(t, err, 0, resp)
+	assertEcho(t, err, int32(0), resp)
 }
 
 func TestEchoRetInt64(t *testing.T) {
 	resp, err := cli.EchoRetInt64(context.Background())
-	assertEcho(t, err, 0, resp)
+	assertEcho(t, err, int64(0), resp)
 }
 
 func TestEchoRetFloat(t *testing.T) {
 	resp, err := cli.EchoRetFloat(context.Background())
-	assertEcho(t, err, 0, resp)
+	assertEcho(t, err, float64(0), resp)
 }
 
 func TestEchoRetDouble(t *testing.T) {
 	resp, err := cli.EchoRetDouble(context.Background())
-	assertEcho(t, err, 0, resp)
+	assertEcho(t, err, float64(0), resp)
 }
 
 func TestEchoRetString(t *testing.T) {
