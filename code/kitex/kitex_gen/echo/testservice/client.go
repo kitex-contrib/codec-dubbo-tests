@@ -11,6 +11,14 @@ import (
 
 // Client is designed to provide IDL-compatible methods with call-option parameter for kitex framework.
 type Client interface {
+	EchoRetByte(ctx context.Context, callOptions ...callopt.Option) (r int8, err error)
+	EchoRetBool(ctx context.Context, callOptions ...callopt.Option) (r bool, err error)
+	EchoRetInt16(ctx context.Context, callOptions ...callopt.Option) (r int16, err error)
+	EchoRetInt32(ctx context.Context, callOptions ...callopt.Option) (r int32, err error)
+	EchoRetInt64(ctx context.Context, callOptions ...callopt.Option) (r int64, err error)
+	EchoRetFloat(ctx context.Context, callOptions ...callopt.Option) (r float64, err error)
+	EchoRetDouble(ctx context.Context, callOptions ...callopt.Option) (r float64, err error)
+	EchoRetString(ctx context.Context, callOptions ...callopt.Option) (r string, err error)
 	EchoInt(ctx context.Context, req int32, callOptions ...callopt.Option) (r int32, err error)
 	EchoBool(ctx context.Context, req bool, callOptions ...callopt.Option) (r bool, err error)
 	EchoByte(ctx context.Context, req int8, callOptions ...callopt.Option) (r int8, err error)
@@ -136,6 +144,46 @@ func MustNewClient(destService string, opts ...client.Option) Client {
 
 type kTestServiceClient struct {
 	*kClient
+}
+
+func (p *kTestServiceClient) EchoRetByte(ctx context.Context, callOptions ...callopt.Option) (r int8, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.EchoRetByte(ctx)
+}
+
+func (p *kTestServiceClient) EchoRetBool(ctx context.Context, callOptions ...callopt.Option) (r bool, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.EchoRetBool(ctx)
+}
+
+func (p *kTestServiceClient) EchoRetInt16(ctx context.Context, callOptions ...callopt.Option) (r int16, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.EchoRetInt16(ctx)
+}
+
+func (p *kTestServiceClient) EchoRetInt32(ctx context.Context, callOptions ...callopt.Option) (r int32, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.EchoRetInt32(ctx)
+}
+
+func (p *kTestServiceClient) EchoRetInt64(ctx context.Context, callOptions ...callopt.Option) (r int64, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.EchoRetInt64(ctx)
+}
+
+func (p *kTestServiceClient) EchoRetFloat(ctx context.Context, callOptions ...callopt.Option) (r float64, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.EchoRetFloat(ctx)
+}
+
+func (p *kTestServiceClient) EchoRetDouble(ctx context.Context, callOptions ...callopt.Option) (r float64, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.EchoRetDouble(ctx)
+}
+
+func (p *kTestServiceClient) EchoRetString(ctx context.Context, callOptions ...callopt.Option) (r string, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.EchoRetString(ctx)
 }
 
 func (p *kTestServiceClient) EchoInt(ctx context.Context, req int32, callOptions ...callopt.Option) (r int32, err error) {

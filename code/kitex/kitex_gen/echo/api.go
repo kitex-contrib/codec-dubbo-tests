@@ -996,6 +996,22 @@ func (p *EchoCustomizedException) Error() string {
 }
 
 type TestService interface {
+	EchoRetByte(ctx context.Context) (r int8, err error)
+
+	EchoRetBool(ctx context.Context) (r bool, err error)
+
+	EchoRetInt16(ctx context.Context) (r int16, err error)
+
+	EchoRetInt32(ctx context.Context) (r int32, err error)
+
+	EchoRetInt64(ctx context.Context) (r int64, err error)
+
+	EchoRetFloat(ctx context.Context) (r float64, err error)
+
+	EchoRetDouble(ctx context.Context) (r float64, err error)
+
+	EchoRetString(ctx context.Context) (r string, err error)
+
 	EchoInt(ctx context.Context, req int32) (r int32, err error)
 
 	EchoBool(ctx context.Context, req bool) (r bool, err error)

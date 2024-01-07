@@ -112,6 +112,16 @@ exception EchoCustomizedException {
 }(JavaClassName="org.apache.dubbo.tests.api.EchoCustomizedException")
 
 service TestService {
+    // without in params
+    byte   EchoRetByte()
+    bool   EchoRetBool()
+    i16    EchoRetInt16()
+    i32    EchoRetInt32()
+    i64    EchoRetInt64()
+    double EchoRetFloat()
+    double EchoRetDouble()
+    string EchoRetString()
+
     i32 EchoInt(1: i32 req)
 
     // base types

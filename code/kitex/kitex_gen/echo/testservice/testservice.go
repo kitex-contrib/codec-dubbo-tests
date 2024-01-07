@@ -19,6 +19,14 @@ func NewServiceInfo() *kitex.ServiceInfo {
 	serviceName := "TestService"
 	handlerType := (*echo.TestService)(nil)
 	methods := map[string]kitex.MethodInfo{
+		"EchoRetByte":                     kitex.NewMethodInfo(echoRetByteHandler, newTestServiceEchoRetByteArgs, newTestServiceEchoRetByteResult, false),
+		"EchoRetBool":                     kitex.NewMethodInfo(echoRetBoolHandler, newTestServiceEchoRetBoolArgs, newTestServiceEchoRetBoolResult, false),
+		"EchoRetInt16":                    kitex.NewMethodInfo(echoRetInt16Handler, newTestServiceEchoRetInt16Args, newTestServiceEchoRetInt16Result, false),
+		"EchoRetInt32":                    kitex.NewMethodInfo(echoRetInt32Handler, newTestServiceEchoRetInt32Args, newTestServiceEchoRetInt32Result, false),
+		"EchoRetInt64":                    kitex.NewMethodInfo(echoRetInt64Handler, newTestServiceEchoRetInt64Args, newTestServiceEchoRetInt64Result, false),
+		"EchoRetFloat":                    kitex.NewMethodInfo(echoRetFloatHandler, newTestServiceEchoRetFloatArgs, newTestServiceEchoRetFloatResult, false),
+		"EchoRetDouble":                   kitex.NewMethodInfo(echoRetDoubleHandler, newTestServiceEchoRetDoubleArgs, newTestServiceEchoRetDoubleResult, false),
+		"EchoRetString":                   kitex.NewMethodInfo(echoRetStringHandler, newTestServiceEchoRetStringArgs, newTestServiceEchoRetStringResult, false),
 		"EchoInt":                         kitex.NewMethodInfo(echoIntHandler, newTestServiceEchoIntArgs, newTestServiceEchoIntResult, false),
 		"EchoBool":                        kitex.NewMethodInfo(echoBoolHandler, newTestServiceEchoBoolArgs, newTestServiceEchoBoolResult, false),
 		"EchoByte":                        kitex.NewMethodInfo(echoByteHandler, newTestServiceEchoByteArgs, newTestServiceEchoByteResult, false),
@@ -128,6 +136,150 @@ func NewServiceInfo() *kitex.ServiceInfo {
 		Extra:           extra,
 	}
 	return svcInfo
+}
+
+func echoRetByteHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+
+	realResult := result.(*echo.TestServiceEchoRetByteResult)
+	success, err := handler.(echo.TestService).EchoRetByte(ctx)
+	if err != nil {
+		return err
+	}
+	realResult.Success = &success
+	return nil
+}
+func newTestServiceEchoRetByteArgs() interface{} {
+	return echo.NewTestServiceEchoRetByteArgs()
+}
+
+func newTestServiceEchoRetByteResult() interface{} {
+	return echo.NewTestServiceEchoRetByteResult()
+}
+
+func echoRetBoolHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+
+	realResult := result.(*echo.TestServiceEchoRetBoolResult)
+	success, err := handler.(echo.TestService).EchoRetBool(ctx)
+	if err != nil {
+		return err
+	}
+	realResult.Success = &success
+	return nil
+}
+func newTestServiceEchoRetBoolArgs() interface{} {
+	return echo.NewTestServiceEchoRetBoolArgs()
+}
+
+func newTestServiceEchoRetBoolResult() interface{} {
+	return echo.NewTestServiceEchoRetBoolResult()
+}
+
+func echoRetInt16Handler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+
+	realResult := result.(*echo.TestServiceEchoRetInt16Result)
+	success, err := handler.(echo.TestService).EchoRetInt16(ctx)
+	if err != nil {
+		return err
+	}
+	realResult.Success = &success
+	return nil
+}
+func newTestServiceEchoRetInt16Args() interface{} {
+	return echo.NewTestServiceEchoRetInt16Args()
+}
+
+func newTestServiceEchoRetInt16Result() interface{} {
+	return echo.NewTestServiceEchoRetInt16Result()
+}
+
+func echoRetInt32Handler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+
+	realResult := result.(*echo.TestServiceEchoRetInt32Result)
+	success, err := handler.(echo.TestService).EchoRetInt32(ctx)
+	if err != nil {
+		return err
+	}
+	realResult.Success = &success
+	return nil
+}
+func newTestServiceEchoRetInt32Args() interface{} {
+	return echo.NewTestServiceEchoRetInt32Args()
+}
+
+func newTestServiceEchoRetInt32Result() interface{} {
+	return echo.NewTestServiceEchoRetInt32Result()
+}
+
+func echoRetInt64Handler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+
+	realResult := result.(*echo.TestServiceEchoRetInt64Result)
+	success, err := handler.(echo.TestService).EchoRetInt64(ctx)
+	if err != nil {
+		return err
+	}
+	realResult.Success = &success
+	return nil
+}
+func newTestServiceEchoRetInt64Args() interface{} {
+	return echo.NewTestServiceEchoRetInt64Args()
+}
+
+func newTestServiceEchoRetInt64Result() interface{} {
+	return echo.NewTestServiceEchoRetInt64Result()
+}
+
+func echoRetFloatHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+
+	realResult := result.(*echo.TestServiceEchoRetFloatResult)
+	success, err := handler.(echo.TestService).EchoRetFloat(ctx)
+	if err != nil {
+		return err
+	}
+	realResult.Success = &success
+	return nil
+}
+func newTestServiceEchoRetFloatArgs() interface{} {
+	return echo.NewTestServiceEchoRetFloatArgs()
+}
+
+func newTestServiceEchoRetFloatResult() interface{} {
+	return echo.NewTestServiceEchoRetFloatResult()
+}
+
+func echoRetDoubleHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+
+	realResult := result.(*echo.TestServiceEchoRetDoubleResult)
+	success, err := handler.(echo.TestService).EchoRetDouble(ctx)
+	if err != nil {
+		return err
+	}
+	realResult.Success = &success
+	return nil
+}
+func newTestServiceEchoRetDoubleArgs() interface{} {
+	return echo.NewTestServiceEchoRetDoubleArgs()
+}
+
+func newTestServiceEchoRetDoubleResult() interface{} {
+	return echo.NewTestServiceEchoRetDoubleResult()
+}
+
+func echoRetStringHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+
+	realResult := result.(*echo.TestServiceEchoRetStringResult)
+	success, err := handler.(echo.TestService).EchoRetString(ctx)
+	if err != nil {
+		return err
+	}
+	realResult.Success = &success
+	return nil
+}
+func newTestServiceEchoRetStringArgs() interface{} {
+	return echo.NewTestServiceEchoRetStringArgs()
+}
+
+func newTestServiceEchoRetStringResult() interface{} {
+	return echo.NewTestServiceEchoRetStringResult()
 }
 
 func echoIntHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
@@ -1866,6 +2018,78 @@ func newServiceClient(c client.Client) *kClient {
 	return &kClient{
 		c: c,
 	}
+}
+
+func (p *kClient) EchoRetByte(ctx context.Context) (r int8, err error) {
+	var _args echo.TestServiceEchoRetByteArgs
+	var _result echo.TestServiceEchoRetByteResult
+	if err = p.c.Call(ctx, "EchoRetByte", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) EchoRetBool(ctx context.Context) (r bool, err error) {
+	var _args echo.TestServiceEchoRetBoolArgs
+	var _result echo.TestServiceEchoRetBoolResult
+	if err = p.c.Call(ctx, "EchoRetBool", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) EchoRetInt16(ctx context.Context) (r int16, err error) {
+	var _args echo.TestServiceEchoRetInt16Args
+	var _result echo.TestServiceEchoRetInt16Result
+	if err = p.c.Call(ctx, "EchoRetInt16", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) EchoRetInt32(ctx context.Context) (r int32, err error) {
+	var _args echo.TestServiceEchoRetInt32Args
+	var _result echo.TestServiceEchoRetInt32Result
+	if err = p.c.Call(ctx, "EchoRetInt32", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) EchoRetInt64(ctx context.Context) (r int64, err error) {
+	var _args echo.TestServiceEchoRetInt64Args
+	var _result echo.TestServiceEchoRetInt64Result
+	if err = p.c.Call(ctx, "EchoRetInt64", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) EchoRetFloat(ctx context.Context) (r float64, err error) {
+	var _args echo.TestServiceEchoRetFloatArgs
+	var _result echo.TestServiceEchoRetFloatResult
+	if err = p.c.Call(ctx, "EchoRetFloat", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) EchoRetDouble(ctx context.Context) (r float64, err error) {
+	var _args echo.TestServiceEchoRetDoubleArgs
+	var _result echo.TestServiceEchoRetDoubleResult
+	if err = p.c.Call(ctx, "EchoRetDouble", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) EchoRetString(ctx context.Context) (r string, err error) {
+	var _args echo.TestServiceEchoRetStringArgs
+	var _result echo.TestServiceEchoRetStringResult
+	if err = p.c.Call(ctx, "EchoRetString", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
 }
 
 func (p *kClient) EchoInt(ctx context.Context, req int32) (r int32, err error) {

@@ -23,6 +23,478 @@ var (
 	_ = java.KitexUnusedProtection
 )
 
+type TestServiceEchoRetByteArgs struct {
+}
+
+func NewTestServiceEchoRetByteArgs() *TestServiceEchoRetByteArgs {
+	return &TestServiceEchoRetByteArgs{}
+}
+
+func (p *TestServiceEchoRetByteArgs) InitDefault() {
+	*p = TestServiceEchoRetByteArgs{}
+}
+
+func (p *TestServiceEchoRetByteArgs) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	return fmt.Sprintf("TestServiceEchoRetByteArgs(%+v)", *p)
+}
+func (p *TestServiceEchoRetByteArgs) GetFirstArgument() interface{} {
+	return nil
+}
+
+type TestServiceEchoRetByteResult struct {
+	Success *int8 `thrift:"success,0,optional" frugal:"0,optional,byte" json:"success,omitempty"`
+}
+
+func NewTestServiceEchoRetByteResult() *TestServiceEchoRetByteResult {
+	return &TestServiceEchoRetByteResult{}
+}
+
+func (p *TestServiceEchoRetByteResult) InitDefault() {
+	*p = TestServiceEchoRetByteResult{}
+}
+
+var TestServiceEchoRetByteResult_Success_DEFAULT int8
+
+func (p *TestServiceEchoRetByteResult) GetSuccess() (v int8) {
+	if !p.IsSetSuccess() {
+		return TestServiceEchoRetByteResult_Success_DEFAULT
+	}
+	return *p.Success
+}
+func (p *TestServiceEchoRetByteResult) SetSuccess(x interface{}) {
+	p.Success = x.(*int8)
+}
+
+func (p *TestServiceEchoRetByteResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *TestServiceEchoRetByteResult) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	return fmt.Sprintf("TestServiceEchoRetByteResult(%+v)", *p)
+}
+func (p *TestServiceEchoRetByteResult) GetResult() interface{} {
+	return p.Success
+}
+
+type TestServiceEchoRetBoolArgs struct {
+}
+
+func NewTestServiceEchoRetBoolArgs() *TestServiceEchoRetBoolArgs {
+	return &TestServiceEchoRetBoolArgs{}
+}
+
+func (p *TestServiceEchoRetBoolArgs) InitDefault() {
+	*p = TestServiceEchoRetBoolArgs{}
+}
+
+func (p *TestServiceEchoRetBoolArgs) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	return fmt.Sprintf("TestServiceEchoRetBoolArgs(%+v)", *p)
+}
+func (p *TestServiceEchoRetBoolArgs) GetFirstArgument() interface{} {
+	return nil
+}
+
+type TestServiceEchoRetBoolResult struct {
+	Success *bool `thrift:"success,0,optional" frugal:"0,optional,bool" json:"success,omitempty"`
+}
+
+func NewTestServiceEchoRetBoolResult() *TestServiceEchoRetBoolResult {
+	return &TestServiceEchoRetBoolResult{}
+}
+
+func (p *TestServiceEchoRetBoolResult) InitDefault() {
+	*p = TestServiceEchoRetBoolResult{}
+}
+
+var TestServiceEchoRetBoolResult_Success_DEFAULT bool
+
+func (p *TestServiceEchoRetBoolResult) GetSuccess() (v bool) {
+	if !p.IsSetSuccess() {
+		return TestServiceEchoRetBoolResult_Success_DEFAULT
+	}
+	return *p.Success
+}
+func (p *TestServiceEchoRetBoolResult) SetSuccess(x interface{}) {
+	p.Success = x.(*bool)
+}
+
+func (p *TestServiceEchoRetBoolResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *TestServiceEchoRetBoolResult) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	return fmt.Sprintf("TestServiceEchoRetBoolResult(%+v)", *p)
+}
+func (p *TestServiceEchoRetBoolResult) GetResult() interface{} {
+	return p.Success
+}
+
+type TestServiceEchoRetInt16Args struct {
+}
+
+func NewTestServiceEchoRetInt16Args() *TestServiceEchoRetInt16Args {
+	return &TestServiceEchoRetInt16Args{}
+}
+
+func (p *TestServiceEchoRetInt16Args) InitDefault() {
+	*p = TestServiceEchoRetInt16Args{}
+}
+
+func (p *TestServiceEchoRetInt16Args) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	return fmt.Sprintf("TestServiceEchoRetInt16Args(%+v)", *p)
+}
+func (p *TestServiceEchoRetInt16Args) GetFirstArgument() interface{} {
+	return nil
+}
+
+type TestServiceEchoRetInt16Result struct {
+	Success *int16 `thrift:"success,0,optional" frugal:"0,optional,i16" json:"success,omitempty"`
+}
+
+func NewTestServiceEchoRetInt16Result() *TestServiceEchoRetInt16Result {
+	return &TestServiceEchoRetInt16Result{}
+}
+
+func (p *TestServiceEchoRetInt16Result) InitDefault() {
+	*p = TestServiceEchoRetInt16Result{}
+}
+
+var TestServiceEchoRetInt16Result_Success_DEFAULT int16
+
+func (p *TestServiceEchoRetInt16Result) GetSuccess() (v int16) {
+	if !p.IsSetSuccess() {
+		return TestServiceEchoRetInt16Result_Success_DEFAULT
+	}
+	return *p.Success
+}
+func (p *TestServiceEchoRetInt16Result) SetSuccess(x interface{}) {
+	p.Success = x.(*int16)
+}
+
+func (p *TestServiceEchoRetInt16Result) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *TestServiceEchoRetInt16Result) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	return fmt.Sprintf("TestServiceEchoRetInt16Result(%+v)", *p)
+}
+func (p *TestServiceEchoRetInt16Result) GetResult() interface{} {
+	return p.Success
+}
+
+type TestServiceEchoRetInt32Args struct {
+}
+
+func NewTestServiceEchoRetInt32Args() *TestServiceEchoRetInt32Args {
+	return &TestServiceEchoRetInt32Args{}
+}
+
+func (p *TestServiceEchoRetInt32Args) InitDefault() {
+	*p = TestServiceEchoRetInt32Args{}
+}
+
+func (p *TestServiceEchoRetInt32Args) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	return fmt.Sprintf("TestServiceEchoRetInt32Args(%+v)", *p)
+}
+func (p *TestServiceEchoRetInt32Args) GetFirstArgument() interface{} {
+	return nil
+}
+
+type TestServiceEchoRetInt32Result struct {
+	Success *int32 `thrift:"success,0,optional" frugal:"0,optional,i32" json:"success,omitempty"`
+}
+
+func NewTestServiceEchoRetInt32Result() *TestServiceEchoRetInt32Result {
+	return &TestServiceEchoRetInt32Result{}
+}
+
+func (p *TestServiceEchoRetInt32Result) InitDefault() {
+	*p = TestServiceEchoRetInt32Result{}
+}
+
+var TestServiceEchoRetInt32Result_Success_DEFAULT int32
+
+func (p *TestServiceEchoRetInt32Result) GetSuccess() (v int32) {
+	if !p.IsSetSuccess() {
+		return TestServiceEchoRetInt32Result_Success_DEFAULT
+	}
+	return *p.Success
+}
+func (p *TestServiceEchoRetInt32Result) SetSuccess(x interface{}) {
+	p.Success = x.(*int32)
+}
+
+func (p *TestServiceEchoRetInt32Result) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *TestServiceEchoRetInt32Result) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	return fmt.Sprintf("TestServiceEchoRetInt32Result(%+v)", *p)
+}
+func (p *TestServiceEchoRetInt32Result) GetResult() interface{} {
+	return p.Success
+}
+
+type TestServiceEchoRetInt64Args struct {
+}
+
+func NewTestServiceEchoRetInt64Args() *TestServiceEchoRetInt64Args {
+	return &TestServiceEchoRetInt64Args{}
+}
+
+func (p *TestServiceEchoRetInt64Args) InitDefault() {
+	*p = TestServiceEchoRetInt64Args{}
+}
+
+func (p *TestServiceEchoRetInt64Args) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	return fmt.Sprintf("TestServiceEchoRetInt64Args(%+v)", *p)
+}
+func (p *TestServiceEchoRetInt64Args) GetFirstArgument() interface{} {
+	return nil
+}
+
+type TestServiceEchoRetInt64Result struct {
+	Success *int64 `thrift:"success,0,optional" frugal:"0,optional,i64" json:"success,omitempty"`
+}
+
+func NewTestServiceEchoRetInt64Result() *TestServiceEchoRetInt64Result {
+	return &TestServiceEchoRetInt64Result{}
+}
+
+func (p *TestServiceEchoRetInt64Result) InitDefault() {
+	*p = TestServiceEchoRetInt64Result{}
+}
+
+var TestServiceEchoRetInt64Result_Success_DEFAULT int64
+
+func (p *TestServiceEchoRetInt64Result) GetSuccess() (v int64) {
+	if !p.IsSetSuccess() {
+		return TestServiceEchoRetInt64Result_Success_DEFAULT
+	}
+	return *p.Success
+}
+func (p *TestServiceEchoRetInt64Result) SetSuccess(x interface{}) {
+	p.Success = x.(*int64)
+}
+
+func (p *TestServiceEchoRetInt64Result) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *TestServiceEchoRetInt64Result) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	return fmt.Sprintf("TestServiceEchoRetInt64Result(%+v)", *p)
+}
+func (p *TestServiceEchoRetInt64Result) GetResult() interface{} {
+	return p.Success
+}
+
+type TestServiceEchoRetFloatArgs struct {
+}
+
+func NewTestServiceEchoRetFloatArgs() *TestServiceEchoRetFloatArgs {
+	return &TestServiceEchoRetFloatArgs{}
+}
+
+func (p *TestServiceEchoRetFloatArgs) InitDefault() {
+	*p = TestServiceEchoRetFloatArgs{}
+}
+
+func (p *TestServiceEchoRetFloatArgs) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	return fmt.Sprintf("TestServiceEchoRetFloatArgs(%+v)", *p)
+}
+func (p *TestServiceEchoRetFloatArgs) GetFirstArgument() interface{} {
+	return nil
+}
+
+type TestServiceEchoRetFloatResult struct {
+	Success *float64 `thrift:"success,0,optional" frugal:"0,optional,double" json:"success,omitempty"`
+}
+
+func NewTestServiceEchoRetFloatResult() *TestServiceEchoRetFloatResult {
+	return &TestServiceEchoRetFloatResult{}
+}
+
+func (p *TestServiceEchoRetFloatResult) InitDefault() {
+	*p = TestServiceEchoRetFloatResult{}
+}
+
+var TestServiceEchoRetFloatResult_Success_DEFAULT float64
+
+func (p *TestServiceEchoRetFloatResult) GetSuccess() (v float64) {
+	if !p.IsSetSuccess() {
+		return TestServiceEchoRetFloatResult_Success_DEFAULT
+	}
+	return *p.Success
+}
+func (p *TestServiceEchoRetFloatResult) SetSuccess(x interface{}) {
+	p.Success = x.(*float64)
+}
+
+func (p *TestServiceEchoRetFloatResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *TestServiceEchoRetFloatResult) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	return fmt.Sprintf("TestServiceEchoRetFloatResult(%+v)", *p)
+}
+func (p *TestServiceEchoRetFloatResult) GetResult() interface{} {
+	return p.Success
+}
+
+type TestServiceEchoRetDoubleArgs struct {
+}
+
+func NewTestServiceEchoRetDoubleArgs() *TestServiceEchoRetDoubleArgs {
+	return &TestServiceEchoRetDoubleArgs{}
+}
+
+func (p *TestServiceEchoRetDoubleArgs) InitDefault() {
+	*p = TestServiceEchoRetDoubleArgs{}
+}
+
+func (p *TestServiceEchoRetDoubleArgs) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	return fmt.Sprintf("TestServiceEchoRetDoubleArgs(%+v)", *p)
+}
+func (p *TestServiceEchoRetDoubleArgs) GetFirstArgument() interface{} {
+	return nil
+}
+
+type TestServiceEchoRetDoubleResult struct {
+	Success *float64 `thrift:"success,0,optional" frugal:"0,optional,double" json:"success,omitempty"`
+}
+
+func NewTestServiceEchoRetDoubleResult() *TestServiceEchoRetDoubleResult {
+	return &TestServiceEchoRetDoubleResult{}
+}
+
+func (p *TestServiceEchoRetDoubleResult) InitDefault() {
+	*p = TestServiceEchoRetDoubleResult{}
+}
+
+var TestServiceEchoRetDoubleResult_Success_DEFAULT float64
+
+func (p *TestServiceEchoRetDoubleResult) GetSuccess() (v float64) {
+	if !p.IsSetSuccess() {
+		return TestServiceEchoRetDoubleResult_Success_DEFAULT
+	}
+	return *p.Success
+}
+func (p *TestServiceEchoRetDoubleResult) SetSuccess(x interface{}) {
+	p.Success = x.(*float64)
+}
+
+func (p *TestServiceEchoRetDoubleResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *TestServiceEchoRetDoubleResult) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	return fmt.Sprintf("TestServiceEchoRetDoubleResult(%+v)", *p)
+}
+func (p *TestServiceEchoRetDoubleResult) GetResult() interface{} {
+	return p.Success
+}
+
+type TestServiceEchoRetStringArgs struct {
+}
+
+func NewTestServiceEchoRetStringArgs() *TestServiceEchoRetStringArgs {
+	return &TestServiceEchoRetStringArgs{}
+}
+
+func (p *TestServiceEchoRetStringArgs) InitDefault() {
+	*p = TestServiceEchoRetStringArgs{}
+}
+
+func (p *TestServiceEchoRetStringArgs) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	return fmt.Sprintf("TestServiceEchoRetStringArgs(%+v)", *p)
+}
+func (p *TestServiceEchoRetStringArgs) GetFirstArgument() interface{} {
+	return nil
+}
+
+type TestServiceEchoRetStringResult struct {
+	Success *string `thrift:"success,0,optional" frugal:"0,optional,string" json:"success,omitempty"`
+}
+
+func NewTestServiceEchoRetStringResult() *TestServiceEchoRetStringResult {
+	return &TestServiceEchoRetStringResult{}
+}
+
+func (p *TestServiceEchoRetStringResult) InitDefault() {
+	*p = TestServiceEchoRetStringResult{}
+}
+
+var TestServiceEchoRetStringResult_Success_DEFAULT string
+
+func (p *TestServiceEchoRetStringResult) GetSuccess() (v string) {
+	if !p.IsSetSuccess() {
+		return TestServiceEchoRetStringResult_Success_DEFAULT
+	}
+	return *p.Success
+}
+func (p *TestServiceEchoRetStringResult) SetSuccess(x interface{}) {
+	p.Success = x.(*string)
+}
+
+func (p *TestServiceEchoRetStringResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *TestServiceEchoRetStringResult) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	return fmt.Sprintf("TestServiceEchoRetStringResult(%+v)", *p)
+}
+func (p *TestServiceEchoRetStringResult) GetResult() interface{} {
+	return p.Success
+}
+
 type TestServiceEchoIntArgs struct {
 	Req int32 `thrift:"req,1" frugal:"1,default,i32" json:"req"`
 }
