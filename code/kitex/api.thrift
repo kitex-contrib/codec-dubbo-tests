@@ -111,6 +111,21 @@ exception EchoCustomizedException {
     2: required string customizedMessage
 }(JavaClassName="org.apache.dubbo.tests.api.EchoCustomizedException")
 
+struct EchoGenericRequest {
+    1: required i32 reqField,
+    2: required list<java.Object> list
+}(JavaClassName="org.apache.dubbo.tests.api.EchoGenericRequest")
+
+struct EchoGenericResponse {
+    1: required i32 respField,
+    2: required list<java.Object> list
+}(JavaClassName="org.apache.dubbo.tests.api.EchoGenericResponse")
+
+struct EchoGenericEmbedded {
+    1: required string internalStringReq,
+    2: required i32 internalIntegerReq
+}(JavaClassName="org.apache.dubbo.tests.api.EchoGenericEmbedded")
+
 service TestService {
     // without in params
     byte   EchoRetByte()
@@ -237,4 +252,7 @@ service TestService {
     // exception
     bool EchoException(1: bool req)
     bool EchoCustomizedException(1: bool req)
+
+    // java generic
+    EchoGenericResponse EchoGeneric(1: EchoGenericRequest req)
 }(JavaClassName="org.apache.dubbo.tests.api.UserProvider")

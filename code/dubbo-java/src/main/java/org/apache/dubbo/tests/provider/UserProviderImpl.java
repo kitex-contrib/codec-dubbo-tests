@@ -509,4 +509,9 @@ public class UserProviderImpl implements UserProvider {
     public Boolean EchoCustomizedException(Boolean req) throws Exception {
         throw new EchoCustomizedException("EchoCustomizedException");
     }
+
+    @Override
+    public EchoGenericResponse<EchoGenericEmbedded> EchoGeneric(EchoGenericRequest<EchoGenericEmbedded> req) throws Exception {
+        return new EchoGenericResponse<>(req.getReqField(), req.getList());
+    }
 }
