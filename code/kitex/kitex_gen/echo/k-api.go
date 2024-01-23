@@ -7219,3 +7219,79 @@ func (p *TestServiceEchoCustomizedExceptionResult) String() string {
 func (p *TestServiceEchoCustomizedExceptionResult) GetResult() interface{} {
 	return p.Success
 }
+
+type TestServiceEchoGenericArgs struct {
+	Req *EchoGenericRequest `thrift:"req,1" frugal:"1,default,EchoGenericRequest" json:"req"`
+}
+
+func NewTestServiceEchoGenericArgs() *TestServiceEchoGenericArgs {
+	return &TestServiceEchoGenericArgs{}
+}
+
+func (p *TestServiceEchoGenericArgs) InitDefault() {
+	*p = TestServiceEchoGenericArgs{}
+}
+
+var TestServiceEchoGenericArgs_Req_DEFAULT *EchoGenericRequest
+
+func (p *TestServiceEchoGenericArgs) GetReq() (v *EchoGenericRequest) {
+	if !p.IsSetReq() {
+		return TestServiceEchoGenericArgs_Req_DEFAULT
+	}
+	return p.Req
+}
+func (p *TestServiceEchoGenericArgs) SetReq(val *EchoGenericRequest) {
+	p.Req = val
+}
+
+func (p *TestServiceEchoGenericArgs) IsSetReq() bool {
+	return p.Req != nil
+}
+
+func (p *TestServiceEchoGenericArgs) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	return fmt.Sprintf("TestServiceEchoGenericArgs(%+v)", *p)
+}
+func (p *TestServiceEchoGenericArgs) GetFirstArgument() interface{} {
+	return p.Req
+}
+
+type TestServiceEchoGenericResult struct {
+	Success *EchoGenericResponse `thrift:"success,0,optional" frugal:"0,optional,EchoGenericResponse" json:"success,omitempty"`
+}
+
+func NewTestServiceEchoGenericResult() *TestServiceEchoGenericResult {
+	return &TestServiceEchoGenericResult{}
+}
+
+func (p *TestServiceEchoGenericResult) InitDefault() {
+	*p = TestServiceEchoGenericResult{}
+}
+
+var TestServiceEchoGenericResult_Success_DEFAULT *EchoGenericResponse
+
+func (p *TestServiceEchoGenericResult) GetSuccess() (v *EchoGenericResponse) {
+	if !p.IsSetSuccess() {
+		return TestServiceEchoGenericResult_Success_DEFAULT
+	}
+	return p.Success
+}
+func (p *TestServiceEchoGenericResult) SetSuccess(x interface{}) {
+	p.Success = x.(*EchoGenericResponse)
+}
+
+func (p *TestServiceEchoGenericResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *TestServiceEchoGenericResult) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	return fmt.Sprintf("TestServiceEchoGenericResult(%+v)", *p)
+}
+func (p *TestServiceEchoGenericResult) GetResult() interface{} {
+	return p.Success
+}

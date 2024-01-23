@@ -65,6 +65,7 @@ public class Application {
         testMethodNameAnnotation(service);
         testJavaNull(service);
         testExceptions(service);
+        testGeneric(service);
     }
 
     public static void logEchoFail(String methodName) {
@@ -197,6 +198,10 @@ public class Application {
     public static void testExceptions(UserProvider svc) {
         testException(svc);
         testCustomizedException(svc);
+    }
+
+    public static void testGeneric(UserProvider svc) {
+        testEchoGeneric(svc);
     }
 
     public static void testEchoRetByte(UserProvider svc) {
@@ -1576,6 +1581,25 @@ public class Application {
             if (!(e instanceof EchoCustomizedException) || !(((EchoCustomizedException) e).getCustomizedMessage().equals(methodName))) {
                 logEchoException(methodName, e);
             }
+        }
+        logEchoEnd(methodName);
+    }
+
+    public static void testEchoGeneric(UserProvider svc) {
+        String methodName = "EchoGeneric";
+        try {
+            List<EchoGenericEmbedded> list = new ArrayList<>();
+            EchoGenericEmbedded embed1 = new EchoGenericEmbedded("EchoGeneric1", 1);
+            list.add(embed1);
+            EchoGenericEmbedded embed2 = new EchoGenericEmbedded("EchoGeneric2", 2);
+            list.add(embed2);
+            EchoGenericRequest<EchoGenericEmbedded> req = new EchoGenericRequest<>(1, list);
+            EchoGenericResponse<EchoGenericEmbedded> resp = svc.EchoGeneric(req);
+            if (!list.equals(resp.getList()) || req.getReqField() != resp.getRespField()) {
+                logEchoFail(methodName);
+            }
+        } catch (Exception e) {
+            logEchoException(methodName, e);
         }
         logEchoEnd(methodName);
     }

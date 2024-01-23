@@ -203,4 +203,6 @@ public interface UserProvider {
     Boolean EchoException(Boolean req) throws Exception;
 
     Boolean EchoCustomizedException(Boolean req) throws Exception;
+
+    EchoGenericResponse<EchoGenericEmbedded> EchoGeneric(EchoGenericRequest<EchoGenericEmbedded> req) throws Exception;
 }

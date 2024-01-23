@@ -115,6 +115,7 @@ type Client interface {
 	EchoOptionalMultiStringResponse(ctx context.Context, req string, callOptions ...callopt.Option) (r *echo.EchoOptionalMultiStringResponse, err error)
 	EchoException(ctx context.Context, req bool, callOptions ...callopt.Option) (r bool, err error)
 	EchoCustomizedException(ctx context.Context, req bool, callOptions ...callopt.Option) (r bool, err error)
+	EchoGeneric(ctx context.Context, req *echo.EchoGenericRequest, callOptions ...callopt.Option) (r *echo.EchoGenericResponse, err error)
 }
 
 // NewClient creates a client for the service defined in IDL.
@@ -124,7 +125,7 @@ func NewClient(destService string, opts ...client.Option) (Client, error) {
 
 	options = append(options, opts...)
 
-	kc, err := client.NewClient(serviceInfo(), options...)
+	kc, err := client.NewClient(serviceInfoForClient(), options...)
 	if err != nil {
 		return nil, err
 	}
@@ -664,4 +665,9 @@ func (p *kTestServiceClient) EchoException(ctx context.Context, req bool, callOp
 func (p *kTestServiceClient) EchoCustomizedException(ctx context.Context, req bool, callOptions ...callopt.Option) (r bool, err error) {
 	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
 	return p.kClient.EchoCustomizedException(ctx, req)
+}
+
+func (p *kTestServiceClient) EchoGeneric(ctx context.Context, req *echo.EchoGenericRequest, callOptions ...callopt.Option) (r *echo.EchoGenericResponse, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.EchoGeneric(ctx, req)
 }

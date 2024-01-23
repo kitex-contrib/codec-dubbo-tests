@@ -614,3 +614,11 @@ func (s *TestServiceImpl) EchoCustomizedException(ctx context.Context, req bool)
 		CustomizedMessage: "EchoCustomizedException",
 	}
 }
+
+// EchoGeneric implements the TestServiceImpl interface.
+func (s *TestServiceImpl) EchoGeneric(ctx context.Context, req *echo.EchoGenericRequest) (resp *echo.EchoGenericResponse, err error) {
+	return &echo.EchoGenericResponse{
+		RespField: req.ReqField,
+		List:      req.List,
+	}, nil
+}

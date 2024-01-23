@@ -4,129 +4,805 @@ package testservice
 
 import (
 	"context"
+	"errors"
 	client "github.com/cloudwego/kitex/client"
 	kitex "github.com/cloudwego/kitex/pkg/serviceinfo"
 	echo "github.com/kitex-contrib/codec-dubbo-tests/code/kitex/kitex_gen/echo"
 )
 
+var errInvalidMessageType = errors.New("invalid message type for service method handler")
+
+var serviceMethods = map[string]kitex.MethodInfo{
+	"EchoRetByte": kitex.NewMethodInfo(
+		echoRetByteHandler,
+		newTestServiceEchoRetByteArgs,
+		newTestServiceEchoRetByteResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingNone),
+	),
+	"EchoRetBool": kitex.NewMethodInfo(
+		echoRetBoolHandler,
+		newTestServiceEchoRetBoolArgs,
+		newTestServiceEchoRetBoolResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingNone),
+	),
+	"EchoRetInt16": kitex.NewMethodInfo(
+		echoRetInt16Handler,
+		newTestServiceEchoRetInt16Args,
+		newTestServiceEchoRetInt16Result,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingNone),
+	),
+	"EchoRetInt32": kitex.NewMethodInfo(
+		echoRetInt32Handler,
+		newTestServiceEchoRetInt32Args,
+		newTestServiceEchoRetInt32Result,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingNone),
+	),
+	"EchoRetInt64": kitex.NewMethodInfo(
+		echoRetInt64Handler,
+		newTestServiceEchoRetInt64Args,
+		newTestServiceEchoRetInt64Result,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingNone),
+	),
+	"EchoRetFloat": kitex.NewMethodInfo(
+		echoRetFloatHandler,
+		newTestServiceEchoRetFloatArgs,
+		newTestServiceEchoRetFloatResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingNone),
+	),
+	"EchoRetDouble": kitex.NewMethodInfo(
+		echoRetDoubleHandler,
+		newTestServiceEchoRetDoubleArgs,
+		newTestServiceEchoRetDoubleResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingNone),
+	),
+	"EchoRetString": kitex.NewMethodInfo(
+		echoRetStringHandler,
+		newTestServiceEchoRetStringArgs,
+		newTestServiceEchoRetStringResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingNone),
+	),
+	"EchoInt": kitex.NewMethodInfo(
+		echoIntHandler,
+		newTestServiceEchoIntArgs,
+		newTestServiceEchoIntResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingNone),
+	),
+	"EchoBool": kitex.NewMethodInfo(
+		echoBoolHandler,
+		newTestServiceEchoBoolArgs,
+		newTestServiceEchoBoolResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingNone),
+	),
+	"EchoByte": kitex.NewMethodInfo(
+		echoByteHandler,
+		newTestServiceEchoByteArgs,
+		newTestServiceEchoByteResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingNone),
+	),
+	"EchoInt16": kitex.NewMethodInfo(
+		echoInt16Handler,
+		newTestServiceEchoInt16Args,
+		newTestServiceEchoInt16Result,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingNone),
+	),
+	"EchoInt32": kitex.NewMethodInfo(
+		echoInt32Handler,
+		newTestServiceEchoInt32Args,
+		newTestServiceEchoInt32Result,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingNone),
+	),
+	"EchoInt64": kitex.NewMethodInfo(
+		echoInt64Handler,
+		newTestServiceEchoInt64Args,
+		newTestServiceEchoInt64Result,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingNone),
+	),
+	"EchoFloat": kitex.NewMethodInfo(
+		echoFloatHandler,
+		newTestServiceEchoFloatArgs,
+		newTestServiceEchoFloatResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingNone),
+	),
+	"EchoDouble": kitex.NewMethodInfo(
+		echoDoubleHandler,
+		newTestServiceEchoDoubleArgs,
+		newTestServiceEchoDoubleResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingNone),
+	),
+	"EchoString": kitex.NewMethodInfo(
+		echoStringHandler,
+		newTestServiceEchoStringArgs,
+		newTestServiceEchoStringResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingNone),
+	),
+	"EchoBinary": kitex.NewMethodInfo(
+		echoBinaryHandler,
+		newTestServiceEchoBinaryArgs,
+		newTestServiceEchoBinaryResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingNone),
+	),
+	"Echo": kitex.NewMethodInfo(
+		echoHandler,
+		newTestServiceEchoArgs,
+		newTestServiceEchoResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingNone),
+	),
+	"EchoBoolList": kitex.NewMethodInfo(
+		echoBoolListHandler,
+		newTestServiceEchoBoolListArgs,
+		newTestServiceEchoBoolListResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingNone),
+	),
+	"EchoByteList": kitex.NewMethodInfo(
+		echoByteListHandler,
+		newTestServiceEchoByteListArgs,
+		newTestServiceEchoByteListResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingNone),
+	),
+	"EchoInt16List": kitex.NewMethodInfo(
+		echoInt16ListHandler,
+		newTestServiceEchoInt16ListArgs,
+		newTestServiceEchoInt16ListResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingNone),
+	),
+	"EchoInt32List": kitex.NewMethodInfo(
+		echoInt32ListHandler,
+		newTestServiceEchoInt32ListArgs,
+		newTestServiceEchoInt32ListResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingNone),
+	),
+	"EchoInt64List": kitex.NewMethodInfo(
+		echoInt64ListHandler,
+		newTestServiceEchoInt64ListArgs,
+		newTestServiceEchoInt64ListResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingNone),
+	),
+	"EchoFloatList": kitex.NewMethodInfo(
+		echoFloatListHandler,
+		newTestServiceEchoFloatListArgs,
+		newTestServiceEchoFloatListResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingNone),
+	),
+	"EchoDoubleList": kitex.NewMethodInfo(
+		echoDoubleListHandler,
+		newTestServiceEchoDoubleListArgs,
+		newTestServiceEchoDoubleListResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingNone),
+	),
+	"EchoStringList": kitex.NewMethodInfo(
+		echoStringListHandler,
+		newTestServiceEchoStringListArgs,
+		newTestServiceEchoStringListResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingNone),
+	),
+	"EchoBinaryList": kitex.NewMethodInfo(
+		echoBinaryListHandler,
+		newTestServiceEchoBinaryListArgs,
+		newTestServiceEchoBinaryListResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingNone),
+	),
+	"EchoBool2BoolMap": kitex.NewMethodInfo(
+		echoBool2BoolMapHandler,
+		newTestServiceEchoBool2BoolMapArgs,
+		newTestServiceEchoBool2BoolMapResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingNone),
+	),
+	"EchoBool2ByteMap": kitex.NewMethodInfo(
+		echoBool2ByteMapHandler,
+		newTestServiceEchoBool2ByteMapArgs,
+		newTestServiceEchoBool2ByteMapResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingNone),
+	),
+	"EchoBool2Int16Map": kitex.NewMethodInfo(
+		echoBool2Int16MapHandler,
+		newTestServiceEchoBool2Int16MapArgs,
+		newTestServiceEchoBool2Int16MapResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingNone),
+	),
+	"EchoBool2Int32Map": kitex.NewMethodInfo(
+		echoBool2Int32MapHandler,
+		newTestServiceEchoBool2Int32MapArgs,
+		newTestServiceEchoBool2Int32MapResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingNone),
+	),
+	"EchoBool2Int64Map": kitex.NewMethodInfo(
+		echoBool2Int64MapHandler,
+		newTestServiceEchoBool2Int64MapArgs,
+		newTestServiceEchoBool2Int64MapResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingNone),
+	),
+	"EchoBool2FloatMap": kitex.NewMethodInfo(
+		echoBool2FloatMapHandler,
+		newTestServiceEchoBool2FloatMapArgs,
+		newTestServiceEchoBool2FloatMapResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingNone),
+	),
+	"EchoBool2DoubleMap": kitex.NewMethodInfo(
+		echoBool2DoubleMapHandler,
+		newTestServiceEchoBool2DoubleMapArgs,
+		newTestServiceEchoBool2DoubleMapResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingNone),
+	),
+	"EchoBool2StringMap": kitex.NewMethodInfo(
+		echoBool2StringMapHandler,
+		newTestServiceEchoBool2StringMapArgs,
+		newTestServiceEchoBool2StringMapResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingNone),
+	),
+	"EchoBool2BinaryMap": kitex.NewMethodInfo(
+		echoBool2BinaryMapHandler,
+		newTestServiceEchoBool2BinaryMapArgs,
+		newTestServiceEchoBool2BinaryMapResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingNone),
+	),
+	"EchoBool2BoolListMap": kitex.NewMethodInfo(
+		echoBool2BoolListMapHandler,
+		newTestServiceEchoBool2BoolListMapArgs,
+		newTestServiceEchoBool2BoolListMapResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingNone),
+	),
+	"EchoBool2ByteListMap": kitex.NewMethodInfo(
+		echoBool2ByteListMapHandler,
+		newTestServiceEchoBool2ByteListMapArgs,
+		newTestServiceEchoBool2ByteListMapResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingNone),
+	),
+	"EchoBool2Int16ListMap": kitex.NewMethodInfo(
+		echoBool2Int16ListMapHandler,
+		newTestServiceEchoBool2Int16ListMapArgs,
+		newTestServiceEchoBool2Int16ListMapResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingNone),
+	),
+	"EchoBool2Int32ListMap": kitex.NewMethodInfo(
+		echoBool2Int32ListMapHandler,
+		newTestServiceEchoBool2Int32ListMapArgs,
+		newTestServiceEchoBool2Int32ListMapResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingNone),
+	),
+	"EchoBool2Int64ListMap": kitex.NewMethodInfo(
+		echoBool2Int64ListMapHandler,
+		newTestServiceEchoBool2Int64ListMapArgs,
+		newTestServiceEchoBool2Int64ListMapResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingNone),
+	),
+	"EchoBool2FloatListMap": kitex.NewMethodInfo(
+		echoBool2FloatListMapHandler,
+		newTestServiceEchoBool2FloatListMapArgs,
+		newTestServiceEchoBool2FloatListMapResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingNone),
+	),
+	"EchoBool2DoubleListMap": kitex.NewMethodInfo(
+		echoBool2DoubleListMapHandler,
+		newTestServiceEchoBool2DoubleListMapArgs,
+		newTestServiceEchoBool2DoubleListMapResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingNone),
+	),
+	"EchoBool2StringListMap": kitex.NewMethodInfo(
+		echoBool2StringListMapHandler,
+		newTestServiceEchoBool2StringListMapArgs,
+		newTestServiceEchoBool2StringListMapResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingNone),
+	),
+	"EchoBool2BinaryListMap": kitex.NewMethodInfo(
+		echoBool2BinaryListMapHandler,
+		newTestServiceEchoBool2BinaryListMapArgs,
+		newTestServiceEchoBool2BinaryListMapResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingNone),
+	),
+	"EchoMultiBool": kitex.NewMethodInfo(
+		echoMultiBoolHandler,
+		newTestServiceEchoMultiBoolArgs,
+		newTestServiceEchoMultiBoolResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingNone),
+	),
+	"EchoMultiByte": kitex.NewMethodInfo(
+		echoMultiByteHandler,
+		newTestServiceEchoMultiByteArgs,
+		newTestServiceEchoMultiByteResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingNone),
+	),
+	"EchoMultiInt16": kitex.NewMethodInfo(
+		echoMultiInt16Handler,
+		newTestServiceEchoMultiInt16Args,
+		newTestServiceEchoMultiInt16Result,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingNone),
+	),
+	"EchoMultiInt32": kitex.NewMethodInfo(
+		echoMultiInt32Handler,
+		newTestServiceEchoMultiInt32Args,
+		newTestServiceEchoMultiInt32Result,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingNone),
+	),
+	"EchoMultiInt64": kitex.NewMethodInfo(
+		echoMultiInt64Handler,
+		newTestServiceEchoMultiInt64Args,
+		newTestServiceEchoMultiInt64Result,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingNone),
+	),
+	"EchoMultiFloat": kitex.NewMethodInfo(
+		echoMultiFloatHandler,
+		newTestServiceEchoMultiFloatArgs,
+		newTestServiceEchoMultiFloatResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingNone),
+	),
+	"EchoMultiDouble": kitex.NewMethodInfo(
+		echoMultiDoubleHandler,
+		newTestServiceEchoMultiDoubleArgs,
+		newTestServiceEchoMultiDoubleResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingNone),
+	),
+	"EchoMultiString": kitex.NewMethodInfo(
+		echoMultiStringHandler,
+		newTestServiceEchoMultiStringArgs,
+		newTestServiceEchoMultiStringResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingNone),
+	),
+	"EchoBaseBool": kitex.NewMethodInfo(
+		echoBaseBoolHandler,
+		newTestServiceEchoBaseBoolArgs,
+		newTestServiceEchoBaseBoolResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingNone),
+	),
+	"EchoBaseByte": kitex.NewMethodInfo(
+		echoBaseByteHandler,
+		newTestServiceEchoBaseByteArgs,
+		newTestServiceEchoBaseByteResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingNone),
+	),
+	"EchoBaseInt16": kitex.NewMethodInfo(
+		echoBaseInt16Handler,
+		newTestServiceEchoBaseInt16Args,
+		newTestServiceEchoBaseInt16Result,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingNone),
+	),
+	"EchoBaseInt32": kitex.NewMethodInfo(
+		echoBaseInt32Handler,
+		newTestServiceEchoBaseInt32Args,
+		newTestServiceEchoBaseInt32Result,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingNone),
+	),
+	"EchoBaseInt64": kitex.NewMethodInfo(
+		echoBaseInt64Handler,
+		newTestServiceEchoBaseInt64Args,
+		newTestServiceEchoBaseInt64Result,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingNone),
+	),
+	"EchoBaseFloat": kitex.NewMethodInfo(
+		echoBaseFloatHandler,
+		newTestServiceEchoBaseFloatArgs,
+		newTestServiceEchoBaseFloatResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingNone),
+	),
+	"EchoBaseDouble": kitex.NewMethodInfo(
+		echoBaseDoubleHandler,
+		newTestServiceEchoBaseDoubleArgs,
+		newTestServiceEchoBaseDoubleResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingNone),
+	),
+	"EchoBaseBoolList": kitex.NewMethodInfo(
+		echoBaseBoolListHandler,
+		newTestServiceEchoBaseBoolListArgs,
+		newTestServiceEchoBaseBoolListResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingNone),
+	),
+	"EchoBaseByteList": kitex.NewMethodInfo(
+		echoBaseByteListHandler,
+		newTestServiceEchoBaseByteListArgs,
+		newTestServiceEchoBaseByteListResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingNone),
+	),
+	"EchoBaseInt16List": kitex.NewMethodInfo(
+		echoBaseInt16ListHandler,
+		newTestServiceEchoBaseInt16ListArgs,
+		newTestServiceEchoBaseInt16ListResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingNone),
+	),
+	"EchoBaseInt32List": kitex.NewMethodInfo(
+		echoBaseInt32ListHandler,
+		newTestServiceEchoBaseInt32ListArgs,
+		newTestServiceEchoBaseInt32ListResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingNone),
+	),
+	"EchoBaseInt64List": kitex.NewMethodInfo(
+		echoBaseInt64ListHandler,
+		newTestServiceEchoBaseInt64ListArgs,
+		newTestServiceEchoBaseInt64ListResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingNone),
+	),
+	"EchoBaseFloatList": kitex.NewMethodInfo(
+		echoBaseFloatListHandler,
+		newTestServiceEchoBaseFloatListArgs,
+		newTestServiceEchoBaseFloatListResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingNone),
+	),
+	"EchoBaseDoubleList": kitex.NewMethodInfo(
+		echoBaseDoubleListHandler,
+		newTestServiceEchoBaseDoubleListArgs,
+		newTestServiceEchoBaseDoubleListResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingNone),
+	),
+	"EchoBool2BoolBaseMap": kitex.NewMethodInfo(
+		echoBool2BoolBaseMapHandler,
+		newTestServiceEchoBool2BoolBaseMapArgs,
+		newTestServiceEchoBool2BoolBaseMapResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingNone),
+	),
+	"EchoBool2ByteBaseMap": kitex.NewMethodInfo(
+		echoBool2ByteBaseMapHandler,
+		newTestServiceEchoBool2ByteBaseMapArgs,
+		newTestServiceEchoBool2ByteBaseMapResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingNone),
+	),
+	"EchoBool2Int16BaseMap": kitex.NewMethodInfo(
+		echoBool2Int16BaseMapHandler,
+		newTestServiceEchoBool2Int16BaseMapArgs,
+		newTestServiceEchoBool2Int16BaseMapResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingNone),
+	),
+	"EchoBool2Int32BaseMap": kitex.NewMethodInfo(
+		echoBool2Int32BaseMapHandler,
+		newTestServiceEchoBool2Int32BaseMapArgs,
+		newTestServiceEchoBool2Int32BaseMapResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingNone),
+	),
+	"EchoBool2Int64BaseMap": kitex.NewMethodInfo(
+		echoBool2Int64BaseMapHandler,
+		newTestServiceEchoBool2Int64BaseMapArgs,
+		newTestServiceEchoBool2Int64BaseMapResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingNone),
+	),
+	"EchoBool2FloatBaseMap": kitex.NewMethodInfo(
+		echoBool2FloatBaseMapHandler,
+		newTestServiceEchoBool2FloatBaseMapArgs,
+		newTestServiceEchoBool2FloatBaseMapResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingNone),
+	),
+	"EchoBool2DoubleBaseMap": kitex.NewMethodInfo(
+		echoBool2DoubleBaseMapHandler,
+		newTestServiceEchoBool2DoubleBaseMapArgs,
+		newTestServiceEchoBool2DoubleBaseMapResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingNone),
+	),
+	"EchoMultiBaseBool": kitex.NewMethodInfo(
+		echoMultiBaseBoolHandler,
+		newTestServiceEchoMultiBaseBoolArgs,
+		newTestServiceEchoMultiBaseBoolResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingNone),
+	),
+	"EchoMultiBaseByte": kitex.NewMethodInfo(
+		echoMultiBaseByteHandler,
+		newTestServiceEchoMultiBaseByteArgs,
+		newTestServiceEchoMultiBaseByteResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingNone),
+	),
+	"EchoMultiBaseInt16": kitex.NewMethodInfo(
+		echoMultiBaseInt16Handler,
+		newTestServiceEchoMultiBaseInt16Args,
+		newTestServiceEchoMultiBaseInt16Result,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingNone),
+	),
+	"EchoMultiBaseInt32": kitex.NewMethodInfo(
+		echoMultiBaseInt32Handler,
+		newTestServiceEchoMultiBaseInt32Args,
+		newTestServiceEchoMultiBaseInt32Result,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingNone),
+	),
+	"EchoMultiBaseInt64": kitex.NewMethodInfo(
+		echoMultiBaseInt64Handler,
+		newTestServiceEchoMultiBaseInt64Args,
+		newTestServiceEchoMultiBaseInt64Result,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingNone),
+	),
+	"EchoMultiBaseFloat": kitex.NewMethodInfo(
+		echoMultiBaseFloatHandler,
+		newTestServiceEchoMultiBaseFloatArgs,
+		newTestServiceEchoMultiBaseFloatResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingNone),
+	),
+	"EchoMultiBaseDouble": kitex.NewMethodInfo(
+		echoMultiBaseDoubleHandler,
+		newTestServiceEchoMultiBaseDoubleArgs,
+		newTestServiceEchoMultiBaseDoubleResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingNone),
+	),
+	"EchoMethodA": kitex.NewMethodInfo(
+		echoMethodAHandler,
+		newTestServiceEchoMethodAArgs,
+		newTestServiceEchoMethodAResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingNone),
+	),
+	"EchoMethodB": kitex.NewMethodInfo(
+		echoMethodBHandler,
+		newTestServiceEchoMethodBArgs,
+		newTestServiceEchoMethodBResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingNone),
+	),
+	"EchoMethodC": kitex.NewMethodInfo(
+		echoMethodCHandler,
+		newTestServiceEchoMethodCArgs,
+		newTestServiceEchoMethodCResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingNone),
+	),
+	"EchoMethodD": kitex.NewMethodInfo(
+		echoMethodDHandler,
+		newTestServiceEchoMethodDArgs,
+		newTestServiceEchoMethodDResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingNone),
+	),
+	"EchoOptionalBool": kitex.NewMethodInfo(
+		echoOptionalBoolHandler,
+		newTestServiceEchoOptionalBoolArgs,
+		newTestServiceEchoOptionalBoolResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingNone),
+	),
+	"EchoOptionalInt32": kitex.NewMethodInfo(
+		echoOptionalInt32Handler,
+		newTestServiceEchoOptionalInt32Args,
+		newTestServiceEchoOptionalInt32Result,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingNone),
+	),
+	"EchoOptionalString": kitex.NewMethodInfo(
+		echoOptionalStringHandler,
+		newTestServiceEchoOptionalStringArgs,
+		newTestServiceEchoOptionalStringResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingNone),
+	),
+	"EchoOptionalBoolList": kitex.NewMethodInfo(
+		echoOptionalBoolListHandler,
+		newTestServiceEchoOptionalBoolListArgs,
+		newTestServiceEchoOptionalBoolListResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingNone),
+	),
+	"EchoOptionalInt32List": kitex.NewMethodInfo(
+		echoOptionalInt32ListHandler,
+		newTestServiceEchoOptionalInt32ListArgs,
+		newTestServiceEchoOptionalInt32ListResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingNone),
+	),
+	"EchoOptionalStringList": kitex.NewMethodInfo(
+		echoOptionalStringListHandler,
+		newTestServiceEchoOptionalStringListArgs,
+		newTestServiceEchoOptionalStringListResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingNone),
+	),
+	"EchoOptionalBool2BoolMap": kitex.NewMethodInfo(
+		echoOptionalBool2BoolMapHandler,
+		newTestServiceEchoOptionalBool2BoolMapArgs,
+		newTestServiceEchoOptionalBool2BoolMapResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingNone),
+	),
+	"EchoOptionalBool2Int32Map": kitex.NewMethodInfo(
+		echoOptionalBool2Int32MapHandler,
+		newTestServiceEchoOptionalBool2Int32MapArgs,
+		newTestServiceEchoOptionalBool2Int32MapResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingNone),
+	),
+	"EchoOptionalBool2StringMap": kitex.NewMethodInfo(
+		echoOptionalBool2StringMapHandler,
+		newTestServiceEchoOptionalBool2StringMapArgs,
+		newTestServiceEchoOptionalBool2StringMapResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingNone),
+	),
+	"EchoOptionalStruct": kitex.NewMethodInfo(
+		echoOptionalStructHandler,
+		newTestServiceEchoOptionalStructArgs,
+		newTestServiceEchoOptionalStructResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingNone),
+	),
+	"EchoOptionalMultiBoolRequest": kitex.NewMethodInfo(
+		echoOptionalMultiBoolRequestHandler,
+		newTestServiceEchoOptionalMultiBoolRequestArgs,
+		newTestServiceEchoOptionalMultiBoolRequestResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingNone),
+	),
+	"EchoOptionalMultiInt32Request": kitex.NewMethodInfo(
+		echoOptionalMultiInt32RequestHandler,
+		newTestServiceEchoOptionalMultiInt32RequestArgs,
+		newTestServiceEchoOptionalMultiInt32RequestResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingNone),
+	),
+	"EchoOptionalMultiStringRequest": kitex.NewMethodInfo(
+		echoOptionalMultiStringRequestHandler,
+		newTestServiceEchoOptionalMultiStringRequestArgs,
+		newTestServiceEchoOptionalMultiStringRequestResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingNone),
+	),
+	"EchoOptionalMultiBoolResponse": kitex.NewMethodInfo(
+		echoOptionalMultiBoolResponseHandler,
+		newTestServiceEchoOptionalMultiBoolResponseArgs,
+		newTestServiceEchoOptionalMultiBoolResponseResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingNone),
+	),
+	"EchoOptionalMultiInt32Response": kitex.NewMethodInfo(
+		echoOptionalMultiInt32ResponseHandler,
+		newTestServiceEchoOptionalMultiInt32ResponseArgs,
+		newTestServiceEchoOptionalMultiInt32ResponseResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingNone),
+	),
+	"EchoOptionalMultiStringResponse": kitex.NewMethodInfo(
+		echoOptionalMultiStringResponseHandler,
+		newTestServiceEchoOptionalMultiStringResponseArgs,
+		newTestServiceEchoOptionalMultiStringResponseResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingNone),
+	),
+	"EchoException": kitex.NewMethodInfo(
+		echoExceptionHandler,
+		newTestServiceEchoExceptionArgs,
+		newTestServiceEchoExceptionResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingNone),
+	),
+	"EchoCustomizedException": kitex.NewMethodInfo(
+		echoCustomizedExceptionHandler,
+		newTestServiceEchoCustomizedExceptionArgs,
+		newTestServiceEchoCustomizedExceptionResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingNone),
+	),
+	"EchoGeneric": kitex.NewMethodInfo(
+		echoGenericHandler,
+		newTestServiceEchoGenericArgs,
+		newTestServiceEchoGenericResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingNone),
+	),
+}
+
+var (
+	testServiceServiceInfo                = NewServiceInfo()
+	testServiceServiceInfoForClient       = NewServiceInfoForClient()
+	testServiceServiceInfoForStreamClient = NewServiceInfoForStreamClient()
+)
+
+// for server
 func serviceInfo() *kitex.ServiceInfo {
 	return testServiceServiceInfo
 }
 
-var testServiceServiceInfo = NewServiceInfo()
+// for client
+func serviceInfoForStreamClient() *kitex.ServiceInfo {
+	return testServiceServiceInfoForStreamClient
+}
 
+// for stream client
+func serviceInfoForClient() *kitex.ServiceInfo {
+	return testServiceServiceInfoForClient
+}
+
+// NewServiceInfo creates a new ServiceInfo containing all methods
 func NewServiceInfo() *kitex.ServiceInfo {
+	return newServiceInfo(false, true, true)
+}
+
+// NewServiceInfo creates a new ServiceInfo containing non-streaming methods
+func NewServiceInfoForClient() *kitex.ServiceInfo {
+	return newServiceInfo(false, false, true)
+}
+func NewServiceInfoForStreamClient() *kitex.ServiceInfo {
+	return newServiceInfo(true, true, false)
+}
+
+func newServiceInfo(hasStreaming bool, keepStreamingMethods bool, keepNonStreamingMethods bool) *kitex.ServiceInfo {
 	serviceName := "TestService"
 	handlerType := (*echo.TestService)(nil)
-	methods := map[string]kitex.MethodInfo{
-		"EchoRetByte":                     kitex.NewMethodInfo(echoRetByteHandler, newTestServiceEchoRetByteArgs, newTestServiceEchoRetByteResult, false),
-		"EchoRetBool":                     kitex.NewMethodInfo(echoRetBoolHandler, newTestServiceEchoRetBoolArgs, newTestServiceEchoRetBoolResult, false),
-		"EchoRetInt16":                    kitex.NewMethodInfo(echoRetInt16Handler, newTestServiceEchoRetInt16Args, newTestServiceEchoRetInt16Result, false),
-		"EchoRetInt32":                    kitex.NewMethodInfo(echoRetInt32Handler, newTestServiceEchoRetInt32Args, newTestServiceEchoRetInt32Result, false),
-		"EchoRetInt64":                    kitex.NewMethodInfo(echoRetInt64Handler, newTestServiceEchoRetInt64Args, newTestServiceEchoRetInt64Result, false),
-		"EchoRetFloat":                    kitex.NewMethodInfo(echoRetFloatHandler, newTestServiceEchoRetFloatArgs, newTestServiceEchoRetFloatResult, false),
-		"EchoRetDouble":                   kitex.NewMethodInfo(echoRetDoubleHandler, newTestServiceEchoRetDoubleArgs, newTestServiceEchoRetDoubleResult, false),
-		"EchoRetString":                   kitex.NewMethodInfo(echoRetStringHandler, newTestServiceEchoRetStringArgs, newTestServiceEchoRetStringResult, false),
-		"EchoInt":                         kitex.NewMethodInfo(echoIntHandler, newTestServiceEchoIntArgs, newTestServiceEchoIntResult, false),
-		"EchoBool":                        kitex.NewMethodInfo(echoBoolHandler, newTestServiceEchoBoolArgs, newTestServiceEchoBoolResult, false),
-		"EchoByte":                        kitex.NewMethodInfo(echoByteHandler, newTestServiceEchoByteArgs, newTestServiceEchoByteResult, false),
-		"EchoInt16":                       kitex.NewMethodInfo(echoInt16Handler, newTestServiceEchoInt16Args, newTestServiceEchoInt16Result, false),
-		"EchoInt32":                       kitex.NewMethodInfo(echoInt32Handler, newTestServiceEchoInt32Args, newTestServiceEchoInt32Result, false),
-		"EchoInt64":                       kitex.NewMethodInfo(echoInt64Handler, newTestServiceEchoInt64Args, newTestServiceEchoInt64Result, false),
-		"EchoFloat":                       kitex.NewMethodInfo(echoFloatHandler, newTestServiceEchoFloatArgs, newTestServiceEchoFloatResult, false),
-		"EchoDouble":                      kitex.NewMethodInfo(echoDoubleHandler, newTestServiceEchoDoubleArgs, newTestServiceEchoDoubleResult, false),
-		"EchoString":                      kitex.NewMethodInfo(echoStringHandler, newTestServiceEchoStringArgs, newTestServiceEchoStringResult, false),
-		"EchoBinary":                      kitex.NewMethodInfo(echoBinaryHandler, newTestServiceEchoBinaryArgs, newTestServiceEchoBinaryResult, false),
-		"Echo":                            kitex.NewMethodInfo(echoHandler, newTestServiceEchoArgs, newTestServiceEchoResult, false),
-		"EchoBoolList":                    kitex.NewMethodInfo(echoBoolListHandler, newTestServiceEchoBoolListArgs, newTestServiceEchoBoolListResult, false),
-		"EchoByteList":                    kitex.NewMethodInfo(echoByteListHandler, newTestServiceEchoByteListArgs, newTestServiceEchoByteListResult, false),
-		"EchoInt16List":                   kitex.NewMethodInfo(echoInt16ListHandler, newTestServiceEchoInt16ListArgs, newTestServiceEchoInt16ListResult, false),
-		"EchoInt32List":                   kitex.NewMethodInfo(echoInt32ListHandler, newTestServiceEchoInt32ListArgs, newTestServiceEchoInt32ListResult, false),
-		"EchoInt64List":                   kitex.NewMethodInfo(echoInt64ListHandler, newTestServiceEchoInt64ListArgs, newTestServiceEchoInt64ListResult, false),
-		"EchoFloatList":                   kitex.NewMethodInfo(echoFloatListHandler, newTestServiceEchoFloatListArgs, newTestServiceEchoFloatListResult, false),
-		"EchoDoubleList":                  kitex.NewMethodInfo(echoDoubleListHandler, newTestServiceEchoDoubleListArgs, newTestServiceEchoDoubleListResult, false),
-		"EchoStringList":                  kitex.NewMethodInfo(echoStringListHandler, newTestServiceEchoStringListArgs, newTestServiceEchoStringListResult, false),
-		"EchoBinaryList":                  kitex.NewMethodInfo(echoBinaryListHandler, newTestServiceEchoBinaryListArgs, newTestServiceEchoBinaryListResult, false),
-		"EchoBool2BoolMap":                kitex.NewMethodInfo(echoBool2BoolMapHandler, newTestServiceEchoBool2BoolMapArgs, newTestServiceEchoBool2BoolMapResult, false),
-		"EchoBool2ByteMap":                kitex.NewMethodInfo(echoBool2ByteMapHandler, newTestServiceEchoBool2ByteMapArgs, newTestServiceEchoBool2ByteMapResult, false),
-		"EchoBool2Int16Map":               kitex.NewMethodInfo(echoBool2Int16MapHandler, newTestServiceEchoBool2Int16MapArgs, newTestServiceEchoBool2Int16MapResult, false),
-		"EchoBool2Int32Map":               kitex.NewMethodInfo(echoBool2Int32MapHandler, newTestServiceEchoBool2Int32MapArgs, newTestServiceEchoBool2Int32MapResult, false),
-		"EchoBool2Int64Map":               kitex.NewMethodInfo(echoBool2Int64MapHandler, newTestServiceEchoBool2Int64MapArgs, newTestServiceEchoBool2Int64MapResult, false),
-		"EchoBool2FloatMap":               kitex.NewMethodInfo(echoBool2FloatMapHandler, newTestServiceEchoBool2FloatMapArgs, newTestServiceEchoBool2FloatMapResult, false),
-		"EchoBool2DoubleMap":              kitex.NewMethodInfo(echoBool2DoubleMapHandler, newTestServiceEchoBool2DoubleMapArgs, newTestServiceEchoBool2DoubleMapResult, false),
-		"EchoBool2StringMap":              kitex.NewMethodInfo(echoBool2StringMapHandler, newTestServiceEchoBool2StringMapArgs, newTestServiceEchoBool2StringMapResult, false),
-		"EchoBool2BinaryMap":              kitex.NewMethodInfo(echoBool2BinaryMapHandler, newTestServiceEchoBool2BinaryMapArgs, newTestServiceEchoBool2BinaryMapResult, false),
-		"EchoBool2BoolListMap":            kitex.NewMethodInfo(echoBool2BoolListMapHandler, newTestServiceEchoBool2BoolListMapArgs, newTestServiceEchoBool2BoolListMapResult, false),
-		"EchoBool2ByteListMap":            kitex.NewMethodInfo(echoBool2ByteListMapHandler, newTestServiceEchoBool2ByteListMapArgs, newTestServiceEchoBool2ByteListMapResult, false),
-		"EchoBool2Int16ListMap":           kitex.NewMethodInfo(echoBool2Int16ListMapHandler, newTestServiceEchoBool2Int16ListMapArgs, newTestServiceEchoBool2Int16ListMapResult, false),
-		"EchoBool2Int32ListMap":           kitex.NewMethodInfo(echoBool2Int32ListMapHandler, newTestServiceEchoBool2Int32ListMapArgs, newTestServiceEchoBool2Int32ListMapResult, false),
-		"EchoBool2Int64ListMap":           kitex.NewMethodInfo(echoBool2Int64ListMapHandler, newTestServiceEchoBool2Int64ListMapArgs, newTestServiceEchoBool2Int64ListMapResult, false),
-		"EchoBool2FloatListMap":           kitex.NewMethodInfo(echoBool2FloatListMapHandler, newTestServiceEchoBool2FloatListMapArgs, newTestServiceEchoBool2FloatListMapResult, false),
-		"EchoBool2DoubleListMap":          kitex.NewMethodInfo(echoBool2DoubleListMapHandler, newTestServiceEchoBool2DoubleListMapArgs, newTestServiceEchoBool2DoubleListMapResult, false),
-		"EchoBool2StringListMap":          kitex.NewMethodInfo(echoBool2StringListMapHandler, newTestServiceEchoBool2StringListMapArgs, newTestServiceEchoBool2StringListMapResult, false),
-		"EchoBool2BinaryListMap":          kitex.NewMethodInfo(echoBool2BinaryListMapHandler, newTestServiceEchoBool2BinaryListMapArgs, newTestServiceEchoBool2BinaryListMapResult, false),
-		"EchoMultiBool":                   kitex.NewMethodInfo(echoMultiBoolHandler, newTestServiceEchoMultiBoolArgs, newTestServiceEchoMultiBoolResult, false),
-		"EchoMultiByte":                   kitex.NewMethodInfo(echoMultiByteHandler, newTestServiceEchoMultiByteArgs, newTestServiceEchoMultiByteResult, false),
-		"EchoMultiInt16":                  kitex.NewMethodInfo(echoMultiInt16Handler, newTestServiceEchoMultiInt16Args, newTestServiceEchoMultiInt16Result, false),
-		"EchoMultiInt32":                  kitex.NewMethodInfo(echoMultiInt32Handler, newTestServiceEchoMultiInt32Args, newTestServiceEchoMultiInt32Result, false),
-		"EchoMultiInt64":                  kitex.NewMethodInfo(echoMultiInt64Handler, newTestServiceEchoMultiInt64Args, newTestServiceEchoMultiInt64Result, false),
-		"EchoMultiFloat":                  kitex.NewMethodInfo(echoMultiFloatHandler, newTestServiceEchoMultiFloatArgs, newTestServiceEchoMultiFloatResult, false),
-		"EchoMultiDouble":                 kitex.NewMethodInfo(echoMultiDoubleHandler, newTestServiceEchoMultiDoubleArgs, newTestServiceEchoMultiDoubleResult, false),
-		"EchoMultiString":                 kitex.NewMethodInfo(echoMultiStringHandler, newTestServiceEchoMultiStringArgs, newTestServiceEchoMultiStringResult, false),
-		"EchoBaseBool":                    kitex.NewMethodInfo(echoBaseBoolHandler, newTestServiceEchoBaseBoolArgs, newTestServiceEchoBaseBoolResult, false),
-		"EchoBaseByte":                    kitex.NewMethodInfo(echoBaseByteHandler, newTestServiceEchoBaseByteArgs, newTestServiceEchoBaseByteResult, false),
-		"EchoBaseInt16":                   kitex.NewMethodInfo(echoBaseInt16Handler, newTestServiceEchoBaseInt16Args, newTestServiceEchoBaseInt16Result, false),
-		"EchoBaseInt32":                   kitex.NewMethodInfo(echoBaseInt32Handler, newTestServiceEchoBaseInt32Args, newTestServiceEchoBaseInt32Result, false),
-		"EchoBaseInt64":                   kitex.NewMethodInfo(echoBaseInt64Handler, newTestServiceEchoBaseInt64Args, newTestServiceEchoBaseInt64Result, false),
-		"EchoBaseFloat":                   kitex.NewMethodInfo(echoBaseFloatHandler, newTestServiceEchoBaseFloatArgs, newTestServiceEchoBaseFloatResult, false),
-		"EchoBaseDouble":                  kitex.NewMethodInfo(echoBaseDoubleHandler, newTestServiceEchoBaseDoubleArgs, newTestServiceEchoBaseDoubleResult, false),
-		"EchoBaseBoolList":                kitex.NewMethodInfo(echoBaseBoolListHandler, newTestServiceEchoBaseBoolListArgs, newTestServiceEchoBaseBoolListResult, false),
-		"EchoBaseByteList":                kitex.NewMethodInfo(echoBaseByteListHandler, newTestServiceEchoBaseByteListArgs, newTestServiceEchoBaseByteListResult, false),
-		"EchoBaseInt16List":               kitex.NewMethodInfo(echoBaseInt16ListHandler, newTestServiceEchoBaseInt16ListArgs, newTestServiceEchoBaseInt16ListResult, false),
-		"EchoBaseInt32List":               kitex.NewMethodInfo(echoBaseInt32ListHandler, newTestServiceEchoBaseInt32ListArgs, newTestServiceEchoBaseInt32ListResult, false),
-		"EchoBaseInt64List":               kitex.NewMethodInfo(echoBaseInt64ListHandler, newTestServiceEchoBaseInt64ListArgs, newTestServiceEchoBaseInt64ListResult, false),
-		"EchoBaseFloatList":               kitex.NewMethodInfo(echoBaseFloatListHandler, newTestServiceEchoBaseFloatListArgs, newTestServiceEchoBaseFloatListResult, false),
-		"EchoBaseDoubleList":              kitex.NewMethodInfo(echoBaseDoubleListHandler, newTestServiceEchoBaseDoubleListArgs, newTestServiceEchoBaseDoubleListResult, false),
-		"EchoBool2BoolBaseMap":            kitex.NewMethodInfo(echoBool2BoolBaseMapHandler, newTestServiceEchoBool2BoolBaseMapArgs, newTestServiceEchoBool2BoolBaseMapResult, false),
-		"EchoBool2ByteBaseMap":            kitex.NewMethodInfo(echoBool2ByteBaseMapHandler, newTestServiceEchoBool2ByteBaseMapArgs, newTestServiceEchoBool2ByteBaseMapResult, false),
-		"EchoBool2Int16BaseMap":           kitex.NewMethodInfo(echoBool2Int16BaseMapHandler, newTestServiceEchoBool2Int16BaseMapArgs, newTestServiceEchoBool2Int16BaseMapResult, false),
-		"EchoBool2Int32BaseMap":           kitex.NewMethodInfo(echoBool2Int32BaseMapHandler, newTestServiceEchoBool2Int32BaseMapArgs, newTestServiceEchoBool2Int32BaseMapResult, false),
-		"EchoBool2Int64BaseMap":           kitex.NewMethodInfo(echoBool2Int64BaseMapHandler, newTestServiceEchoBool2Int64BaseMapArgs, newTestServiceEchoBool2Int64BaseMapResult, false),
-		"EchoBool2FloatBaseMap":           kitex.NewMethodInfo(echoBool2FloatBaseMapHandler, newTestServiceEchoBool2FloatBaseMapArgs, newTestServiceEchoBool2FloatBaseMapResult, false),
-		"EchoBool2DoubleBaseMap":          kitex.NewMethodInfo(echoBool2DoubleBaseMapHandler, newTestServiceEchoBool2DoubleBaseMapArgs, newTestServiceEchoBool2DoubleBaseMapResult, false),
-		"EchoMultiBaseBool":               kitex.NewMethodInfo(echoMultiBaseBoolHandler, newTestServiceEchoMultiBaseBoolArgs, newTestServiceEchoMultiBaseBoolResult, false),
-		"EchoMultiBaseByte":               kitex.NewMethodInfo(echoMultiBaseByteHandler, newTestServiceEchoMultiBaseByteArgs, newTestServiceEchoMultiBaseByteResult, false),
-		"EchoMultiBaseInt16":              kitex.NewMethodInfo(echoMultiBaseInt16Handler, newTestServiceEchoMultiBaseInt16Args, newTestServiceEchoMultiBaseInt16Result, false),
-		"EchoMultiBaseInt32":              kitex.NewMethodInfo(echoMultiBaseInt32Handler, newTestServiceEchoMultiBaseInt32Args, newTestServiceEchoMultiBaseInt32Result, false),
-		"EchoMultiBaseInt64":              kitex.NewMethodInfo(echoMultiBaseInt64Handler, newTestServiceEchoMultiBaseInt64Args, newTestServiceEchoMultiBaseInt64Result, false),
-		"EchoMultiBaseFloat":              kitex.NewMethodInfo(echoMultiBaseFloatHandler, newTestServiceEchoMultiBaseFloatArgs, newTestServiceEchoMultiBaseFloatResult, false),
-		"EchoMultiBaseDouble":             kitex.NewMethodInfo(echoMultiBaseDoubleHandler, newTestServiceEchoMultiBaseDoubleArgs, newTestServiceEchoMultiBaseDoubleResult, false),
-		"EchoMethodA":                     kitex.NewMethodInfo(echoMethodAHandler, newTestServiceEchoMethodAArgs, newTestServiceEchoMethodAResult, false),
-		"EchoMethodB":                     kitex.NewMethodInfo(echoMethodBHandler, newTestServiceEchoMethodBArgs, newTestServiceEchoMethodBResult, false),
-		"EchoMethodC":                     kitex.NewMethodInfo(echoMethodCHandler, newTestServiceEchoMethodCArgs, newTestServiceEchoMethodCResult, false),
-		"EchoMethodD":                     kitex.NewMethodInfo(echoMethodDHandler, newTestServiceEchoMethodDArgs, newTestServiceEchoMethodDResult, false),
-		"EchoOptionalBool":                kitex.NewMethodInfo(echoOptionalBoolHandler, newTestServiceEchoOptionalBoolArgs, newTestServiceEchoOptionalBoolResult, false),
-		"EchoOptionalInt32":               kitex.NewMethodInfo(echoOptionalInt32Handler, newTestServiceEchoOptionalInt32Args, newTestServiceEchoOptionalInt32Result, false),
-		"EchoOptionalString":              kitex.NewMethodInfo(echoOptionalStringHandler, newTestServiceEchoOptionalStringArgs, newTestServiceEchoOptionalStringResult, false),
-		"EchoOptionalBoolList":            kitex.NewMethodInfo(echoOptionalBoolListHandler, newTestServiceEchoOptionalBoolListArgs, newTestServiceEchoOptionalBoolListResult, false),
-		"EchoOptionalInt32List":           kitex.NewMethodInfo(echoOptionalInt32ListHandler, newTestServiceEchoOptionalInt32ListArgs, newTestServiceEchoOptionalInt32ListResult, false),
-		"EchoOptionalStringList":          kitex.NewMethodInfo(echoOptionalStringListHandler, newTestServiceEchoOptionalStringListArgs, newTestServiceEchoOptionalStringListResult, false),
-		"EchoOptionalBool2BoolMap":        kitex.NewMethodInfo(echoOptionalBool2BoolMapHandler, newTestServiceEchoOptionalBool2BoolMapArgs, newTestServiceEchoOptionalBool2BoolMapResult, false),
-		"EchoOptionalBool2Int32Map":       kitex.NewMethodInfo(echoOptionalBool2Int32MapHandler, newTestServiceEchoOptionalBool2Int32MapArgs, newTestServiceEchoOptionalBool2Int32MapResult, false),
-		"EchoOptionalBool2StringMap":      kitex.NewMethodInfo(echoOptionalBool2StringMapHandler, newTestServiceEchoOptionalBool2StringMapArgs, newTestServiceEchoOptionalBool2StringMapResult, false),
-		"EchoOptionalStruct":              kitex.NewMethodInfo(echoOptionalStructHandler, newTestServiceEchoOptionalStructArgs, newTestServiceEchoOptionalStructResult, false),
-		"EchoOptionalMultiBoolRequest":    kitex.NewMethodInfo(echoOptionalMultiBoolRequestHandler, newTestServiceEchoOptionalMultiBoolRequestArgs, newTestServiceEchoOptionalMultiBoolRequestResult, false),
-		"EchoOptionalMultiInt32Request":   kitex.NewMethodInfo(echoOptionalMultiInt32RequestHandler, newTestServiceEchoOptionalMultiInt32RequestArgs, newTestServiceEchoOptionalMultiInt32RequestResult, false),
-		"EchoOptionalMultiStringRequest":  kitex.NewMethodInfo(echoOptionalMultiStringRequestHandler, newTestServiceEchoOptionalMultiStringRequestArgs, newTestServiceEchoOptionalMultiStringRequestResult, false),
-		"EchoOptionalMultiBoolResponse":   kitex.NewMethodInfo(echoOptionalMultiBoolResponseHandler, newTestServiceEchoOptionalMultiBoolResponseArgs, newTestServiceEchoOptionalMultiBoolResponseResult, false),
-		"EchoOptionalMultiInt32Response":  kitex.NewMethodInfo(echoOptionalMultiInt32ResponseHandler, newTestServiceEchoOptionalMultiInt32ResponseArgs, newTestServiceEchoOptionalMultiInt32ResponseResult, false),
-		"EchoOptionalMultiStringResponse": kitex.NewMethodInfo(echoOptionalMultiStringResponseHandler, newTestServiceEchoOptionalMultiStringResponseArgs, newTestServiceEchoOptionalMultiStringResponseResult, false),
-		"EchoException":                   kitex.NewMethodInfo(echoExceptionHandler, newTestServiceEchoExceptionArgs, newTestServiceEchoExceptionResult, false),
-		"EchoCustomizedException":         kitex.NewMethodInfo(echoCustomizedExceptionHandler, newTestServiceEchoCustomizedExceptionArgs, newTestServiceEchoCustomizedExceptionResult, false),
+	methods := map[string]kitex.MethodInfo{}
+	for name, m := range serviceMethods {
+		if m.IsStreaming() && !keepStreamingMethods {
+			continue
+		}
+		if !m.IsStreaming() && !keepNonStreamingMethods {
+			continue
+		}
+		methods[name] = m
 	}
 	extra := map[string]interface{}{
 		"PackageName":     "echo",
 		"ServiceFilePath": `api.thrift`,
+	}
+	if hasStreaming {
+		extra["streaming"] = hasStreaming
 	}
 	svcInfo := &kitex.ServiceInfo{
 		ServiceName:     serviceName,
@@ -139,7 +815,7 @@ func NewServiceInfo() *kitex.ServiceInfo {
 }
 
 func echoRetByteHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
-
+	_ = arg.(*echo.TestServiceEchoRetByteArgs)
 	realResult := result.(*echo.TestServiceEchoRetByteResult)
 	success, err := handler.(echo.TestService).EchoRetByte(ctx)
 	if err != nil {
@@ -157,7 +833,7 @@ func newTestServiceEchoRetByteResult() interface{} {
 }
 
 func echoRetBoolHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
-
+	_ = arg.(*echo.TestServiceEchoRetBoolArgs)
 	realResult := result.(*echo.TestServiceEchoRetBoolResult)
 	success, err := handler.(echo.TestService).EchoRetBool(ctx)
 	if err != nil {
@@ -175,7 +851,7 @@ func newTestServiceEchoRetBoolResult() interface{} {
 }
 
 func echoRetInt16Handler(ctx context.Context, handler interface{}, arg, result interface{}) error {
-
+	_ = arg.(*echo.TestServiceEchoRetInt16Args)
 	realResult := result.(*echo.TestServiceEchoRetInt16Result)
 	success, err := handler.(echo.TestService).EchoRetInt16(ctx)
 	if err != nil {
@@ -193,7 +869,7 @@ func newTestServiceEchoRetInt16Result() interface{} {
 }
 
 func echoRetInt32Handler(ctx context.Context, handler interface{}, arg, result interface{}) error {
-
+	_ = arg.(*echo.TestServiceEchoRetInt32Args)
 	realResult := result.(*echo.TestServiceEchoRetInt32Result)
 	success, err := handler.(echo.TestService).EchoRetInt32(ctx)
 	if err != nil {
@@ -211,7 +887,7 @@ func newTestServiceEchoRetInt32Result() interface{} {
 }
 
 func echoRetInt64Handler(ctx context.Context, handler interface{}, arg, result interface{}) error {
-
+	_ = arg.(*echo.TestServiceEchoRetInt64Args)
 	realResult := result.(*echo.TestServiceEchoRetInt64Result)
 	success, err := handler.(echo.TestService).EchoRetInt64(ctx)
 	if err != nil {
@@ -229,7 +905,7 @@ func newTestServiceEchoRetInt64Result() interface{} {
 }
 
 func echoRetFloatHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
-
+	_ = arg.(*echo.TestServiceEchoRetFloatArgs)
 	realResult := result.(*echo.TestServiceEchoRetFloatResult)
 	success, err := handler.(echo.TestService).EchoRetFloat(ctx)
 	if err != nil {
@@ -247,7 +923,7 @@ func newTestServiceEchoRetFloatResult() interface{} {
 }
 
 func echoRetDoubleHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
-
+	_ = arg.(*echo.TestServiceEchoRetDoubleArgs)
 	realResult := result.(*echo.TestServiceEchoRetDoubleResult)
 	success, err := handler.(echo.TestService).EchoRetDouble(ctx)
 	if err != nil {
@@ -265,7 +941,7 @@ func newTestServiceEchoRetDoubleResult() interface{} {
 }
 
 func echoRetStringHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
-
+	_ = arg.(*echo.TestServiceEchoRetStringArgs)
 	realResult := result.(*echo.TestServiceEchoRetStringResult)
 	success, err := handler.(echo.TestService).EchoRetString(ctx)
 	if err != nil {
@@ -2010,6 +2686,24 @@ func newTestServiceEchoCustomizedExceptionResult() interface{} {
 	return echo.NewTestServiceEchoCustomizedExceptionResult()
 }
 
+func echoGenericHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+	realArg := arg.(*echo.TestServiceEchoGenericArgs)
+	realResult := result.(*echo.TestServiceEchoGenericResult)
+	success, err := handler.(echo.TestService).EchoGeneric(ctx, realArg.Req)
+	if err != nil {
+		return err
+	}
+	realResult.Success = success
+	return nil
+}
+func newTestServiceEchoGenericArgs() interface{} {
+	return echo.NewTestServiceEchoGenericArgs()
+}
+
+func newTestServiceEchoGenericResult() interface{} {
+	return echo.NewTestServiceEchoGenericResult()
+}
+
 type kClient struct {
 	c client.Client
 }
@@ -3078,6 +3772,16 @@ func (p *kClient) EchoCustomizedException(ctx context.Context, req bool) (r bool
 	_args.Req = req
 	var _result echo.TestServiceEchoCustomizedExceptionResult
 	if err = p.c.Call(ctx, "EchoCustomizedException", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) EchoGeneric(ctx context.Context, req *echo.EchoGenericRequest) (r *echo.EchoGenericResponse, err error) {
+	var _args echo.TestServiceEchoGenericArgs
+	_args.Req = req
+	var _result echo.TestServiceEchoGenericResult
+	if err = p.c.Call(ctx, "EchoGeneric", &_args, &_result); err != nil {
 		return
 	}
 	return _result.GetSuccess(), nil
