@@ -19,6 +19,7 @@
 
 package org.apache.dubbo.tests.api;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -205,4 +206,7 @@ public interface UserProvider {
     Boolean EchoCustomizedException(Boolean req) throws Exception;
 
     EchoGenericResponse<EchoGenericEmbedded> EchoGeneric(EchoGenericRequest<EchoGenericEmbedded> req) throws Exception;
+
+    Date EchoJavaDate(Date req) throws Exception;
+    List<Date> EchoJavaDateList(List<Date> req) throws Exception;
 }

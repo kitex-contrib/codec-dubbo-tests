@@ -19,6 +19,7 @@
 
 package org.apache.dubbo.tests.provider;
 
+import org.apache.dubbo.config.ApplicationConfig;
 import org.apache.dubbo.config.ProtocolConfig;
 import org.apache.dubbo.config.RegistryConfig;
 import org.apache.dubbo.config.ServiceConfig;
@@ -30,15 +31,18 @@ import java.util.List;
 
 public class Application {
 
-public static void main(String[] args) {
+    public static void main(String[] args) {
         List<ServiceConfig> list = new ArrayList<>();
         ServiceConfig<UserProvider> service = new ServiceConfig<>();
         service.setInterface(UserProvider.class);
         service.setRef(new UserProviderImpl());
         list.add(service);
 
+        ApplicationConfig cfg = new ApplicationConfig("first-dubbo-provider");
+        // enable encode/decode some java types, e.g. (java.sql.Timestamp)
+        cfg.setSerializeCheckStatus("DISABLE");
         DubboBootstrap instance = DubboBootstrap.getInstance()
-                .application("first-dubbo-provider")
+                .application(cfg)
                 .protocol(new ProtocolConfig("dubbo", 20001));
 
 

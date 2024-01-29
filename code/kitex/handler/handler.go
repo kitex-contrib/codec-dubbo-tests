@@ -5,6 +5,7 @@ import (
 	"errors"
 	"fmt"
 
+	"github.com/kitex-contrib/codec-dubbo-tests/code/kitex/kitex_gen/java"
 	hessian2_exception "github.com/kitex-contrib/codec-dubbo/pkg/hessian2/exception"
 
 	"github.com/kitex-contrib/codec-dubbo-tests/code/kitex/kitex_gen/echo"
@@ -621,4 +622,14 @@ func (s *TestServiceImpl) EchoGeneric(ctx context.Context, req *echo.EchoGeneric
 		RespField: req.ReqField,
 		List:      req.List,
 	}, nil
+}
+
+// EchoJavaDate implements the TestServiceImpl interface.
+func (s *TestServiceImpl) EchoJavaDate(ctx context.Context, req *java.Date) (resp *java.Date, err error) {
+	return req, nil
+}
+
+// EchoJavaDateList implements the TestServiceImpl interface.
+func (s *TestServiceImpl) EchoJavaDateList(ctx context.Context, req []*java.Date) (resp []*java.Date, err error) {
+	return req, nil
 }

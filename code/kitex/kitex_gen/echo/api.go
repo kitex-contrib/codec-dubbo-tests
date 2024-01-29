@@ -1307,4 +1307,8 @@ type TestService interface {
 	EchoCustomizedException(ctx context.Context, req bool) (r bool, err error)
 
 	EchoGeneric(ctx context.Context, req *EchoGenericRequest) (r *EchoGenericResponse, err error)
+
+	EchoJavaDate(ctx context.Context, req *java.Date) (r *java.Date, err error)
+
+	EchoJavaDateList(ctx context.Context, req []*java.Date) (r []*java.Date, err error)
 }

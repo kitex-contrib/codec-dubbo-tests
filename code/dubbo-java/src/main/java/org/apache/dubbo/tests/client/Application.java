@@ -19,6 +19,7 @@
 
 package org.apache.dubbo.tests.client;
 
+import org.apache.dubbo.config.ApplicationConfig;
 import org.apache.dubbo.config.ReferenceConfig;
 import org.apache.dubbo.config.RegistryConfig;
 import org.apache.dubbo.config.bootstrap.DubboBootstrap;
@@ -29,8 +30,11 @@ import java.util.*;
 
 public class Application {
     public static void main(String[] args) throws IOException {
+        ApplicationConfig cfg = new ApplicationConfig("dubbo");
+        // enable encode/decode some java types, e.g. (java.sql.Timestamp)
+        cfg.setSerializeCheckStatus("DISABLE");
         DubboBootstrap instance = DubboBootstrap.getInstance()
-                .application("dubbo");
+                .application(cfg);
         ReferenceConfig<UserProvider> reference = new ReferenceConfig<>();
         reference.setInterface(UserProvider.class);
 
@@ -66,6 +70,7 @@ public class Application {
         testJavaNull(service);
         testExceptions(service);
         testGeneric(service);
+        testJavaExtensions(service);
     }
 
     public static void logEchoFail(String methodName) {
@@ -202,6 +207,11 @@ public class Application {
 
     public static void testGeneric(UserProvider svc) {
         testEchoGeneric(svc);
+    }
+
+    public static void testJavaExtensions(UserProvider svc) {
+        testEchoJavaDate(svc);
+        testEchoJavaDateList(svc);
     }
 
     public static void testEchoRetByte(UserProvider svc) {
@@ -1596,6 +1606,38 @@ public class Application {
             EchoGenericRequest<EchoGenericEmbedded> req = new EchoGenericRequest<>(1, list);
             EchoGenericResponse<EchoGenericEmbedded> resp = svc.EchoGeneric(req);
             if (!list.equals(resp.getList()) || req.getReqField() != resp.getRespField()) {
+                logEchoFail(methodName);
+            }
+        } catch (Exception e) {
+            logEchoException(methodName, e);
+        }
+        logEchoEnd(methodName);
+    }
+
+    public static void testEchoJavaDate(UserProvider svc) {
+        String methodName = "EchoJavaDate";
+        try {
+            Date req = new Date(1000);
+            Date resp = svc.EchoJavaDate(req);
+            if (!req.equals(resp)) {
+                logEchoFail(methodName);
+            }
+        } catch (Exception e) {
+            logEchoException(methodName, e);
+        }
+        logEchoEnd(methodName);
+    }
+
+    public static void testEchoJavaDateList(UserProvider svc) {
+        String methodName = "EchoJavaDateList";
+        try {
+            List<Date> req = new ArrayList<>();
+            Date date1 = new Date(1001);
+            req.add(date1);
+            Date date2 = new Date(1002);
+            req.add(date2);
+            List<Date> resp = svc.EchoJavaDateList(req);
+            if (!req.equals(resp)) {
                 logEchoFail(methodName);
             }
         } catch (Exception e) {

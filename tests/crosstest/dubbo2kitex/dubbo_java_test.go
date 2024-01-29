@@ -98,6 +98,8 @@ func TestDubboJava(t *testing.T) {
 			"EchoException",
 			"EchoCustomizedException",
 			"EchoGeneric",
+			"EchoJavaDate",
+			"EchoJavaDateList",
 		},
 	)
 }

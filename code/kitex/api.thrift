@@ -255,4 +255,8 @@ service TestService {
 
     // java generic
     EchoGenericResponse EchoGeneric(1: EchoGenericRequest req)
+
+    // java class extension
+    java.Date EchoJavaDate(1: java.Date req)
+    list<java.Date> EchoJavaDateList(1: list<java.Date> req)
 }(JavaClassName="org.apache.dubbo.tests.api.UserProvider")
