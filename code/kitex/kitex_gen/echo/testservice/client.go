@@ -7,6 +7,7 @@ import (
 	client "github.com/cloudwego/kitex/client"
 	callopt "github.com/cloudwego/kitex/client/callopt"
 	echo "github.com/kitex-contrib/codec-dubbo-tests/code/kitex/kitex_gen/echo"
+	java "github.com/kitex-contrib/codec-dubbo-tests/code/kitex/kitex_gen/java"
 )
 
 // Client is designed to provide IDL-compatible methods with call-option parameter for kitex framework.
@@ -116,6 +117,8 @@ type Client interface {
 	EchoException(ctx context.Context, req bool, callOptions ...callopt.Option) (r bool, err error)
 	EchoCustomizedException(ctx context.Context, req bool, callOptions ...callopt.Option) (r bool, err error)
 	EchoGeneric(ctx context.Context, req *echo.EchoGenericRequest, callOptions ...callopt.Option) (r *echo.EchoGenericResponse, err error)
+	EchoJavaDate(ctx context.Context, req *java.Date, callOptions ...callopt.Option) (r *java.Date, err error)
+	EchoJavaDateList(ctx context.Context, req []*java.Date, callOptions ...callopt.Option) (r []*java.Date, err error)
 }
 
 // NewClient creates a client for the service defined in IDL.
@@ -670,4 +673,14 @@ func (p *kTestServiceClient) EchoCustomizedException(ctx context.Context, req bo
 func (p *kTestServiceClient) EchoGeneric(ctx context.Context, req *echo.EchoGenericRequest, callOptions ...callopt.Option) (r *echo.EchoGenericResponse, err error) {
 	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
 	return p.kClient.EchoGeneric(ctx, req)
+}
+
+func (p *kTestServiceClient) EchoJavaDate(ctx context.Context, req *java.Date, callOptions ...callopt.Option) (r *java.Date, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.EchoJavaDate(ctx, req)
+}
+
+func (p *kTestServiceClient) EchoJavaDateList(ctx context.Context, req []*java.Date, callOptions ...callopt.Option) (r []*java.Date, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.EchoJavaDateList(ctx, req)
 }

@@ -8,6 +8,7 @@ import (
 	client "github.com/cloudwego/kitex/client"
 	kitex "github.com/cloudwego/kitex/pkg/serviceinfo"
 	echo "github.com/kitex-contrib/codec-dubbo-tests/code/kitex/kitex_gen/echo"
+	java "github.com/kitex-contrib/codec-dubbo-tests/code/kitex/kitex_gen/java"
 )
 
 var errInvalidMessageType = errors.New("invalid message type for service method handler")
@@ -745,6 +746,20 @@ var serviceMethods = map[string]kitex.MethodInfo{
 		echoGenericHandler,
 		newTestServiceEchoGenericArgs,
 		newTestServiceEchoGenericResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingNone),
+	),
+	"EchoJavaDate": kitex.NewMethodInfo(
+		echoJavaDateHandler,
+		newTestServiceEchoJavaDateArgs,
+		newTestServiceEchoJavaDateResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingNone),
+	),
+	"EchoJavaDateList": kitex.NewMethodInfo(
+		echoJavaDateListHandler,
+		newTestServiceEchoJavaDateListArgs,
+		newTestServiceEchoJavaDateListResult,
 		false,
 		kitex.WithStreamingMode(kitex.StreamingNone),
 	),
@@ -2704,6 +2719,42 @@ func newTestServiceEchoGenericResult() interface{} {
 	return echo.NewTestServiceEchoGenericResult()
 }
 
+func echoJavaDateHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+	realArg := arg.(*echo.TestServiceEchoJavaDateArgs)
+	realResult := result.(*echo.TestServiceEchoJavaDateResult)
+	success, err := handler.(echo.TestService).EchoJavaDate(ctx, realArg.Req)
+	if err != nil {
+		return err
+	}
+	realResult.Success = success
+	return nil
+}
+func newTestServiceEchoJavaDateArgs() interface{} {
+	return echo.NewTestServiceEchoJavaDateArgs()
+}
+
+func newTestServiceEchoJavaDateResult() interface{} {
+	return echo.NewTestServiceEchoJavaDateResult()
+}
+
+func echoJavaDateListHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+	realArg := arg.(*echo.TestServiceEchoJavaDateListArgs)
+	realResult := result.(*echo.TestServiceEchoJavaDateListResult)
+	success, err := handler.(echo.TestService).EchoJavaDateList(ctx, realArg.Req)
+	if err != nil {
+		return err
+	}
+	realResult.Success = success
+	return nil
+}
+func newTestServiceEchoJavaDateListArgs() interface{} {
+	return echo.NewTestServiceEchoJavaDateListArgs()
+}
+
+func newTestServiceEchoJavaDateListResult() interface{} {
+	return echo.NewTestServiceEchoJavaDateListResult()
+}
+
 type kClient struct {
 	c client.Client
 }
@@ -3782,6 +3833,26 @@ func (p *kClient) EchoGeneric(ctx context.Context, req *echo.EchoGenericRequest)
 	_args.Req = req
 	var _result echo.TestServiceEchoGenericResult
 	if err = p.c.Call(ctx, "EchoGeneric", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) EchoJavaDate(ctx context.Context, req *java.Date) (r *java.Date, err error) {
+	var _args echo.TestServiceEchoJavaDateArgs
+	_args.Req = req
+	var _result echo.TestServiceEchoJavaDateResult
+	if err = p.c.Call(ctx, "EchoJavaDate", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) EchoJavaDateList(ctx context.Context, req []*java.Date) (r []*java.Date, err error) {
+	var _args echo.TestServiceEchoJavaDateListArgs
+	_args.Req = req
+	var _result echo.TestServiceEchoJavaDateListResult
+	if err = p.c.Call(ctx, "EchoJavaDateList", &_args, &_result); err != nil {
 		return
 	}
 	return _result.GetSuccess(), nil

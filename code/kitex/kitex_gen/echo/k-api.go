@@ -7295,3 +7295,146 @@ func (p *TestServiceEchoGenericResult) String() string {
 func (p *TestServiceEchoGenericResult) GetResult() interface{} {
 	return p.Success
 }
+
+type TestServiceEchoJavaDateArgs struct {
+	Req *java.Date `thrift:"req,1" frugal:"1,default,java.Date" json:"req"`
+}
+
+func NewTestServiceEchoJavaDateArgs() *TestServiceEchoJavaDateArgs {
+	return &TestServiceEchoJavaDateArgs{}
+}
+
+func (p *TestServiceEchoJavaDateArgs) InitDefault() {
+	*p = TestServiceEchoJavaDateArgs{}
+}
+
+var TestServiceEchoJavaDateArgs_Req_DEFAULT *java.Date
+
+func (p *TestServiceEchoJavaDateArgs) GetReq() (v *java.Date) {
+	if !p.IsSetReq() {
+		return TestServiceEchoJavaDateArgs_Req_DEFAULT
+	}
+	return p.Req
+}
+func (p *TestServiceEchoJavaDateArgs) SetReq(val *java.Date) {
+	p.Req = val
+}
+
+func (p *TestServiceEchoJavaDateArgs) IsSetReq() bool {
+	return p.Req != nil
+}
+
+func (p *TestServiceEchoJavaDateArgs) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	return fmt.Sprintf("TestServiceEchoJavaDateArgs(%+v)", *p)
+}
+func (p *TestServiceEchoJavaDateArgs) GetFirstArgument() interface{} {
+	return p.Req
+}
+
+type TestServiceEchoJavaDateResult struct {
+	Success *java.Date `thrift:"success,0,optional" frugal:"0,optional,java.Date" json:"success,omitempty"`
+}
+
+func NewTestServiceEchoJavaDateResult() *TestServiceEchoJavaDateResult {
+	return &TestServiceEchoJavaDateResult{}
+}
+
+func (p *TestServiceEchoJavaDateResult) InitDefault() {
+	*p = TestServiceEchoJavaDateResult{}
+}
+
+var TestServiceEchoJavaDateResult_Success_DEFAULT *java.Date
+
+func (p *TestServiceEchoJavaDateResult) GetSuccess() (v *java.Date) {
+	if !p.IsSetSuccess() {
+		return TestServiceEchoJavaDateResult_Success_DEFAULT
+	}
+	return p.Success
+}
+func (p *TestServiceEchoJavaDateResult) SetSuccess(x interface{}) {
+	p.Success = x.(*java.Date)
+}
+
+func (p *TestServiceEchoJavaDateResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *TestServiceEchoJavaDateResult) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	return fmt.Sprintf("TestServiceEchoJavaDateResult(%+v)", *p)
+}
+func (p *TestServiceEchoJavaDateResult) GetResult() interface{} {
+	return p.Success
+}
+
+type TestServiceEchoJavaDateListArgs struct {
+	Req []*java.Date `thrift:"req,1" frugal:"1,default,list<java.Date>" json:"req"`
+}
+
+func NewTestServiceEchoJavaDateListArgs() *TestServiceEchoJavaDateListArgs {
+	return &TestServiceEchoJavaDateListArgs{}
+}
+
+func (p *TestServiceEchoJavaDateListArgs) InitDefault() {
+	*p = TestServiceEchoJavaDateListArgs{}
+}
+
+func (p *TestServiceEchoJavaDateListArgs) GetReq() (v []*java.Date) {
+	return p.Req
+}
+func (p *TestServiceEchoJavaDateListArgs) SetReq(val []*java.Date) {
+	p.Req = val
+}
+
+func (p *TestServiceEchoJavaDateListArgs) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	return fmt.Sprintf("TestServiceEchoJavaDateListArgs(%+v)", *p)
+}
+func (p *TestServiceEchoJavaDateListArgs) GetFirstArgument() interface{} {
+	return p.Req
+}
+
+type TestServiceEchoJavaDateListResult struct {
+	Success []*java.Date `thrift:"success,0,optional" frugal:"0,optional,list<java.Date>" json:"success,omitempty"`
+}
+
+func NewTestServiceEchoJavaDateListResult() *TestServiceEchoJavaDateListResult {
+	return &TestServiceEchoJavaDateListResult{}
+}
+
+func (p *TestServiceEchoJavaDateListResult) InitDefault() {
+	*p = TestServiceEchoJavaDateListResult{}
+}
+
+var TestServiceEchoJavaDateListResult_Success_DEFAULT []*java.Date
+
+func (p *TestServiceEchoJavaDateListResult) GetSuccess() (v []*java.Date) {
+	if !p.IsSetSuccess() {
+		return TestServiceEchoJavaDateListResult_Success_DEFAULT
+	}
+	return p.Success
+}
+func (p *TestServiceEchoJavaDateListResult) SetSuccess(x interface{}) {
+	p.Success = x.([]*java.Date)
+}
+
+func (p *TestServiceEchoJavaDateListResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *TestServiceEchoJavaDateListResult) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	return fmt.Sprintf("TestServiceEchoJavaDateListResult(%+v)", *p)
+}
+func (p *TestServiceEchoJavaDateListResult) GetResult() interface{} {
+	return p.Success
+}

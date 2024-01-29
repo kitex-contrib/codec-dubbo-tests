@@ -335,8 +335,8 @@ github.com/kisielk/errcheck v1.1.0/go.mod h1:EZBBE59ingxPouuu3KfxchcWSUPOHkagtvW
 github.com/kisielk/errcheck v1.2.0/go.mod h1:/BMXB+zMLi60iA8Vv6Ksmxu/1UDYcXs4uQLJ+jE2L00=
 github.com/kisielk/errcheck v1.5.0/go.mod h1:pFxgyoBC7bSaBwPgfKdkLd5X25qrDl4LWUI2bnpBCr8=
 github.com/kisielk/gotool v1.0.0/go.mod h1:XhKaO+MFFWcvkIS/tQcRk01m1F5IRFswLeQ+oQHNcck=
-github.com/kitex-contrib/codec-dubbo v0.2.4-0.20240103114736-708aa3f1726a h1:KNQnhU5obY/5vzkmqlig0PrmGCbpEMk4SfqmL2a4AcM=
-github.com/kitex-contrib/codec-dubbo v0.2.4-0.20240103114736-708aa3f1726a/go.mod h1:0pp4flNA+oPBDxAcOCxH7D+McLAjFrLzGXVABdw22xE=
+github.com/kitex-contrib/codec-dubbo v0.2.5-0.20240129030840-dcc4d83669b1 h1:VONspuu/xcWkANCWEhXHZ/PMAZ4FGKP2InEnd1jgD5Q=
+github.com/kitex-contrib/codec-dubbo v0.2.5-0.20240129030840-dcc4d83669b1/go.mod h1:0pp4flNA+oPBDxAcOCxH7D+McLAjFrLzGXVABdw22xE=
 github.com/klauspost/cpuid/v2 v2.0.9/go.mod h1:FInQzS24/EEf25PyTYn52gqo7WaD8xa0213Md/qVLRg=
 github.com/klauspost/cpuid/v2 v2.1.0/go.mod h1:RVVoqg1df56z8g3pUjL/3lE5UfnlrJX8tyFgg4nqhuY=
 github.com/klauspost/cpuid/v2 v2.2.4 h1:acbojRNwl3o09bUq+yDCtZFc1aiwaAAxtcn8YkZXnvk=

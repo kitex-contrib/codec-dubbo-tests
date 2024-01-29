@@ -21,10 +21,8 @@ package org.apache.dubbo.tests.provider;
 
 import org.apache.dubbo.tests.api.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.math.BigDecimal;
+import java.util.*;
 
 public class UserProviderImpl implements UserProvider {
     @Override
@@ -513,5 +511,15 @@ public class UserProviderImpl implements UserProvider {
     @Override
     public EchoGenericResponse<EchoGenericEmbedded> EchoGeneric(EchoGenericRequest<EchoGenericEmbedded> req) throws Exception {
         return new EchoGenericResponse<>(req.getReqField(), req.getList());
+    }
+
+    @Override
+    public Date EchoJavaDate(Date req) throws Exception {
+        return req;
+    }
+
+    @Override
+    public List<Date> EchoJavaDateList(List<Date> req) throws Exception {
+        return req;
     }
 }
