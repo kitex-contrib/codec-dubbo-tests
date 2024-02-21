@@ -24,7 +24,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/kitex-contrib/codec-dubbo-tests/code/kitex/extensions"
+	"github.com/kitex-contrib/codec-dubbo-tests/code/kitex/kitex_gen/extensions"
 	"github.com/kitex-contrib/codec-dubbo-tests/code/kitex/kitex_gen/java"
 	"github.com/stretchr/testify/assert"
 )
