@@ -100,6 +100,8 @@ func TestDubboJava(t *testing.T) {
 			"EchoGeneric",
 			"EchoJavaDate",
 			"EchoJavaDateList",
+			"EchoJavaBigDecimal",
+			"EchoJavaBigInteger",
 		},
 	)
 }

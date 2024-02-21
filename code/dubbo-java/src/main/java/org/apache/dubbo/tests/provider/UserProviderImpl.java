@@ -22,6 +22,7 @@ package org.apache.dubbo.tests.provider;
 import org.apache.dubbo.tests.api.*;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.*;
 
 public class UserProviderImpl implements UserProvider {
@@ -520,6 +521,16 @@ public class UserProviderImpl implements UserProvider {
 
     @Override
     public List<Date> EchoJavaDateList(List<Date> req) throws Exception {
+        return req;
+    }
+
+    @Override
+    public BigDecimal EchoJavaBigDecimal(BigDecimal req) throws Exception {
+        return req;
+    }
+
+    @Override
+    public BigInteger EchoJavaBigInteger(BigInteger req) throws Exception {
         return req;
     }
 }

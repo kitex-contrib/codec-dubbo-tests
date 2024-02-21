@@ -8,6 +8,7 @@ import (
 	client "github.com/cloudwego/kitex/client"
 	kitex "github.com/cloudwego/kitex/pkg/serviceinfo"
 	echo "github.com/kitex-contrib/codec-dubbo-tests/code/kitex/kitex_gen/echo"
+	extensions "github.com/kitex-contrib/codec-dubbo-tests/code/kitex/kitex_gen/extensions"
 	java "github.com/kitex-contrib/codec-dubbo-tests/code/kitex/kitex_gen/java"
 )
 
@@ -760,6 +761,20 @@ var serviceMethods = map[string]kitex.MethodInfo{
 		echoJavaDateListHandler,
 		newTestServiceEchoJavaDateListArgs,
 		newTestServiceEchoJavaDateListResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingNone),
+	),
+	"EchoJavaBigDecimal": kitex.NewMethodInfo(
+		echoJavaBigDecimalHandler,
+		newTestServiceEchoJavaBigDecimalArgs,
+		newTestServiceEchoJavaBigDecimalResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingNone),
+	),
+	"EchoJavaBigInteger": kitex.NewMethodInfo(
+		echoJavaBigIntegerHandler,
+		newTestServiceEchoJavaBigIntegerArgs,
+		newTestServiceEchoJavaBigIntegerResult,
 		false,
 		kitex.WithStreamingMode(kitex.StreamingNone),
 	),
@@ -2755,6 +2770,42 @@ func newTestServiceEchoJavaDateListResult() interface{} {
 	return echo.NewTestServiceEchoJavaDateListResult()
 }
 
+func echoJavaBigDecimalHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+	realArg := arg.(*echo.TestServiceEchoJavaBigDecimalArgs)
+	realResult := result.(*echo.TestServiceEchoJavaBigDecimalResult)
+	success, err := handler.(echo.TestService).EchoJavaBigDecimal(ctx, realArg.Req)
+	if err != nil {
+		return err
+	}
+	realResult.Success = success
+	return nil
+}
+func newTestServiceEchoJavaBigDecimalArgs() interface{} {
+	return echo.NewTestServiceEchoJavaBigDecimalArgs()
+}
+
+func newTestServiceEchoJavaBigDecimalResult() interface{} {
+	return echo.NewTestServiceEchoJavaBigDecimalResult()
+}
+
+func echoJavaBigIntegerHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+	realArg := arg.(*echo.TestServiceEchoJavaBigIntegerArgs)
+	realResult := result.(*echo.TestServiceEchoJavaBigIntegerResult)
+	success, err := handler.(echo.TestService).EchoJavaBigInteger(ctx, realArg.Req)
+	if err != nil {
+		return err
+	}
+	realResult.Success = success
+	return nil
+}
+func newTestServiceEchoJavaBigIntegerArgs() interface{} {
+	return echo.NewTestServiceEchoJavaBigIntegerArgs()
+}
+
+func newTestServiceEchoJavaBigIntegerResult() interface{} {
+	return echo.NewTestServiceEchoJavaBigIntegerResult()
+}
+
 type kClient struct {
 	c client.Client
 }
@@ -3853,6 +3904,26 @@ func (p *kClient) EchoJavaDateList(ctx context.Context, req []*java.Date) (r []*
 	_args.Req = req
 	var _result echo.TestServiceEchoJavaDateListResult
 	if err = p.c.Call(ctx, "EchoJavaDateList", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) EchoJavaBigDecimal(ctx context.Context, req *extensions.BigDecimal) (r *extensions.BigDecimal, err error) {
+	var _args echo.TestServiceEchoJavaBigDecimalArgs
+	_args.Req = req
+	var _result echo.TestServiceEchoJavaBigDecimalResult
+	if err = p.c.Call(ctx, "EchoJavaBigDecimal", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) EchoJavaBigInteger(ctx context.Context, req *extensions.BigInteger) (r *extensions.BigInteger, err error) {
+	var _args echo.TestServiceEchoJavaBigIntegerArgs
+	_args.Req = req
+	var _result echo.TestServiceEchoJavaBigIntegerResult
+	if err = p.c.Call(ctx, "EchoJavaBigInteger", &_args, &_result); err != nil {
 		return
 	}
 	return _result.GetSuccess(), nil

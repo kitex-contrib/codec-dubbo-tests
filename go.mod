@@ -10,8 +10,12 @@ require (
 	github.com/dubbogo/tools v1.0.9
 	github.com/kitex-contrib/codec-dubbo v0.2.5-0.20240129030840-dcc4d83669b1
 	github.com/kitex-contrib/codec-dubbo-tests/code/kitex v0.0.0
+	github.com/kitex-contrib/codec-dubbo-tests/code/kitex/extensions v0.0.0
 	github.com/kitex-contrib/codec-dubbo/registries/zookeeper v0.0.0-20231220024013-016c9d2b688f
 	github.com/stretchr/testify v1.8.2
 )
 
-replace github.com/kitex-contrib/codec-dubbo-tests/code/kitex v0.0.0 => ./code/kitex
+replace (
+	github.com/kitex-contrib/codec-dubbo-tests/code/kitex v0.0.0 => ./code/kitex
+	github.com/kitex-contrib/codec-dubbo-tests/code/kitex/extensions v0.0.0 => ./code/kitex/extensions
+)

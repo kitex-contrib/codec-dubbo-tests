@@ -24,7 +24,9 @@ import (
 	"testing"
 	"time"
 
+	"github.com/kitex-contrib/codec-dubbo-tests/code/kitex/extensions"
 	"github.com/kitex-contrib/codec-dubbo-tests/code/kitex/kitex_gen/java"
+	"github.com/stretchr/testify/assert"
 )
 
 func TestEchoJavaDate(t *testing.T) {
@@ -39,4 +41,18 @@ func TestEchoJavaDateList(t *testing.T) {
 	req := []*java.Date{&date1, &date2}
 	resp, err := cli.EchoJavaDateList(context.Background(), req)
 	assertEcho(t, err, req, resp)
+}
+
+func TestEchoJavaBigDecimal_Java(t *testing.T) {
+	req, err := extensions.NewBigDecimal("12.3456789012345678901234567890")
+	assert.Nil(t, err)
+	resp, err := cli.EchoJavaBigDecimal(context.Background(), req)
+	assertEcho(t, err, req.String(), resp.String())
+}
+
+func TestEchoJavaBigInteger_Java(t *testing.T) {
+	req, err := extensions.NewBigInteger("123456789012345678901234567890")
+	assert.Nil(t, err)
+	resp, err := cli.EchoJavaBigInteger(context.Background(), req)
+	assertEcho(t, err, req.String(), resp.String())
 }
