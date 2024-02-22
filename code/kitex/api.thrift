@@ -1,6 +1,7 @@
 namespace go echo
 
 include "java.thrift"
+include "extensions.thrift"
 
 struct EchoRequest {
     1: required i32 int32,
@@ -259,4 +260,6 @@ service TestService {
     // java class extension
     java.Date EchoJavaDate(1: java.Date req)
     list<java.Date> EchoJavaDateList(1: list<java.Date> req)
+    extensions.BigDecimal EchoJavaBigDecimal(1: extensions.BigDecimal req)
+    extensions.BigInteger EchoJavaBigInteger(1: extensions.BigInteger req)
 }(JavaClassName="org.apache.dubbo.tests.api.UserProvider")

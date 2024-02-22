@@ -5,6 +5,7 @@ import (
 	"errors"
 	"fmt"
 
+	"github.com/kitex-contrib/codec-dubbo-tests/code/kitex/extensions"
 	"github.com/kitex-contrib/codec-dubbo-tests/code/kitex/kitex_gen/java"
 	hessian2_exception "github.com/kitex-contrib/codec-dubbo/pkg/hessian2/exception"
 
@@ -631,5 +632,15 @@ func (s *TestServiceImpl) EchoJavaDate(ctx context.Context, req *java.Date) (res
 
 // EchoJavaDateList implements the TestServiceImpl interface.
 func (s *TestServiceImpl) EchoJavaDateList(ctx context.Context, req []*java.Date) (resp []*java.Date, err error) {
+	return req, nil
+}
+
+// EchoJavaBigDecimal implements the TestServiceImpl interface.
+func (s *TestServiceImpl) EchoJavaBigDecimal(ctx context.Context, req *extensions.BigDecimal) (resp *extensions.BigDecimal, err error) {
+	return req, nil
+}
+
+// EchoJavaBigInteger implements the TestServiceImpl interface.
+func (s *TestServiceImpl) EchoJavaBigInteger(ctx context.Context, req *extensions.BigInteger) (resp *extensions.BigInteger, err error) {
 	return req, nil
 }

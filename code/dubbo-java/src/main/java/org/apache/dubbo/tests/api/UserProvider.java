@@ -19,6 +19,8 @@
 
 package org.apache.dubbo.tests.api;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -209,4 +211,6 @@ public interface UserProvider {
 
     Date EchoJavaDate(Date req) throws Exception;
     List<Date> EchoJavaDateList(List<Date> req) throws Exception;
+    BigDecimal EchoJavaBigDecimal(BigDecimal req) throws Exception;
+    BigInteger EchoJavaBigInteger(BigInteger req) throws Exception;
 }

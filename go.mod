@@ -14,4 +14,7 @@ require (
 	github.com/stretchr/testify v1.8.2
 )
 
-replace github.com/kitex-contrib/codec-dubbo-tests/code/kitex v0.0.0 => ./code/kitex
+replace (
+	github.com/kitex-contrib/codec-dubbo-tests/code/kitex v0.0.0 => ./code/kitex
+	github.com/kitex-contrib/codec-dubbo-tests/code/kitex/extensions v0.0.0 => ./code/kitex/extensions
+)

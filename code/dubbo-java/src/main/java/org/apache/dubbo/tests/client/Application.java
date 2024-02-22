@@ -26,6 +26,8 @@ import org.apache.dubbo.config.bootstrap.DubboBootstrap;
 import org.apache.dubbo.tests.api.*;
 
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.*;
 
 public class Application {
@@ -212,6 +214,8 @@ public class Application {
     public static void testJavaExtensions(UserProvider svc) {
         testEchoJavaDate(svc);
         testEchoJavaDateList(svc);
+        testEchoJavaBigDecimal(svc);
+        testEchoJavaBigInteger(svc);
     }
 
     public static void testEchoRetByte(UserProvider svc) {
@@ -1637,6 +1641,34 @@ public class Application {
             Date date2 = new Date(1002);
             req.add(date2);
             List<Date> resp = svc.EchoJavaDateList(req);
+            if (!req.equals(resp)) {
+                logEchoFail(methodName);
+            }
+        } catch (Exception e) {
+            logEchoException(methodName, e);
+        }
+        logEchoEnd(methodName);
+    }
+
+    public static void testEchoJavaBigDecimal(UserProvider svc) {
+        String methodName = "EchoJavaBigDecimal";
+        try {
+            BigDecimal req = new BigDecimal("12.3456789012345678901234567890");
+            BigDecimal resp = svc.EchoJavaBigDecimal(req);
+            if (!req.equals(resp)) {
+                logEchoFail(methodName);
+            }
+        } catch (Exception e) {
+            logEchoException(methodName, e);
+        }
+        logEchoEnd(methodName);
+    }
+
+    public static void testEchoJavaBigInteger(UserProvider svc) {
+        String methodName = "EchoJavaBigInteger";
+        try {
+            BigInteger req = new BigInteger("123456789012345678901234567890");
+            BigInteger resp = svc.EchoJavaBigInteger(req);
             if (!req.equals(resp)) {
                 logEchoFail(methodName);
             }

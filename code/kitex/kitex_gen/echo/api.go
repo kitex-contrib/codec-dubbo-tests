@@ -5,6 +5,7 @@ package echo
 import (
 	"context"
 	"fmt"
+	"github.com/kitex-contrib/codec-dubbo-tests/code/kitex/kitex_gen/extensions"
 	"github.com/kitex-contrib/codec-dubbo-tests/code/kitex/kitex_gen/java"
 )
 
@@ -1311,4 +1312,8 @@ type TestService interface {
 	EchoJavaDate(ctx context.Context, req *java.Date) (r *java.Date, err error)
 
 	EchoJavaDateList(ctx context.Context, req []*java.Date) (r []*java.Date, err error)
+
+	EchoJavaBigDecimal(ctx context.Context, req *extensions.BigDecimal) (r *extensions.BigDecimal, err error)
+
+	EchoJavaBigInteger(ctx context.Context, req *extensions.BigInteger) (r *extensions.BigInteger, err error)
 }

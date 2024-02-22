@@ -10,6 +10,7 @@ import (
 
 	"github.com/apache/thrift/lib/go/thrift"
 
+	"github.com/kitex-contrib/codec-dubbo-tests/code/kitex/kitex_gen/extensions"
 	"github.com/kitex-contrib/codec-dubbo-tests/code/kitex/kitex_gen/java"
 )
 
@@ -20,6 +21,7 @@ var (
 	_ = (*strings.Builder)(nil)
 	_ = reflect.Type(nil)
 	_ = thrift.TProtocol(nil)
+	_ = extensions.KitexUnusedProtection
 	_ = java.KitexUnusedProtection
 )
 
@@ -7436,5 +7438,157 @@ func (p *TestServiceEchoJavaDateListResult) String() string {
 	return fmt.Sprintf("TestServiceEchoJavaDateListResult(%+v)", *p)
 }
 func (p *TestServiceEchoJavaDateListResult) GetResult() interface{} {
+	return p.Success
+}
+
+type TestServiceEchoJavaBigDecimalArgs struct {
+	Req *extensions.BigDecimal `thrift:"req,1" frugal:"1,default,extensions.BigDecimal" json:"req"`
+}
+
+func NewTestServiceEchoJavaBigDecimalArgs() *TestServiceEchoJavaBigDecimalArgs {
+	return &TestServiceEchoJavaBigDecimalArgs{}
+}
+
+func (p *TestServiceEchoJavaBigDecimalArgs) InitDefault() {
+	*p = TestServiceEchoJavaBigDecimalArgs{}
+}
+
+var TestServiceEchoJavaBigDecimalArgs_Req_DEFAULT *extensions.BigDecimal
+
+func (p *TestServiceEchoJavaBigDecimalArgs) GetReq() (v *extensions.BigDecimal) {
+	if !p.IsSetReq() {
+		return TestServiceEchoJavaBigDecimalArgs_Req_DEFAULT
+	}
+	return p.Req
+}
+func (p *TestServiceEchoJavaBigDecimalArgs) SetReq(val *extensions.BigDecimal) {
+	p.Req = val
+}
+
+func (p *TestServiceEchoJavaBigDecimalArgs) IsSetReq() bool {
+	return p.Req != nil
+}
+
+func (p *TestServiceEchoJavaBigDecimalArgs) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	return fmt.Sprintf("TestServiceEchoJavaBigDecimalArgs(%+v)", *p)
+}
+func (p *TestServiceEchoJavaBigDecimalArgs) GetFirstArgument() interface{} {
+	return p.Req
+}
+
+type TestServiceEchoJavaBigDecimalResult struct {
+	Success *extensions.BigDecimal `thrift:"success,0,optional" frugal:"0,optional,extensions.BigDecimal" json:"success,omitempty"`
+}
+
+func NewTestServiceEchoJavaBigDecimalResult() *TestServiceEchoJavaBigDecimalResult {
+	return &TestServiceEchoJavaBigDecimalResult{}
+}
+
+func (p *TestServiceEchoJavaBigDecimalResult) InitDefault() {
+	*p = TestServiceEchoJavaBigDecimalResult{}
+}
+
+var TestServiceEchoJavaBigDecimalResult_Success_DEFAULT *extensions.BigDecimal
+
+func (p *TestServiceEchoJavaBigDecimalResult) GetSuccess() (v *extensions.BigDecimal) {
+	if !p.IsSetSuccess() {
+		return TestServiceEchoJavaBigDecimalResult_Success_DEFAULT
+	}
+	return p.Success
+}
+func (p *TestServiceEchoJavaBigDecimalResult) SetSuccess(x interface{}) {
+	p.Success = x.(*extensions.BigDecimal)
+}
+
+func (p *TestServiceEchoJavaBigDecimalResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *TestServiceEchoJavaBigDecimalResult) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	return fmt.Sprintf("TestServiceEchoJavaBigDecimalResult(%+v)", *p)
+}
+func (p *TestServiceEchoJavaBigDecimalResult) GetResult() interface{} {
+	return p.Success
+}
+
+type TestServiceEchoJavaBigIntegerArgs struct {
+	Req *extensions.BigInteger `thrift:"req,1" frugal:"1,default,extensions.BigInteger" json:"req"`
+}
+
+func NewTestServiceEchoJavaBigIntegerArgs() *TestServiceEchoJavaBigIntegerArgs {
+	return &TestServiceEchoJavaBigIntegerArgs{}
+}
+
+func (p *TestServiceEchoJavaBigIntegerArgs) InitDefault() {
+	*p = TestServiceEchoJavaBigIntegerArgs{}
+}
+
+var TestServiceEchoJavaBigIntegerArgs_Req_DEFAULT *extensions.BigInteger
+
+func (p *TestServiceEchoJavaBigIntegerArgs) GetReq() (v *extensions.BigInteger) {
+	if !p.IsSetReq() {
+		return TestServiceEchoJavaBigIntegerArgs_Req_DEFAULT
+	}
+	return p.Req
+}
+func (p *TestServiceEchoJavaBigIntegerArgs) SetReq(val *extensions.BigInteger) {
+	p.Req = val
+}
+
+func (p *TestServiceEchoJavaBigIntegerArgs) IsSetReq() bool {
+	return p.Req != nil
+}
+
+func (p *TestServiceEchoJavaBigIntegerArgs) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	return fmt.Sprintf("TestServiceEchoJavaBigIntegerArgs(%+v)", *p)
+}
+func (p *TestServiceEchoJavaBigIntegerArgs) GetFirstArgument() interface{} {
+	return p.Req
+}
+
+type TestServiceEchoJavaBigIntegerResult struct {
+	Success *extensions.BigInteger `thrift:"success,0,optional" frugal:"0,optional,extensions.BigInteger" json:"success,omitempty"`
+}
+
+func NewTestServiceEchoJavaBigIntegerResult() *TestServiceEchoJavaBigIntegerResult {
+	return &TestServiceEchoJavaBigIntegerResult{}
+}
+
+func (p *TestServiceEchoJavaBigIntegerResult) InitDefault() {
+	*p = TestServiceEchoJavaBigIntegerResult{}
+}
+
+var TestServiceEchoJavaBigIntegerResult_Success_DEFAULT *extensions.BigInteger
+
+func (p *TestServiceEchoJavaBigIntegerResult) GetSuccess() (v *extensions.BigInteger) {
+	if !p.IsSetSuccess() {
+		return TestServiceEchoJavaBigIntegerResult_Success_DEFAULT
+	}
+	return p.Success
+}
+func (p *TestServiceEchoJavaBigIntegerResult) SetSuccess(x interface{}) {
+	p.Success = x.(*extensions.BigInteger)
+}
+
+func (p *TestServiceEchoJavaBigIntegerResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *TestServiceEchoJavaBigIntegerResult) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	return fmt.Sprintf("TestServiceEchoJavaBigIntegerResult(%+v)", *p)
+}
+func (p *TestServiceEchoJavaBigIntegerResult) GetResult() interface{} {
 	return p.Success
 }

@@ -7,6 +7,7 @@ import (
 	client "github.com/cloudwego/kitex/client"
 	callopt "github.com/cloudwego/kitex/client/callopt"
 	echo "github.com/kitex-contrib/codec-dubbo-tests/code/kitex/kitex_gen/echo"
+	extensions "github.com/kitex-contrib/codec-dubbo-tests/code/kitex/kitex_gen/extensions"
 	java "github.com/kitex-contrib/codec-dubbo-tests/code/kitex/kitex_gen/java"
 )
 
@@ -119,6 +120,8 @@ type Client interface {
 	EchoGeneric(ctx context.Context, req *echo.EchoGenericRequest, callOptions ...callopt.Option) (r *echo.EchoGenericResponse, err error)
 	EchoJavaDate(ctx context.Context, req *java.Date, callOptions ...callopt.Option) (r *java.Date, err error)
 	EchoJavaDateList(ctx context.Context, req []*java.Date, callOptions ...callopt.Option) (r []*java.Date, err error)
+	EchoJavaBigDecimal(ctx context.Context, req *extensions.BigDecimal, callOptions ...callopt.Option) (r *extensions.BigDecimal, err error)
+	EchoJavaBigInteger(ctx context.Context, req *extensions.BigInteger, callOptions ...callopt.Option) (r *extensions.BigInteger, err error)
 }
 
 // NewClient creates a client for the service defined in IDL.
@@ -683,4 +686,14 @@ func (p *kTestServiceClient) EchoJavaDate(ctx context.Context, req *java.Date, c
 func (p *kTestServiceClient) EchoJavaDateList(ctx context.Context, req []*java.Date, callOptions ...callopt.Option) (r []*java.Date, err error) {
 	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
 	return p.kClient.EchoJavaDateList(ctx, req)
+}
+
+func (p *kTestServiceClient) EchoJavaBigDecimal(ctx context.Context, req *extensions.BigDecimal, callOptions ...callopt.Option) (r *extensions.BigDecimal, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.EchoJavaBigDecimal(ctx, req)
+}
+
+func (p *kTestServiceClient) EchoJavaBigInteger(ctx context.Context, req *extensions.BigInteger, callOptions ...callopt.Option) (r *extensions.BigInteger, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.EchoJavaBigInteger(ctx, req)
 }
