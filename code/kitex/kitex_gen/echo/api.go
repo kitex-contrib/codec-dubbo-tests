@@ -4,13 +4,64 @@ package echo
 
 import (
 	"context"
+	"database/sql"
+	"database/sql/driver"
 	"fmt"
 	"github.com/kitex-contrib/codec-dubbo-tests/code/kitex/kitex_gen/extensions"
 	"github.com/kitex-contrib/codec-dubbo-tests/code/kitex/kitex_gen/java"
 )
 
+type KitexEnum int64
+
+const (
+	KitexEnum_ONE   KitexEnum = 0
+	KitexEnum_TWO   KitexEnum = 1
+	KitexEnum_THREE KitexEnum = 2
+)
+
+func (p KitexEnum) String() string {
+	switch p {
+	case KitexEnum_ONE:
+		return "ONE"
+	case KitexEnum_TWO:
+		return "TWO"
+	case KitexEnum_THREE:
+		return "THREE"
+	}
+	return "<UNSET>"
+}
+
+func KitexEnumFromString(s string) (KitexEnum, error) {
+	switch s {
+	case "ONE":
+		return KitexEnum_ONE, nil
+	case "TWO":
+		return KitexEnum_TWO, nil
+	case "THREE":
+		return KitexEnum_THREE, nil
+	}
+	return KitexEnum(0), fmt.Errorf("not a valid KitexEnum string")
+}
+
+func KitexEnumPtr(v KitexEnum) *KitexEnum { return &v }
+
+func (p *KitexEnum) Scan(value interface{}) (err error) {
+	var result sql.NullInt64
+	err = result.Scan(value)
+	*p = KitexEnum(result.Int64)
+	return
+}
+
+func (p *KitexEnum) Value() (driver.Value, error) {
+	if p == nil {
+		return nil, nil
+	}
+	return int64(*p), nil
+}
+
 type EchoRequest struct {
-	Int32 int32 `thrift:"int32,1,required" frugal:"1,required,i32" json:"int32"`
+	Int32     int32     `thrift:"int32,1,required" frugal:"1,required,i32" json:"int32"`
+	EnumField KitexEnum `thrift:"enumField,2,required" frugal:"2,required,KitexEnum" json:"enumField"`
 }
 
 func NewEchoRequest() *EchoRequest {
@@ -26,6 +77,14 @@ func (p *EchoRequest) GetInt32() (v int32) {
 }
 func (p *EchoRequest) SetInt32(val int32) {
 	p.Int32 = val
+}
+
+func (p *EchoRequest) GetEnumField() (v KitexEnum) {
+	return p.EnumField
+}
+
+func (p *EchoRequest) SetEnumField(val KitexEnum) {
+	p.EnumField = val
 }
 
 func (p *EchoRequest) String() string {
@@ -950,7 +1009,7 @@ func (p *EchoOptionalMultiStringResponse) String() string {
 }
 
 type EchoGenericRequest struct {
-	ReqField int32          `thrift:"reqField,1,required" frugal:"1,required,i32" json:"reqField"`
+	ReqField int32         `thrift:"reqField,1,required" frugal:"1,required,i32" json:"reqField"`
 	List     []java.Object `thrift:"list,2,required" frugal:"2,required,list<java.Object>" json:"list"`
 }
 
@@ -984,7 +1043,7 @@ func (p *EchoGenericRequest) String() string {
 }
 
 type EchoGenericResponse struct {
-	RespField int32          `thrift:"respField,1,required" frugal:"1,required,i32" json:"respField"`
+	RespField int32         `thrift:"respField,1,required" frugal:"1,required,i32" json:"respField"`
 	List      []java.Object `thrift:"list,2,required" frugal:"2,required,list<java.Object>" json:"list"`
 }
 
@@ -1316,4 +1375,6 @@ type TestService interface {
 	EchoJavaBigDecimal(ctx context.Context, req *extensions.BigDecimal) (r *extensions.BigDecimal, err error)
 
 	EchoJavaBigInteger(ctx context.Context, req *extensions.BigInteger) (r *extensions.BigInteger, err error)
+
+	EchoJavaEnum(ctx context.Context, kitexEnum KitexEnum) (r string, err error)
 }

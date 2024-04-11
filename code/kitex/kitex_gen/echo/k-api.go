@@ -7592,3 +7592,70 @@ func (p *TestServiceEchoJavaBigIntegerResult) String() string {
 func (p *TestServiceEchoJavaBigIntegerResult) GetResult() interface{} {
 	return p.Success
 }
+
+type EchoService2EchoJavaEnumArgs struct {
+	KitexEnum KitexEnum `thrift:"kitexEnum,1" frugal:"1,default,KitexEnum" json:"kitexEnum"`
+}
+
+func NewEchoService2EchoJavaEnumArgs() *EchoService2EchoJavaEnumArgs {
+	return &EchoService2EchoJavaEnumArgs{}
+}
+
+func (p *EchoService2EchoJavaEnumArgs) InitDefault() {
+	*p = EchoService2EchoJavaEnumArgs{}
+}
+
+func (p *EchoService2EchoJavaEnumArgs) GetKitexEnum() (v KitexEnum) {
+	return p.KitexEnum
+}
+func (p *EchoService2EchoJavaEnumArgs) SetKitexEnum(val KitexEnum) {
+	p.KitexEnum = val
+}
+
+func (p *EchoService2EchoJavaEnumArgs) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	return fmt.Sprintf("EchoService2EchoJavaEnumArgs(%+v)", *p)
+}
+func (p *EchoService2EchoJavaEnumArgs) GetFirstArgument() interface{} {
+	return p.KitexEnum
+}
+
+type EchoService2EchoJavaEnumResult struct {
+	Success *string `thrift:"success,0,optional" frugal:"0,optional,string" json:"success,omitempty"`
+}
+
+func NewEchoService2EchoJavaEnumResult() *EchoService2EchoJavaEnumResult {
+	return &EchoService2EchoJavaEnumResult{}
+}
+
+func (p *EchoService2EchoJavaEnumResult) InitDefault() {
+	*p = EchoService2EchoJavaEnumResult{}
+}
+
+var EchoService2EchoJavaEnumResult_Success_DEFAULT string
+
+func (p *EchoService2EchoJavaEnumResult) GetSuccess() (v string) {
+	if !p.IsSetSuccess() {
+		return EchoService2EchoJavaEnumResult_Success_DEFAULT
+	}
+	return *p.Success
+}
+func (p *EchoService2EchoJavaEnumResult) SetSuccess(x interface{}) {
+	p.Success = x.(*string)
+}
+
+func (p *EchoService2EchoJavaEnumResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *EchoService2EchoJavaEnumResult) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	return fmt.Sprintf("EchoService2EchoJavaEnumResult(%+v)", *p)
+}
+func (p *EchoService2EchoJavaEnumResult) GetResult() interface{} {
+	return p.Success
+}

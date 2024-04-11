@@ -3928,3 +3928,13 @@ func (p *kClient) EchoJavaBigInteger(ctx context.Context, req *extensions.BigInt
 	}
 	return _result.GetSuccess(), nil
 }
+
+func (p *kClient) EchoJavaEnum(ctx context.Context, kitexEnum echo.KitexEnum) (r string, err error) {
+	var _args echo.EchoService2EchoJavaEnumArgs
+	_args.KitexEnum = kitexEnum
+	var _result echo.EchoService2EchoJavaEnumResult
+	if err = p.c.Call(ctx, "EchoJavaEnum", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}

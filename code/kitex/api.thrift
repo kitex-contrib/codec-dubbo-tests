@@ -3,8 +3,17 @@ namespace go echo
 include "java.thrift"
 include "extensions.thrift"
 
+
+enum KitexEnum {
+      ONE,
+      TWO,
+      THREE,
+}(JavaClassName="org.cloudwego.kitex.samples.enum.KitexEnum")
+
+
 struct EchoRequest {
     1: required i32 int32,
+    2: required KitexEnum enumField,
 }(JavaClassName="kitex.echo.EchoRequest")
 
 struct EchoResponse {
@@ -253,6 +262,8 @@ service TestService {
     // exception
     bool EchoException(1: bool req)
     bool EchoCustomizedException(1: bool req)
+
+    string EchoJavaEnum(1: KitexEnum kitexEnum)
 
     // java generic
     EchoGenericResponse EchoGeneric(1: EchoGenericRequest req)

@@ -2,6 +2,7 @@ package echo
 
 import (
 	"fmt"
+	hessian "github.com/apache/dubbo-go-hessian2"
 
 	"github.com/kitex-contrib/codec-dubbo/pkg/hessian2"
 	codec "github.com/kitex-contrib/codec-dubbo/pkg/iface"
@@ -31,6 +32,9 @@ var objectsApi = []interface{}{
 	&EchoGenericResponse{},
 	&EchoGenericEmbedded{},
 	&EchoCustomizedException{},
+	KitexEnum_ONE,
+	KitexEnum_TWO,
+	KitexEnum_THREE,
 }
 
 func init() {
@@ -41,6 +45,24 @@ func GetTestServiceIDLAnnotations() map[string][]string {
 	return map[string][]string{
 		"JavaClassName": {"org.apache.dubbo.tests.api.UserProvider"},
 	}
+}
+
+var KitexEnumValues = map[string]KitexEnum{
+	"ONE":   KitexEnum_ONE,
+	"TWO":   KitexEnum_TWO,
+	"THREE": KitexEnum_THREE,
+}
+
+func (KitexEnum) JavaClassName() string {
+	return "org.cloudwego.kitex.samples.enum.KitexEnum"
+}
+
+func (KitexEnum) EnumValue(s string) hessian.JavaEnum {
+	v, ok := KitexEnumValues[s]
+	if ok {
+		return hessian.JavaEnum(v)
+	}
+	return hessian.InvalidJavaEnum
 }
 
 func (p *EchoRequest) Encode(e codec.Encoder) error {
@@ -7381,6 +7403,60 @@ func (p *TestServiceEchoJavaBigIntegerResult) Encode(e codec.Encoder) error {
 }
 
 func (p *TestServiceEchoJavaBigIntegerResult) Decode(d codec.Decoder) error {
+	var (
+		err error
+		v   interface{}
+	)
+	v, err = d.Decode()
+	if err != nil {
+		return err
+	}
+	err = hessian2.ReflectResponse(v, &p.Success)
+	if err != nil {
+		return errors.Wrap(err, fmt.Sprintf("invalid data type: %T", v))
+	}
+
+	return nil
+}
+
+func (p *EchoService2EchoJavaEnumArgs) Encode(e codec.Encoder) error {
+	var err error
+	err = e.Encode(p.KitexEnum)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (p *EchoService2EchoJavaEnumArgs) Decode(d codec.Decoder) error {
+	var (
+		err error
+		v   interface{}
+	)
+	v, err = d.Decode()
+	if err != nil {
+		return err
+	}
+	err = hessian2.ReflectResponse(v, &p.KitexEnum)
+	if err != nil {
+		return errors.Wrap(err, fmt.Sprintf("invalid data type: %T", v))
+	}
+
+	return nil
+}
+
+func (p *EchoService2EchoJavaEnumResult) Encode(e codec.Encoder) error {
+	var err error
+	err = e.Encode(p.Success)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (p *EchoService2EchoJavaEnumResult) Decode(d codec.Decoder) error {
 	var (
 		err error
 		v   interface{}
