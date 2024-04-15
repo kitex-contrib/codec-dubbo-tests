@@ -2,7 +2,6 @@ package echo
 
 import (
 	"fmt"
-	hessian "github.com/apache/dubbo-go-hessian2"
 
 	"github.com/kitex-contrib/codec-dubbo/pkg/hessian2"
 	codec "github.com/kitex-contrib/codec-dubbo/pkg/iface"
@@ -47,27 +46,14 @@ func GetTestServiceIDLAnnotations() map[string][]string {
 	}
 }
 
-var KitexEnumValues = map[string]KitexEnum{
-	"ONE":   KitexEnum_ONE,
-	"TWO":   KitexEnum_TWO,
-	"THREE": KitexEnum_THREE,
-}
-
-func (KitexEnum) JavaClassName() string {
-	return "org.cloudwego.kitex.samples.enum.KitexEnum"
-}
-
-func (KitexEnum) EnumValue(s string) hessian.JavaEnum {
-	v, ok := KitexEnumValues[s]
-	if ok {
-		return hessian.JavaEnum(v)
-	}
-	return hessian.InvalidJavaEnum
-}
-
 func (p *EchoRequest) Encode(e codec.Encoder) error {
 	var err error
 	err = e.Encode(p.Int32)
+	if err != nil {
+		return err
+	}
+
+	err = e.Encode(p.EnumField)
 	if err != nil {
 		return err
 	}
@@ -85,6 +71,15 @@ func (p *EchoRequest) Decode(d codec.Decoder) error {
 		return err
 	}
 	err = hessian2.ReflectResponse(v, &p.Int32)
+	if err != nil {
+		return errors.Wrap(err, fmt.Sprintf("invalid data type: %T", v))
+	}
+
+	v, err = d.Decode()
+	if err != nil {
+		return err
+	}
+	err = hessian2.ReflectResponse(v, &p.EnumField)
 	if err != nil {
 		return errors.Wrap(err, fmt.Sprintf("invalid data type: %T", v))
 	}
@@ -1249,6 +1244,24 @@ func (p *EchoCustomizedException) Decode(d codec.Decoder) error {
 
 func (p *EchoCustomizedException) JavaClassName() string {
 	return "org.apache.dubbo.tests.api.EchoCustomizedException"
+}
+
+var KitexEnumValues = map[string]KitexEnum{
+	"ONE":   KitexEnum_ONE,
+	"TWO":   KitexEnum_TWO,
+	"THREE": KitexEnum_THREE,
+}
+
+func (KitexEnum) JavaClassName() string {
+	return "org.cloudwego.kitex.samples.enum.KitexEnum"
+}
+
+func (KitexEnum) EnumValue(s string) enum.JavaEnum {
+	v, ok := KitexEnumValues[s]
+	if ok {
+		return enum.JavaEnum(v)
+	}
+	return enum.InvalidJavaEnum
 }
 
 func (p *TestServiceEchoRetByteArgs) Encode(e codec.Encoder) error {
@@ -7149,6 +7162,60 @@ func (p *TestServiceEchoCustomizedExceptionResult) Decode(d codec.Decoder) error
 	return nil
 }
 
+func (p *TestServiceEchoJavaEnumArgs) Encode(e codec.Encoder) error {
+	var err error
+	err = e.Encode(p.KitexEnum)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (p *TestServiceEchoJavaEnumArgs) Decode(d codec.Decoder) error {
+	var (
+		err error
+		v   interface{}
+	)
+	v, err = d.Decode()
+	if err != nil {
+		return err
+	}
+	err = hessian2.ReflectResponse(v, &p.KitexEnum)
+	if err != nil {
+		return errors.Wrap(err, fmt.Sprintf("invalid data type: %T", v))
+	}
+
+	return nil
+}
+
+func (p *TestServiceEchoJavaEnumResult) Encode(e codec.Encoder) error {
+	var err error
+	err = e.Encode(p.Success)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (p *TestServiceEchoJavaEnumResult) Decode(d codec.Decoder) error {
+	var (
+		err error
+		v   interface{}
+	)
+	v, err = d.Decode()
+	if err != nil {
+		return err
+	}
+	err = hessian2.ReflectResponse(v, &p.Success)
+	if err != nil {
+		return errors.Wrap(err, fmt.Sprintf("invalid data type: %T", v))
+	}
+
+	return nil
+}
+
 func (p *TestServiceEchoGenericArgs) Encode(e codec.Encoder) error {
 	var err error
 	err = e.Encode(p.Req)
@@ -7403,60 +7470,6 @@ func (p *TestServiceEchoJavaBigIntegerResult) Encode(e codec.Encoder) error {
 }
 
 func (p *TestServiceEchoJavaBigIntegerResult) Decode(d codec.Decoder) error {
-	var (
-		err error
-		v   interface{}
-	)
-	v, err = d.Decode()
-	if err != nil {
-		return err
-	}
-	err = hessian2.ReflectResponse(v, &p.Success)
-	if err != nil {
-		return errors.Wrap(err, fmt.Sprintf("invalid data type: %T", v))
-	}
-
-	return nil
-}
-
-func (p *EchoService2EchoJavaEnumArgs) Encode(e codec.Encoder) error {
-	var err error
-	err = e.Encode(p.KitexEnum)
-	if err != nil {
-		return err
-	}
-
-	return nil
-}
-
-func (p *EchoService2EchoJavaEnumArgs) Decode(d codec.Decoder) error {
-	var (
-		err error
-		v   interface{}
-	)
-	v, err = d.Decode()
-	if err != nil {
-		return err
-	}
-	err = hessian2.ReflectResponse(v, &p.KitexEnum)
-	if err != nil {
-		return errors.Wrap(err, fmt.Sprintf("invalid data type: %T", v))
-	}
-
-	return nil
-}
-
-func (p *EchoService2EchoJavaEnumResult) Encode(e codec.Encoder) error {
-	var err error
-	err = e.Encode(p.Success)
-	if err != nil {
-		return err
-	}
-
-	return nil
-}
-
-func (p *EchoService2EchoJavaEnumResult) Decode(d codec.Decoder) error {
 	var (
 		err error
 		v   interface{}

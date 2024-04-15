@@ -4,7 +4,7 @@ go 1.18
 
 require (
 	github.com/apache/thrift v0.13.0
-	github.com/cloudwego/kitex v0.9.0-rc3.0.20240122073019-bfe6a07d4a63
+	github.com/cloudwego/kitex v0.9.1
 	github.com/cloudwego/thriftgo v0.3.6
 	github.com/kitex-contrib/codec-dubbo v0.2.5-0.20240129030840-dcc4d83669b1
 	github.com/kitex-contrib/codec-dubbo-tests/code/kitex/extensions v0.0.0
@@ -14,16 +14,16 @@ require (
 require (
 	github.com/apache/dubbo-go-hessian2 v1.12.4 // indirect
 	github.com/bytedance/gopkg v0.0.0-20230728082804-614d0af6619b // indirect
-	github.com/bytedance/sonic v1.10.2 // indirect
+	github.com/bytedance/sonic v1.11.2 // indirect
 	github.com/chenzhuoyu/base64x v0.0.0-20230717121745-296ad89f973d // indirect
 	github.com/chenzhuoyu/iasm v0.9.1 // indirect
 	github.com/choleraehyq/pid v0.0.18 // indirect
 	github.com/cloudwego/configmanager v0.2.0 // indirect
 	github.com/cloudwego/dynamicgo v0.2.0 // indirect
 	github.com/cloudwego/fastpb v0.0.4 // indirect
-	github.com/cloudwego/frugal v0.1.13 // indirect
+	github.com/cloudwego/frugal v0.1.14 // indirect
 	github.com/cloudwego/localsession v0.0.2 // indirect
-	github.com/cloudwego/netpoll v0.5.1 // indirect
+	github.com/cloudwego/netpoll v0.6.0 // indirect
 	github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc // indirect
 	github.com/dubbogo/gost v1.14.0 // indirect
 	github.com/fatih/structtag v1.2.0 // indirect
