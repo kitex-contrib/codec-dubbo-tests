@@ -2,10 +2,11 @@ package echo
 
 import (
 	"fmt"
+	"github.com/s5364733/codec-dubbo/pkg/hessian2/enum"
 
-	"github.com/kitex-contrib/codec-dubbo/pkg/hessian2"
-	codec "github.com/kitex-contrib/codec-dubbo/pkg/iface"
 	"github.com/pkg/errors"
+	"github.com/s5364733/codec-dubbo/pkg/hessian2"
+	codec "github.com/s5364733/codec-dubbo/pkg/iface"
 )
 
 var objectsApi = []interface{}{
