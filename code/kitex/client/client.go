@@ -5,7 +5,7 @@ import (
 
 	"github.com/cloudwego/kitex/pkg/klog"
 
-	dubbo "github.com/kitex-contrib/codec-dubbo/pkg"
+	dubbo "github.com/s5364733/codec-dubbo/pkg"
 
 	"github.com/cloudwego/kitex/client"
 	"github.com/kitex-contrib/codec-dubbo-tests/code/kitex/kitex_gen/echo"

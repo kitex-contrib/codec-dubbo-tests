@@ -6,10 +6,10 @@ require (
 	github.com/apache/thrift v0.13.0
 	github.com/cloudwego/kitex v0.9.1
 	github.com/cloudwego/thriftgo v0.3.6
-	//github.com/kitex-contrib/codec-dubbo v0.2.5-0.20240129030840-dcc4d83669b1
-	github.com/s5364733/codec-dubbo v1.0.1-0.20240415084037-ace7b6c88b48
 	github.com/kitex-contrib/codec-dubbo-tests/code/kitex/extensions v0.0.0
 	github.com/pkg/errors v0.9.1
+	//github.com/kitex-contrib/codec-dubbo v0.2.5-0.20240129030840-dcc4d83669b1
+	github.com/s5364733/codec-dubbo v1.0.1-0.20240416122451-8e50d9080418
 )
 
 require (
@@ -33,6 +33,7 @@ require (
 	github.com/iancoleman/strcase v0.2.0 // indirect
 	github.com/jhump/protoreflect v1.8.2 // indirect
 	github.com/json-iterator/go v1.1.12 // indirect
+	github.com/kitex-contrib/codec-dubbo v0.2.5 // indirect
 	github.com/klauspost/cpuid/v2 v2.2.4 // indirect
 	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
 	github.com/modern-go/gls v0.0.0-20220109145502-612d0167dce5 // indirect
