@@ -3,7 +3,7 @@
 package java
 
 import (
-	java "github.com/s5364733/codec-dubbo/java"
+	java "github.com/kitex-contrib/codec-dubbo/java"
 )
 
 type Object = java.Object

@@ -7,7 +7,7 @@ import (
 
 	"github.com/kitex-contrib/codec-dubbo-tests/code/kitex/extensions"
 	"github.com/kitex-contrib/codec-dubbo-tests/code/kitex/kitex_gen/java"
-	hessian2_exception "github.com/s5364733/codec-dubbo/pkg/hessian2/exception"
+	hessian2_exception "github.com/kitex-contrib/codec-dubbo/pkg/hessian2/exception"
 
 	"github.com/kitex-contrib/codec-dubbo-tests/code/kitex/kitex_gen/echo"
 )
