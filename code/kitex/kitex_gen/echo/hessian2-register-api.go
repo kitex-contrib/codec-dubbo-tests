@@ -1254,7 +1254,7 @@ var KitexEnumValues = map[string]KitexEnum{
 }
 
 func (KitexEnum) JavaClassName() string {
-	return "org.cloudwego.kitex.samples.enum.KitexEnum"
+	return "org.apache.dubbo.tests.enumeration.KitexEnum"
 }
 
 func (KitexEnum) EnumValue(s string) enum.JavaEnum {

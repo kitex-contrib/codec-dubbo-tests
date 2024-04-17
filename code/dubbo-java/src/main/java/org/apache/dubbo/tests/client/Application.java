@@ -24,6 +24,7 @@ import org.apache.dubbo.config.ReferenceConfig;
 import org.apache.dubbo.config.RegistryConfig;
 import org.apache.dubbo.config.bootstrap.DubboBootstrap;
 import org.apache.dubbo.tests.api.*;
+import org.apache.dubbo.tests.enumeration.KitexEnum;
 
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -213,6 +214,7 @@ public class Application {
 
     public static void testJavaExtensions(UserProvider svc) {
         testEchoJavaDate(svc);
+        testEchoJavaEnum(svc);
         testEchoJavaDateList(svc);
         testEchoJavaBigDecimal(svc);
         testEchoJavaBigInteger(svc);
@@ -1631,6 +1633,23 @@ public class Application {
         }
         logEchoEnd(methodName);
     }
+
+    public static void testEchoJavaEnum(UserProvider svc) {
+        String methodName = "EchoJavaEnum";
+        try {
+            KitexEnum req = KitexEnum.ONE;
+            String resp = svc.EchoJavaEnum(KitexEnum.ONE);
+            if (!req.getCode().equals(resp)) {
+                logEchoFail(methodName);
+            }
+        } catch (Exception e) {
+            logEchoException(methodName, e);
+        }
+        logEchoEnd(methodName);
+    }
+
+
+
 
     public static void testEchoJavaDateList(UserProvider svc) {
         String methodName = "EchoJavaDateList";

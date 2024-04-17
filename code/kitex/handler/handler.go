@@ -4,7 +4,6 @@ import (
 	"context"
 	"errors"
 	"fmt"
-
 	"github.com/kitex-contrib/codec-dubbo-tests/code/kitex/extensions"
 	"github.com/kitex-contrib/codec-dubbo-tests/code/kitex/kitex_gen/java"
 	hessian2_exception "github.com/kitex-contrib/codec-dubbo/pkg/hessian2/exception"
@@ -623,6 +622,11 @@ func (s *TestServiceImpl) EchoGeneric(ctx context.Context, req *echo.EchoGeneric
 		RespField: req.ReqField,
 		List:      req.List,
 	}, nil
+}
+
+// EchoJavaEnum implements the TestServiceImpl interface.
+func (s *TestServiceImpl) EchoJavaEnum(ctx context.Context, req *echo.KitexEnum) (resp string, err error) {
+	return req.String(), nil
 }
 
 // EchoJavaDate implements the TestServiceImpl interface.
