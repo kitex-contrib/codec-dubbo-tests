@@ -750,6 +750,13 @@ var serviceMethods = map[string]kitex.MethodInfo{
 		false,
 		kitex.WithStreamingMode(kitex.StreamingNone),
 	),
+	"EchoJavaEnumWithArg": kitex.NewMethodInfo(
+		echoJavaEnumWithArgHandler,
+		newTestServiceEchoJavaEnumWithArgArgs,
+		newTestServiceEchoJavaEnumWithArgResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingNone),
+	),
 	"EchoGeneric": kitex.NewMethodInfo(
 		echoGenericHandler,
 		newTestServiceEchoGenericArgs,
@@ -2741,6 +2748,24 @@ func newTestServiceEchoJavaEnumResult() interface{} {
 	return echo.NewTestServiceEchoJavaEnumResult()
 }
 
+func echoJavaEnumWithArgHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+	realArg := arg.(*echo.TestServiceEchoJavaEnumWithArgArgs)
+	realResult := result.(*echo.TestServiceEchoJavaEnumWithArgResult)
+	success, err := handler.(echo.TestService).EchoJavaEnumWithArg(ctx, realArg.Req)
+	if err != nil {
+		return err
+	}
+	realResult.Success = success
+	return nil
+}
+func newTestServiceEchoJavaEnumWithArgArgs() interface{} {
+	return echo.NewTestServiceEchoJavaEnumWithArgArgs()
+}
+
+func newTestServiceEchoJavaEnumWithArgResult() interface{} {
+	return echo.NewTestServiceEchoJavaEnumWithArgResult()
+}
+
 func echoGenericHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
 	realArg := arg.(*echo.TestServiceEchoGenericArgs)
 	realResult := result.(*echo.TestServiceEchoGenericResult)
@@ -3904,11 +3929,21 @@ func (p *kClient) EchoCustomizedException(ctx context.Context, req bool) (r bool
 	return _result.GetSuccess(), nil
 }
 
-func (p *kClient) EchoJavaEnum(ctx context.Context, kitexEnum echo.KitexEnum) (r string, err error) {
+func (p *kClient) EchoJavaEnum(ctx context.Context, kitexEnum echo.KitexEnum) (r echo.KitexEnum, err error) {
 	var _args echo.TestServiceEchoJavaEnumArgs
 	_args.KitexEnum = kitexEnum
 	var _result echo.TestServiceEchoJavaEnumResult
 	if err = p.c.Call(ctx, "EchoJavaEnum", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) EchoJavaEnumWithArg(ctx context.Context, req *echo.EchoEnumRequest) (r *echo.EchoEnumResponse, err error) {
+	var _args echo.TestServiceEchoJavaEnumWithArgArgs
+	_args.Req = req
+	var _result echo.TestServiceEchoJavaEnumWithArgResult
+	if err = p.c.Call(ctx, "EchoJavaEnumWithArg", &_args, &_result); err != nil {
 		return
 	}
 	return _result.GetSuccess(), nil

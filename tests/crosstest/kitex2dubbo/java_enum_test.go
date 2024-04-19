@@ -26,7 +26,51 @@ import (
 )
 
 func TestEchoJavaEnum_Java(t *testing.T) {
-	req := "1"
-	resp, err := cli2Java.EchoJavaEnum(context.Background(), echo.KitexEnum_ONE)
-	assertEcho(t, err, req, resp)
+
+	t.Run("raw enumeration test", func(t *testing.T) {
+		resp1 := "ONE"
+		req, err1 := cli2Java.EchoJavaEnum(context.Background(), echo.KitexEnum_ONE)
+		assertEcho(t, err1, req.String(), resp1)
+		resp2 := "TWO"
+		req, err2 := cli2Java.EchoJavaEnum(context.Background(), echo.KitexEnum_TWO)
+		assertEcho(t, err2, req.String(), resp2)
+		resp3 := "THREE"
+		req, err3 := cli2Java.EchoJavaEnum(context.Background(), echo.KitexEnum_THREE)
+		assertEcho(t, err3, req.String(), resp3)
+	})
+
+	t.Run("with args enumeration test", func(t *testing.T) {
+		resp1 := &echo.EchoEnumResponse{
+			Echo:      "hello1",
+			KitexEnum: echo.KitexEnum_ONE,
+		}
+		request1 := &echo.EchoEnumRequest{
+			Echo:      "hello1",
+			KitexEnum: echo.KitexEnum_ONE,
+		}
+		req1, err := cli2Java.EchoJavaEnumWithArg(context.Background(), request1)
+		assertEcho(t, err, req1, resp1)
+
+		resp2 := &echo.EchoEnumResponse{
+			Echo:      "hello2",
+			KitexEnum: echo.KitexEnum_TWO,
+		}
+		request2 := &echo.EchoEnumRequest{
+			Echo:      "hello2",
+			KitexEnum: echo.KitexEnum_TWO,
+		}
+		req2, err := cli2Java.EchoJavaEnumWithArg(context.Background(), request2)
+		assertEcho(t, err, req2, resp2)
+
+		resp3 := &echo.EchoEnumResponse{
+			Echo:      "hello3",
+			KitexEnum: echo.KitexEnum_THREE,
+		}
+		request3 := &echo.EchoEnumRequest{
+			Echo:      "hello3",
+			KitexEnum: echo.KitexEnum_THREE,
+		}
+		req3, err := cli2Java.EchoJavaEnumWithArg(context.Background(), request3)
+		assertEcho(t, err, req3, resp3)
+	})
 }

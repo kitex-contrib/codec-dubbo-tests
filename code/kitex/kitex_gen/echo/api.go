@@ -58,9 +58,76 @@ func (p *KitexEnum) Value() (driver.Value, error) {
 	return int64(*p), nil
 }
 
+type EchoEnumRequest struct {
+	Echo      string    `thrift:"echo,1,required" frugal:"1,required,string" json:"echo"`
+	KitexEnum KitexEnum `thrift:"kitexEnum,2,required" frugal:"2,required,KitexEnum" json:"kitexEnum"`
+}
+
+func NewEchoEnumRequest() *EchoEnumRequest {
+	return &EchoEnumRequest{}
+}
+
+func (p *EchoEnumRequest) InitDefault() {
+	*p = EchoEnumRequest{}
+}
+
+func (p *EchoEnumRequest) GetEcho() (v string) {
+	return p.Echo
+}
+
+func (p *EchoEnumRequest) GetKitexEnum() (v KitexEnum) {
+	return p.KitexEnum
+}
+func (p *EchoEnumRequest) SetEcho(val string) {
+	p.Echo = val
+}
+func (p *EchoEnumRequest) SetKitexEnum(val KitexEnum) {
+	p.KitexEnum = val
+}
+
+func (p *EchoEnumRequest) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	return fmt.Sprintf("EchoEnumRequest(%+v)", *p)
+}
+
+type EchoEnumResponse struct {
+	Echo      string    `thrift:"echo,1,required" frugal:"1,required,string" json:"echo"`
+	KitexEnum KitexEnum `thrift:"kitexEnum,2,required" frugal:"2,required,KitexEnum" json:"kitexEnum"`
+}
+
+func NewEchoEnumResponse() *EchoEnumResponse {
+	return &EchoEnumResponse{}
+}
+
+func (p *EchoEnumResponse) InitDefault() {
+	*p = EchoEnumResponse{}
+}
+
+func (p *EchoEnumResponse) GetEcho() (v string) {
+	return p.Echo
+}
+
+func (p *EchoEnumResponse) GetKitexEnum() (v KitexEnum) {
+	return p.KitexEnum
+}
+func (p *EchoEnumResponse) SetEcho(val string) {
+	p.Echo = val
+}
+func (p *EchoEnumResponse) SetKitexEnum(val KitexEnum) {
+	p.KitexEnum = val
+}
+
+func (p *EchoEnumResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	return fmt.Sprintf("EchoEnumResponse(%+v)", *p)
+}
+
 type EchoRequest struct {
-	Int32     int32     `thrift:"int32,1,required" frugal:"1,required,i32" json:"int32"`
-	EnumField KitexEnum `thrift:"enumField,2,required" frugal:"2,required,KitexEnum" json:"enumField"`
+	Int32 int32 `thrift:"int32,1,required" frugal:"1,required,i32" json:"int32"`
 }
 
 func NewEchoRequest() *EchoRequest {
@@ -74,15 +141,8 @@ func (p *EchoRequest) InitDefault() {
 func (p *EchoRequest) GetInt32() (v int32) {
 	return p.Int32
 }
-
-func (p *EchoRequest) GetEnumField() (v KitexEnum) {
-	return p.EnumField
-}
 func (p *EchoRequest) SetInt32(val int32) {
 	p.Int32 = val
-}
-func (p *EchoRequest) SetEnumField(val KitexEnum) {
-	p.EnumField = val
 }
 
 func (p *EchoRequest) String() string {
@@ -1364,7 +1424,9 @@ type TestService interface {
 
 	EchoCustomizedException(ctx context.Context, req bool) (r bool, err error)
 
-	EchoJavaEnum(ctx context.Context, kitexEnum KitexEnum) (r string, err error)
+	EchoJavaEnum(ctx context.Context, kitexEnum KitexEnum) (r KitexEnum, err error)
+
+	EchoJavaEnumWithArg(ctx context.Context, req *EchoEnumRequest) (r *EchoEnumResponse, err error)
 
 	EchoGeneric(ctx context.Context, req *EchoGenericRequest) (r *EchoGenericResponse, err error)
 

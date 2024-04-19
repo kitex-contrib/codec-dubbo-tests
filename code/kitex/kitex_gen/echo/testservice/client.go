@@ -117,7 +117,8 @@ type Client interface {
 	EchoOptionalMultiStringResponse(ctx context.Context, req string, callOptions ...callopt.Option) (r *echo.EchoOptionalMultiStringResponse, err error)
 	EchoException(ctx context.Context, req bool, callOptions ...callopt.Option) (r bool, err error)
 	EchoCustomizedException(ctx context.Context, req bool, callOptions ...callopt.Option) (r bool, err error)
-	EchoJavaEnum(ctx context.Context, kitexEnum echo.KitexEnum, callOptions ...callopt.Option) (r string, err error)
+	EchoJavaEnum(ctx context.Context, kitexEnum echo.KitexEnum, callOptions ...callopt.Option) (r echo.KitexEnum, err error)
+	EchoJavaEnumWithArg(ctx context.Context, req *echo.EchoEnumRequest, callOptions ...callopt.Option) (r *echo.EchoEnumResponse, err error)
 	EchoGeneric(ctx context.Context, req *echo.EchoGenericRequest, callOptions ...callopt.Option) (r *echo.EchoGenericResponse, err error)
 	EchoJavaDate(ctx context.Context, req *java.Date, callOptions ...callopt.Option) (r *java.Date, err error)
 	EchoJavaDateList(ctx context.Context, req []*java.Date, callOptions ...callopt.Option) (r []*java.Date, err error)
@@ -674,9 +675,14 @@ func (p *kTestServiceClient) EchoCustomizedException(ctx context.Context, req bo
 	return p.kClient.EchoCustomizedException(ctx, req)
 }
 
-func (p *kTestServiceClient) EchoJavaEnum(ctx context.Context, kitexEnum echo.KitexEnum, callOptions ...callopt.Option) (r string, err error) {
+func (p *kTestServiceClient) EchoJavaEnum(ctx context.Context, kitexEnum echo.KitexEnum, callOptions ...callopt.Option) (r echo.KitexEnum, err error) {
 	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
 	return p.kClient.EchoJavaEnum(ctx, kitexEnum)
+}
+
+func (p *kTestServiceClient) EchoJavaEnumWithArg(ctx context.Context, req *echo.EchoEnumRequest, callOptions ...callopt.Option) (r *echo.EchoEnumResponse, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.EchoJavaEnumWithArg(ctx, req)
 }
 
 func (p *kTestServiceClient) EchoGeneric(ctx context.Context, req *echo.EchoGenericRequest, callOptions ...callopt.Option) (r *echo.EchoGenericResponse, err error) {

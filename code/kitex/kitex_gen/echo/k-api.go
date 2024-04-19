@@ -7252,7 +7252,7 @@ func (p *TestServiceEchoJavaEnumArgs) GetFirstArgument() interface{} {
 }
 
 type TestServiceEchoJavaEnumResult struct {
-	Success *string `thrift:"success,0,optional" frugal:"0,optional,string" json:"success,omitempty"`
+	Success *KitexEnum `thrift:"success,0,optional" frugal:"0,optional,KitexEnum" json:"success,omitempty"`
 }
 
 func NewTestServiceEchoJavaEnumResult() *TestServiceEchoJavaEnumResult {
@@ -7263,16 +7263,16 @@ func (p *TestServiceEchoJavaEnumResult) InitDefault() {
 	*p = TestServiceEchoJavaEnumResult{}
 }
 
-var TestServiceEchoJavaEnumResult_Success_DEFAULT string
+var TestServiceEchoJavaEnumResult_Success_DEFAULT KitexEnum
 
-func (p *TestServiceEchoJavaEnumResult) GetSuccess() (v string) {
+func (p *TestServiceEchoJavaEnumResult) GetSuccess() (v KitexEnum) {
 	if !p.IsSetSuccess() {
 		return TestServiceEchoJavaEnumResult_Success_DEFAULT
 	}
 	return *p.Success
 }
 func (p *TestServiceEchoJavaEnumResult) SetSuccess(x interface{}) {
-	p.Success = x.(*string)
+	p.Success = x.(*KitexEnum)
 }
 
 func (p *TestServiceEchoJavaEnumResult) IsSetSuccess() bool {
@@ -7286,6 +7286,82 @@ func (p *TestServiceEchoJavaEnumResult) String() string {
 	return fmt.Sprintf("TestServiceEchoJavaEnumResult(%+v)", *p)
 }
 func (p *TestServiceEchoJavaEnumResult) GetResult() interface{} {
+	return p.Success
+}
+
+type TestServiceEchoJavaEnumWithArgArgs struct {
+	Req *EchoEnumRequest `thrift:"req,1" frugal:"1,default,EchoEnumRequest" json:"req"`
+}
+
+func NewTestServiceEchoJavaEnumWithArgArgs() *TestServiceEchoJavaEnumWithArgArgs {
+	return &TestServiceEchoJavaEnumWithArgArgs{}
+}
+
+func (p *TestServiceEchoJavaEnumWithArgArgs) InitDefault() {
+	*p = TestServiceEchoJavaEnumWithArgArgs{}
+}
+
+var TestServiceEchoJavaEnumWithArgArgs_Req_DEFAULT *EchoEnumRequest
+
+func (p *TestServiceEchoJavaEnumWithArgArgs) GetReq() (v *EchoEnumRequest) {
+	if !p.IsSetReq() {
+		return TestServiceEchoJavaEnumWithArgArgs_Req_DEFAULT
+	}
+	return p.Req
+}
+func (p *TestServiceEchoJavaEnumWithArgArgs) SetReq(val *EchoEnumRequest) {
+	p.Req = val
+}
+
+func (p *TestServiceEchoJavaEnumWithArgArgs) IsSetReq() bool {
+	return p.Req != nil
+}
+
+func (p *TestServiceEchoJavaEnumWithArgArgs) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	return fmt.Sprintf("TestServiceEchoJavaEnumWithArgArgs(%+v)", *p)
+}
+func (p *TestServiceEchoJavaEnumWithArgArgs) GetFirstArgument() interface{} {
+	return p.Req
+}
+
+type TestServiceEchoJavaEnumWithArgResult struct {
+	Success *EchoEnumResponse `thrift:"success,0,optional" frugal:"0,optional,EchoEnumResponse" json:"success,omitempty"`
+}
+
+func NewTestServiceEchoJavaEnumWithArgResult() *TestServiceEchoJavaEnumWithArgResult {
+	return &TestServiceEchoJavaEnumWithArgResult{}
+}
+
+func (p *TestServiceEchoJavaEnumWithArgResult) InitDefault() {
+	*p = TestServiceEchoJavaEnumWithArgResult{}
+}
+
+var TestServiceEchoJavaEnumWithArgResult_Success_DEFAULT *EchoEnumResponse
+
+func (p *TestServiceEchoJavaEnumWithArgResult) GetSuccess() (v *EchoEnumResponse) {
+	if !p.IsSetSuccess() {
+		return TestServiceEchoJavaEnumWithArgResult_Success_DEFAULT
+	}
+	return p.Success
+}
+func (p *TestServiceEchoJavaEnumWithArgResult) SetSuccess(x interface{}) {
+	p.Success = x.(*EchoEnumResponse)
+}
+
+func (p *TestServiceEchoJavaEnumWithArgResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *TestServiceEchoJavaEnumWithArgResult) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	return fmt.Sprintf("TestServiceEchoJavaEnumWithArgResult(%+v)", *p)
+}
+func (p *TestServiceEchoJavaEnumWithArgResult) GetResult() interface{} {
 	return p.Success
 }
 

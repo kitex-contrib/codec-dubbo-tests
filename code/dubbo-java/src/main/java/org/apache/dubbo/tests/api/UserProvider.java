@@ -19,6 +19,8 @@
 
 package org.apache.dubbo.tests.api;
 
+import org.apache.dubbo.tests.enumeration.EchoEnumRequest;
+import org.apache.dubbo.tests.enumeration.EchoEnumResponse;
 import org.apache.dubbo.tests.enumeration.KitexEnum;
 
 import java.math.BigDecimal;
@@ -213,7 +215,9 @@ public interface UserProvider {
 
     Date EchoJavaDate(Date req) throws Exception;
 
-    String EchoJavaEnum(KitexEnum req) throws Exception;
+    KitexEnum EchoJavaEnum(KitexEnum req) throws Exception;
+
+    EchoEnumResponse EchoJavaEnumWithArg(EchoEnumRequest req) throws Exception;
 
     List<Date> EchoJavaDateList(List<Date> req) throws Exception;
     BigDecimal EchoJavaBigDecimal(BigDecimal req) throws Exception;
