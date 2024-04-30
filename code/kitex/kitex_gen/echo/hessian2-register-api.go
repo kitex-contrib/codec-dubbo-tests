@@ -3,12 +3,16 @@ package echo
 import (
 	"fmt"
 
+	"github.com/kitex-contrib/codec-dubbo/pkg/hessian2/enum"
+
 	"github.com/kitex-contrib/codec-dubbo/pkg/hessian2"
 	codec "github.com/kitex-contrib/codec-dubbo/pkg/iface"
 	"github.com/pkg/errors"
 )
 
 var objectsApi = []interface{}{
+	&EchoEnumRequest{},
+	&EchoEnumResponse{},
 	&EchoRequest{},
 	&EchoResponse{},
 	&EchoMultiBoolResponse{},
@@ -31,6 +35,9 @@ var objectsApi = []interface{}{
 	&EchoGenericResponse{},
 	&EchoGenericEmbedded{},
 	&EchoCustomizedException{},
+	KitexEnum_ONE,
+	KitexEnum_TWO,
+	KitexEnum_THREE,
 }
 
 func init() {
@@ -41,6 +48,96 @@ func GetTestServiceIDLAnnotations() map[string][]string {
 	return map[string][]string{
 		"JavaClassName": {"org.apache.dubbo.tests.api.UserProvider"},
 	}
+}
+
+func (p *EchoEnumRequest) Encode(e codec.Encoder) error {
+	var err error
+	err = e.Encode(p.Echo)
+	if err != nil {
+		return err
+	}
+
+	err = e.Encode(p.KitexEnum)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (p *EchoEnumRequest) Decode(d codec.Decoder) error {
+	var (
+		err error
+		v   interface{}
+	)
+	v, err = d.Decode()
+	if err != nil {
+		return err
+	}
+	err = hessian2.ReflectResponse(v, &p.Echo)
+	if err != nil {
+		return errors.Wrap(err, fmt.Sprintf("invalid data type: %T", v))
+	}
+
+	v, err = d.Decode()
+	if err != nil {
+		return err
+	}
+	err = hessian2.ReflectResponse(v, &p.KitexEnum)
+	if err != nil {
+		return errors.Wrap(err, fmt.Sprintf("invalid data type: %T", v))
+	}
+
+	return nil
+}
+
+func (p *EchoEnumRequest) JavaClassName() string {
+	return "org.apache.dubbo.tests.enumeration.EchoEnumRequest"
+}
+
+func (p *EchoEnumResponse) Encode(e codec.Encoder) error {
+	var err error
+	err = e.Encode(p.Echo)
+	if err != nil {
+		return err
+	}
+
+	err = e.Encode(p.KitexEnum)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (p *EchoEnumResponse) Decode(d codec.Decoder) error {
+	var (
+		err error
+		v   interface{}
+	)
+	v, err = d.Decode()
+	if err != nil {
+		return err
+	}
+	err = hessian2.ReflectResponse(v, &p.Echo)
+	if err != nil {
+		return errors.Wrap(err, fmt.Sprintf("invalid data type: %T", v))
+	}
+
+	v, err = d.Decode()
+	if err != nil {
+		return err
+	}
+	err = hessian2.ReflectResponse(v, &p.KitexEnum)
+	if err != nil {
+		return errors.Wrap(err, fmt.Sprintf("invalid data type: %T", v))
+	}
+
+	return nil
+}
+
+func (p *EchoEnumResponse) JavaClassName() string {
+	return "org.apache.dubbo.tests.enumeration.EchoEnumResponse"
 }
 
 func (p *EchoRequest) Encode(e codec.Encoder) error {
@@ -1227,6 +1324,24 @@ func (p *EchoCustomizedException) Decode(d codec.Decoder) error {
 
 func (p *EchoCustomizedException) JavaClassName() string {
 	return "org.apache.dubbo.tests.api.EchoCustomizedException"
+}
+
+var KitexEnumValues = map[string]KitexEnum{
+	"ONE":   KitexEnum_ONE,
+	"TWO":   KitexEnum_TWO,
+	"THREE": KitexEnum_THREE,
+}
+
+func (KitexEnum) JavaClassName() string {
+	return "org.apache.dubbo.tests.enumeration.KitexEnum"
+}
+
+func (KitexEnum) EnumValue(s string) enum.JavaEnum {
+	v, ok := KitexEnumValues[s]
+	if ok {
+		return enum.JavaEnum(v)
+	}
+	return enum.InvalidJavaEnum
 }
 
 func (p *TestServiceEchoRetByteArgs) Encode(e codec.Encoder) error {
@@ -7111,6 +7226,114 @@ func (p *TestServiceEchoCustomizedExceptionResult) Encode(e codec.Encoder) error
 }
 
 func (p *TestServiceEchoCustomizedExceptionResult) Decode(d codec.Decoder) error {
+	var (
+		err error
+		v   interface{}
+	)
+	v, err = d.Decode()
+	if err != nil {
+		return err
+	}
+	err = hessian2.ReflectResponse(v, &p.Success)
+	if err != nil {
+		return errors.Wrap(err, fmt.Sprintf("invalid data type: %T", v))
+	}
+
+	return nil
+}
+
+func (p *TestServiceEchoJavaEnumArgs) Encode(e codec.Encoder) error {
+	var err error
+	err = e.Encode(p.KitexEnum)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (p *TestServiceEchoJavaEnumArgs) Decode(d codec.Decoder) error {
+	var (
+		err error
+		v   interface{}
+	)
+	v, err = d.Decode()
+	if err != nil {
+		return err
+	}
+	err = hessian2.ReflectResponse(v, &p.KitexEnum)
+	if err != nil {
+		return errors.Wrap(err, fmt.Sprintf("invalid data type: %T", v))
+	}
+
+	return nil
+}
+
+func (p *TestServiceEchoJavaEnumResult) Encode(e codec.Encoder) error {
+	var err error
+	err = e.Encode(p.Success)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (p *TestServiceEchoJavaEnumResult) Decode(d codec.Decoder) error {
+	var (
+		err error
+		v   interface{}
+	)
+	v, err = d.Decode()
+	if err != nil {
+		return err
+	}
+	err = hessian2.ReflectResponse(v, &p.Success)
+	if err != nil {
+		return errors.Wrap(err, fmt.Sprintf("invalid data type: %T", v))
+	}
+
+	return nil
+}
+
+func (p *TestServiceEchoJavaEnumWithArgArgs) Encode(e codec.Encoder) error {
+	var err error
+	err = e.Encode(p.Req)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (p *TestServiceEchoJavaEnumWithArgArgs) Decode(d codec.Decoder) error {
+	var (
+		err error
+		v   interface{}
+	)
+	v, err = d.Decode()
+	if err != nil {
+		return err
+	}
+	err = hessian2.ReflectResponse(v, &p.Req)
+	if err != nil {
+		return errors.Wrap(err, fmt.Sprintf("invalid data type: %T", v))
+	}
+
+	return nil
+}
+
+func (p *TestServiceEchoJavaEnumWithArgResult) Encode(e codec.Encoder) error {
+	var err error
+	err = e.Encode(p.Success)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (p *TestServiceEchoJavaEnumWithArgResult) Decode(d codec.Decoder) error {
 	var (
 		err error
 		v   interface{}

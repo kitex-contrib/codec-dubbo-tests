@@ -3,6 +3,26 @@ namespace go echo
 include "java.thrift"
 include "extensions.thrift"
 
+
+enum KitexEnum {
+      ONE,
+      TWO,
+      THREE,
+}(JavaClassName="org.apache.dubbo.tests.enumeration.KitexEnum")
+
+
+struct EchoEnumRequest {
+      1: required string echo,
+      2: required KitexEnum kitexEnum,
+}(JavaClassName="org.apache.dubbo.tests.enumeration.EchoEnumRequest")
+
+
+struct EchoEnumResponse {
+    1: required string echo,
+    2: required KitexEnum kitexEnum,
+}(JavaClassName="org.apache.dubbo.tests.enumeration.EchoEnumResponse")
+
+
 struct EchoRequest {
     1: required i32 int32,
 }(JavaClassName="kitex.echo.EchoRequest")
@@ -253,6 +273,10 @@ service TestService {
     // exception
     bool EchoException(1: bool req)
     bool EchoCustomizedException(1: bool req)
+    //Param directly
+    KitexEnum EchoJavaEnum(1: KitexEnum kitexEnum)
+    //Wapper param
+    EchoEnumResponse EchoJavaEnumWithArg(1: EchoEnumRequest req)
 
     // java generic
     EchoGenericResponse EchoGeneric(1: EchoGenericRequest req)

@@ -24,6 +24,9 @@ import org.apache.dubbo.config.ReferenceConfig;
 import org.apache.dubbo.config.RegistryConfig;
 import org.apache.dubbo.config.bootstrap.DubboBootstrap;
 import org.apache.dubbo.tests.api.*;
+import org.apache.dubbo.tests.enumeration.EchoEnumRequest;
+import org.apache.dubbo.tests.enumeration.EchoEnumResponse;
+import org.apache.dubbo.tests.enumeration.KitexEnum;
 
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -213,6 +216,8 @@ public class Application {
 
     public static void testJavaExtensions(UserProvider svc) {
         testEchoJavaDate(svc);
+        testEchoJavaEnum(svc);
+        testEchoJavaEnumArg(svc);
         testEchoJavaDateList(svc);
         testEchoJavaBigDecimal(svc);
         testEchoJavaBigInteger(svc);
@@ -1631,6 +1636,40 @@ public class Application {
         }
         logEchoEnd(methodName);
     }
+
+
+    public static void testEchoJavaEnumArg(UserProvider svc) {
+        String methodName = "EchoJavaEnumWithArg";
+        try {
+            EchoEnumRequest req = new EchoEnumRequest("hello", KitexEnum.ONE);
+            EchoEnumResponse resp = svc.EchoJavaEnumWithArg(req);
+            if (!req.getEcho().equals(resp.getEcho()) &&
+                    !req.getKitexEnum().equals(resp.getKitexEnum())) {
+                logEchoFail(methodName);
+            }
+        } catch (Exception e) {
+            logEchoException(methodName, e);
+        }
+        logEchoEnd(methodName);
+    }
+
+
+    public static void testEchoJavaEnum(UserProvider svc) {
+        String methodName = "EchoJavaEnum";
+        try {
+            KitexEnum req = KitexEnum.ONE;
+            KitexEnum resp = svc.EchoJavaEnum(KitexEnum.ONE);
+            if (!req.equals(resp)) {
+                logEchoFail(methodName);
+            }
+        } catch (Exception e) {
+            logEchoException(methodName, e);
+        }
+        logEchoEnd(methodName);
+    }
+
+
+
 
     public static void testEchoJavaDateList(UserProvider svc) {
         String methodName = "EchoJavaDateList";

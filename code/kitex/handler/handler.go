@@ -612,7 +612,7 @@ func (s *TestServiceImpl) EchoException(ctx context.Context, req bool) (resp boo
 // EchoCustomizedException implements the TestServiceImpl interface.
 func (s *TestServiceImpl) EchoCustomizedException(ctx context.Context, req bool) (resp bool, err error) {
 	return false, &echo.EchoCustomizedException{
-		Exception:         *hessian2_exception.NewException(""),
+		Exception:         hessian2_exception.NewException(""),
 		CustomizedMessage: "EchoCustomizedException",
 	}
 }
@@ -622,6 +622,19 @@ func (s *TestServiceImpl) EchoGeneric(ctx context.Context, req *echo.EchoGeneric
 	return &echo.EchoGenericResponse{
 		RespField: req.ReqField,
 		List:      req.List,
+	}, nil
+}
+
+// EchoJavaEnum implements the TestServiceImpl interface.
+func (s *TestServiceImpl) EchoJavaEnum(ctx context.Context, req echo.KitexEnum) (resp echo.KitexEnum, err error) {
+	return req, nil
+}
+
+// EchoJavaEnumWithArg implements the TestServiceImpl interface.
+func (s *TestServiceImpl) EchoJavaEnumWithArg(ctx context.Context, req *echo.EchoEnumRequest) (resp *echo.EchoEnumResponse, err error) {
+	return &echo.EchoEnumResponse{
+		Echo:      req.Echo,
+		KitexEnum: req.KitexEnum,
 	}, nil
 }
 

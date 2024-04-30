@@ -20,6 +20,9 @@
 package org.apache.dubbo.tests.provider;
 
 import org.apache.dubbo.tests.api.*;
+import org.apache.dubbo.tests.enumeration.EchoEnumRequest;
+import org.apache.dubbo.tests.enumeration.EchoEnumResponse;
+import org.apache.dubbo.tests.enumeration.KitexEnum;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -517,6 +520,17 @@ public class UserProviderImpl implements UserProvider {
     @Override
     public Date EchoJavaDate(Date req) throws Exception {
         return req;
+    }
+
+    @Override
+    public KitexEnum EchoJavaEnum(KitexEnum req) throws Exception {
+        return req;
+    }
+
+
+    @Override
+    public EchoEnumResponse EchoJavaEnumWithArg(EchoEnumRequest req) throws Exception {
+        return new EchoEnumResponse(req.getEcho(),req.getKitexEnum());
     }
 
     @Override
