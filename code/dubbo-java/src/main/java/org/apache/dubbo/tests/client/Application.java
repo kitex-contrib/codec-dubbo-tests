@@ -1659,7 +1659,7 @@ public class Application {
         try {
             KitexEnum req = KitexEnum.ONE;
             KitexEnum resp = svc.EchoJavaEnum(KitexEnum.ONE);
-            if (!req.getCode().equals(resp)) {
+            if (!req.equals(resp)) {
                 logEchoFail(methodName);
             }
         } catch (Exception e) {

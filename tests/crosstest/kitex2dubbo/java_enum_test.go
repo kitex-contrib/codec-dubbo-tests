@@ -21,12 +21,12 @@ package kitex2dubbo
 
 import (
 	"context"
-	"github.com/kitex-contrib/codec-dubbo-tests/code/kitex/kitex_gen/echo"
 	"testing"
+
+	"github.com/kitex-contrib/codec-dubbo-tests/code/kitex/kitex_gen/echo"
 )
 
 func TestEchoJavaEnum_Java(t *testing.T) {
-
 	t.Run("raw enumeration test", func(t *testing.T) {
 		resp1 := "ONE"
 		req, err1 := cli2Java.EchoJavaEnum(context.Background(), echo.KitexEnum_ONE)

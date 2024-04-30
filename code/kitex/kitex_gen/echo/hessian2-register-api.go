@@ -2,6 +2,7 @@ package echo
 
 import (
 	"fmt"
+
 	"github.com/kitex-contrib/codec-dubbo/pkg/hessian2/enum"
 
 	"github.com/kitex-contrib/codec-dubbo/pkg/hessian2"
