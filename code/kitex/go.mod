@@ -6,7 +6,7 @@ require (
 	github.com/apache/thrift v0.13.0
 	github.com/cloudwego/kitex v0.9.1
 	github.com/cloudwego/thriftgo v0.3.6
-	github.com/kitex-contrib/codec-dubbo v0.2.5
+	github.com/kitex-contrib/codec-dubbo v0.2.6-0.20240419063622-a4cf3c1b7d6d
 	github.com/kitex-contrib/codec-dubbo-tests/code/kitex/extensions v0.0.0
 	github.com/pkg/errors v0.9.1
 )

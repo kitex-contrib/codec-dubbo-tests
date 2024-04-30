@@ -1067,8 +1067,8 @@ func (p *EchoOptionalMultiStringResponse) String() string {
 }
 
 type EchoGenericRequest struct {
-	ReqField int32          `thrift:"reqField,1,required" frugal:"1,required,i32" json:"reqField"`
-	List     []*java.Object `thrift:"list,2,required" frugal:"2,required,list<java.Object>" json:"list"`
+	ReqField int32         `thrift:"reqField,1,required" frugal:"1,required,i32" json:"reqField"`
+	List     []java.Object `thrift:"list,2,required" frugal:"2,required,list<java.Object>" json:"list"`
 }
 
 func NewEchoGenericRequest() *EchoGenericRequest {
@@ -1083,13 +1083,13 @@ func (p *EchoGenericRequest) GetReqField() (v int32) {
 	return p.ReqField
 }
 
-func (p *EchoGenericRequest) GetList() (v []*java.Object) {
+func (p *EchoGenericRequest) GetList() (v []java.Object) {
 	return p.List
 }
 func (p *EchoGenericRequest) SetReqField(val int32) {
 	p.ReqField = val
 }
-func (p *EchoGenericRequest) SetList(val []*java.Object) {
+func (p *EchoGenericRequest) SetList(val []java.Object) {
 	p.List = val
 }
 
@@ -1101,8 +1101,8 @@ func (p *EchoGenericRequest) String() string {
 }
 
 type EchoGenericResponse struct {
-	RespField int32          `thrift:"respField,1,required" frugal:"1,required,i32" json:"respField"`
-	List      []*java.Object `thrift:"list,2,required" frugal:"2,required,list<java.Object>" json:"list"`
+	RespField int32         `thrift:"respField,1,required" frugal:"1,required,i32" json:"respField"`
+	List      []java.Object `thrift:"list,2,required" frugal:"2,required,list<java.Object>" json:"list"`
 }
 
 func NewEchoGenericResponse() *EchoGenericResponse {
@@ -1117,13 +1117,13 @@ func (p *EchoGenericResponse) GetRespField() (v int32) {
 	return p.RespField
 }
 
-func (p *EchoGenericResponse) GetList() (v []*java.Object) {
+func (p *EchoGenericResponse) GetList() (v []java.Object) {
 	return p.List
 }
 func (p *EchoGenericResponse) SetRespField(val int32) {
 	p.RespField = val
 }
-func (p *EchoGenericResponse) SetList(val []*java.Object) {
+func (p *EchoGenericResponse) SetList(val []java.Object) {
 	p.List = val
 }
 
