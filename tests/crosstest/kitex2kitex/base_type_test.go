@@ -26,6 +26,7 @@ import (
 	"net"
 	"os"
 	"reflect"
+	"sync"
 	"testing"
 
 	"github.com/cloudwego/kitex/client"
@@ -66,8 +67,11 @@ func runKitexServer(startCh chan struct{}, exitCh chan error, addr string) {
 			return exitCh
 		}),
 	)
+	once := sync.Once{}
 	server.RegisterStartHook(func() {
-		close(startCh)
+		once.Do(func() {
+			close(startCh)
+		})
 	})
 
 	if err := svr.Run(); err != nil {
@@ -77,12 +81,19 @@ func runKitexServer(startCh chan struct{}, exitCh chan error, addr string) {
 
 func TestMain(m *testing.M) {
 	startCh := make(chan struct{})
+	startHelloCh := make(chan struct{})
+
 	exitCh := make(chan error)
+	exitHelloCh := make(chan error)
 	go runKitexServer(startCh, exitCh, ":20000")
+	go runHelloKitexServer(startHelloCh, exitHelloCh, ":9102")
 	<-startCh
+	<-startHelloCh
 	initKitexClient("test", "127.0.0.1:20000")
+	initHelloClient("hello", "127.0.0.1:9102")
 	m.Run()
 	exitCh <- nil
+	exitHelloCh <- nil
 	os.Exit(0)
 }
 

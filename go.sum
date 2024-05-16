@@ -1035,8 +1035,8 @@ github.com/kisielk/errcheck v1.2.0/go.mod h1:/BMXB+zMLi60iA8Vv6Ksmxu/1UDYcXs4uQL
 github.com/kisielk/errcheck v1.5.0/go.mod h1:pFxgyoBC7bSaBwPgfKdkLd5X25qrDl4LWUI2bnpBCr8=
 github.com/kisielk/gotool v1.0.0/go.mod h1:XhKaO+MFFWcvkIS/tQcRk01m1F5IRFswLeQ+oQHNcck=
 github.com/kitex-contrib/codec-dubbo v0.2.1/go.mod h1:KHC/UOUIu9vJBqE3VBdCZMMGwntGaCNjGOIG6zJoowY=
-github.com/kitex-contrib/codec-dubbo v0.2.5-0.20240129030840-dcc4d83669b1 h1:VONspuu/xcWkANCWEhXHZ/PMAZ4FGKP2InEnd1jgD5Q=
-github.com/kitex-contrib/codec-dubbo v0.2.5-0.20240129030840-dcc4d83669b1/go.mod h1:0pp4flNA+oPBDxAcOCxH7D+McLAjFrLzGXVABdw22xE=
+github.com/kitex-contrib/codec-dubbo v0.2.6-0.20240515094852-60d04fdbac3e h1:NgekM/Rt7mERz/9jnTCMNu/AxGax+Slu9frY3gSfvY0=
+github.com/kitex-contrib/codec-dubbo v0.2.6-0.20240515094852-60d04fdbac3e/go.mod h1:Z9G449UO0aU4tTqHFOlfZGQjIVVGKXE2+9aObGlDMuY=
 github.com/kitex-contrib/codec-dubbo/registries/zookeeper v0.0.0-20231220024013-016c9d2b688f h1:Axy/09EBCovbeD7PDM6aKPtIz8h1MdCRR/TU74+HeB8=
 github.com/kitex-contrib/codec-dubbo/registries/zookeeper v0.0.0-20231220024013-016c9d2b688f/go.mod h1:ztO2fZjlVm/kCSmp+0NwIeVBQpQxX3uNbqe0xBdVGFU=
 github.com/klauspost/cpuid/v2 v2.0.9/go.mod h1:FInQzS24/EEf25PyTYn52gqo7WaD8xa0213Md/qVLRg=
