@@ -41,8 +41,10 @@ import (
 	"github.com/kitex-contrib/codec-dubbo-tests/code/kitex_sample/kitex_gen/hello/greetservice"
 )
 
-var nativeCli greetservice.Client
-var dubboCli greetservice.Client
+var (
+	nativeCli greetservice.Client
+	dubboCli  greetservice.Client
+)
 
 // initHelloClient inits Kitex client with specified destService and hostPort
 func initHelloClient(destService, hostPort string) {
